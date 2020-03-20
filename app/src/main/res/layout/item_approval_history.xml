@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_two">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="#ffffff"
+        android:paddingBottom="@dimen/layoutBottom_11">
+
+        <TextView
+            android:id="@+id/item_approval_history_order_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layoutStart_17"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/drw_rad12_corner_blue"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:paddingStart="8dp"
+            android:paddingEnd="7dp"
+            android:textColor="@color/lightish_blue"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_approval_history_order_manager_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_14"
+            app:layout_constraintBottom_toBottomOf="@id/item_approval_history_order_tv"
+            app:layout_constraintStart_toEndOf="@id/item_approval_history_order_tv"
+            app:layout_constraintTop_toTopOf="@id/item_approval_history_order_tv" />
+
+        <TextView
+            android:id="@+id/item_approval_history_status_info_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/layoutEnd_14"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:textColor="#999999"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toBottomOf="@id/item_approval_history_order_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_approval_history_order_tv" />
+
+        <TextView
+            android:id="@+id/item_approval_history_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:textColor="@color/warm_grey"
+            android:textSize="11dp"
+            app:layout_constraintBottom_toBottomOf="@id/item_approval_history_contents_tv"
+            app:layout_constraintEnd_toEndOf="@id/item_approval_history_status_info_tv"
+            app:layout_constraintTop_toBottomOf="@id/item_approval_history_status_info_tv"
+            app:layout_constraintTop_toTopOf="@id/item_approval_history_contents_tv" />
+
+        <TextView
+            android:id="@+id/item_approval_history_contents_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layoutStart_16"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:singleLine="true"
+            android:textColor="#555555"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toStartOf="@id/item_approval_history_date_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_approval_history_order_tv" />
+
+
+        <TextView
+            android:id="@+id/item_approval_history_detail_contents_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/comment_shape"
+            android:minHeight="48dp"
+            android:paddingStart="14dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="8dp"
+            android:textColor="#333333"
+            android:textSize="12dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/item_approval_history_date_tv"
+            app:layout_constraintStart_toStartOf="@id/item_approval_history_contents_tv"
+            app:layout_constraintTop_toBottomOf="@id/item_approval_history_contents_tv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

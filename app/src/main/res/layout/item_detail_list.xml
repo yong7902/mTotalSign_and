@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_two"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:paddingStart="@dimen/layoutStart_16"
+        android:paddingTop="@dimen/layout_20"
+        android:paddingEnd="@dimen/layoutStart_16"
+        android:paddingBottom="@dimen/layoutBottom_11">
+
+
+        <TextView
+            android:id="@+id/item_detail_list_approvalId_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:textColor="@color/lightish_blue"
+            android:textSize="12dp"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="SR00437232" />
+
+        <TextView
+            android:id="@+id/item_detail_list_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drw_rad12_corner_gray"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/brownish_grey"
+            android:textSize="10dp"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="@id/item_detail_list_approvalId_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_detail_list_approvalId_tv"
+            tools:text="SR일반승인" />
+
+        <TextView
+            android:id="@+id/item_detail_list_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layoutTop_12"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:singleLine="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_14"
+            android:includeFontPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_detail_list_approvalId_tv"
+            tools:text="고객별 매출채권 회전기일 관리 프로그램-영역메텍스트입니다 텍스트세트이르ㅏㅣㅁ러ㅏㅣㅁㄴ어ㅣㅁㄴ어ㅣㅁ어ㅣ" />
+
+        <TextView
+            android:id="@+id/item_detail_list_requester_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layoutTop_15"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:textColor="@color/greyish_brown"
+            android:textSize="13dp"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_detail_list_title_tv"
+            tools:text="홍길동" />
+
+        <TextView
+            android:id="@+id/item_detail_list_reqDatetime_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:textColor="@color/warm_grey"
+            android:textSize="11dp"
+            android:includeFontPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_detail_list_requester_tv"
+            tools:text="2019-04-23 11:45" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

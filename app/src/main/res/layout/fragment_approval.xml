@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/drw_round_grey_btn">
+
+            <Button
+                android:id="@+id/btn_approval_personal_select"
+                android:layout_width="160dp"
+                android:layout_height="32dp"
+                android:background="@drawable/drw_round_select_btn"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                android:includeFontPadding="false"
+                android:stateListAnimator="@null"
+                android:text="@string/txt_approval_personal"
+                android:textColor="@drawable/color_tab_select_text"
+                android:textSize="14dp" />
+
+            <Button
+                android:id="@+id/btn_approval_depart_select"
+                android:layout_width="160dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/drw_round_select_btn"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                android:includeFontPadding="false"
+                android:stateListAnimator="@null"
+                android:text="@string/txt_approval_depart"
+                android:textColor="@drawable/color_tab_select_text"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/white_six" />
+
+        <!-- 개인결재 탭-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <com.kolon.sign2.approval.ApprovalScrollTabView
+                android:id="@+id/tabview"
+                android:layout_width="match_parent"
+                android:layout_height="44dp" />
+
+        </RelativeLayout>
+
+        <!-- Shimmer detail-->
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/shimmer_list_approval"/>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/very_light_pink_two">
+
+            <LinearLayout
+                android:id="@+id/no_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="144dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:background="@drawable/empty_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_home_no_data"
+                    android:textColor="@color/brownish_grey"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lv_approval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

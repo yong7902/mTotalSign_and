@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/very_light_pink_two"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:id="@+id/ll_setting_title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/icon_close" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="-1dp"
+            android:text="@string/txt_config_title"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/very_light_pink" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- 알림설정 -->
+                <LinearLayout
+                    android:id="@+id/ll_setting_alarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginBottom="27dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_config_push"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_16" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:clickable="false"
+                        android:src="@drawable/list_setting_arrow_01" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/very_light_pink_two" />
+
+                <!-- 버전 정보 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="27dp"
+                        android:layout_marginBottom="27dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_config_ver"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_16" />
+
+                    <TextView
+                        android:id="@+id/tv_app_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_weight="0"
+                        android:clickable="false"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="01.00.00"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="@dimen/text_15" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/very_light_pink_two" />
+
+                <!-- 계정관리 -->
+                <LinearLayout
+                    android:id="@+id/ll_setting_account_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="13dp"
+                            android:clickable="false"
+                            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                            android:includeFontPadding="false"
+                            android:text="@string/txt_config_account"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="18dp"
+                            android:clickable="false"
+                            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="@string/txt_config_account_detail"
+                            android:textColor="@color/warm_grey"
+                            android:textSize="@dimen/text_12" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:clickable="false"
+                        android:src="@drawable/list_setting_arrow_01" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/very_light_pink_two" />
+
+
+                <!-- 글자 크기 -->
+                <LinearLayout
+                    android:id="@+id/ll_setting_textsize_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="13dp"
+                            android:clickable="false"
+                            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false"
+                            android:text="@string/txt_config_textsize"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="18dp"
+                            android:clickable="false"
+                            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="@string/txt_config_textsize_detail"
+                            android:textColor="@color/warm_grey"
+                            android:textSize="@dimen/text_12" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:clickable="false"
+                        android:src="@drawable/list_setting_arrow_01" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/very_light_pink_two" />
+
+
+                <!-- 메뉴 순서 -->
+                <LinearLayout
+                    android:id="@+id/ll_setting_menu_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="13dp"
+                            android:clickable="false"
+                            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false"
+                            android:text="@string/txt_config_menu"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="18dp"
+                            android:clickable="false"
+                            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="@string/txt_config_menu_detail"
+                            android:textColor="@color/warm_grey"
+                            android:textSize="@dimen/text_12" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:clickable="false"
+                        android:src="@drawable/list_setting_arrow_01" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/very_light_pink_two" />
+            </LinearLayout>
+        </ScrollView>
+        <!-- 로그아웃 -->
+        <LinearLayout
+            android:id="@+id/ll_setting_logout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="0"
+            android:background="@color/white"
+            android:clickable="true"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:clickable="false"
+                android:drawableStart="@drawable/icon_drawer_exit"
+                android:drawablePadding="5dp"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"
+                android:text="@string/txt_config_logout"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

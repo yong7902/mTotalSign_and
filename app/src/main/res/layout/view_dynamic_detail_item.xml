@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/detail_item_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+        android:paddingStart="@dimen/layoutStart_16"
+        android:paddingEnd="10dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_14"
+        tools:text="상태aaaaaaa aaaaaaaaaaaaaaaaaaa" />
+
+    <TextView
+        android:id="@+id/detail_item_contents"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:paddingEnd="@dimen/layoutEnd_14"
+        android:text="기획승인대기"
+        android:textColor="@color/colorBlack" />
+
+
+</LinearLayout>

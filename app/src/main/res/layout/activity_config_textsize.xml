@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/very_light_pink_two"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout1"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_setting_title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="6dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_arrow_back" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/txt_config_textsize"
+            android:textSize="18dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_bold"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="-1dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/very_light_pink"/>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_menu_change_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="16dp"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:text="@string/txt_config_textsize_info"
+        android:background="@color/very_light_pink_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativelayout1" />
+
+    <ListView
+        android:id="@+id/lv_setting_textsize_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:divider="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_menu_change_tip"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </ListView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

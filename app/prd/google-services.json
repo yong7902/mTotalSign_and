@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "186743084584",
+    "firebase_url": "https://sign-1048.firebaseio.com",
+    "project_id": "sign-1048",
+    "storage_bucket": "sign-1048.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186743084584:android:efb81478671767eb",
+        "android_client_info": {
+          "package_name": "com.kolon.sign2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186743084584-2g4ae0fa88rcrj1fn8kv19k9nfrlgi3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6evuwvPwqKPAAXf5jQAtQSy2DUEqeMqY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

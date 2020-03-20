@@ -1,0 +1,276 @@
+<!DOCTYPE resources [<!--REAL-->
+    <!ENTITY mink_host "ikenapp.kolon.com" >
+
+    <!--DEV
+    <!ENTITY mink_host "203.225.255.241" >-->
+    ]>
+<resources>
+    <!-- common -->
+    <string name="txt_close">닫기</string>
+    <string name="txt_all">전체 ></string>
+    <string name="txt_delete">삭제</string>
+    <string name="txt_list_all">전체 보기</string>
+    <string name="txt_alert_confirm">확인</string>
+    <string name="txt_alert_setting">설정</string>
+    <string name="txt_alert_cancel">취소</string>
+    <string name="txt_alert_agree">동의</string>
+    <string name="txt_alert_yes">예</string>
+    <string name="txt_alert_no">아니오</string>
+    <string name="tx_quit_app">뒤로 버튼을 한번 더 누르시면 앱이 종료됩니다.</string>
+    <string name="txt_network_error">서버와의 통신이 원할하지 않습니다. 잠시후 다시 시도해 주세요.</string>
+    <string name="txt_empty_list">조회 결과가 없습니다.</string>
+    <string name="txt_app_ok_hint">(선택) 의견을 입력해주세요.</string>
+    <string name="txt_app_reject_hint">(필수) 의견을 입력해주세요.</string>
+
+
+    <!-- app update-->
+    <string name="txt_svc_app_version_check">http://&mink_host;/portal/minkSvc</string>
+    <string name="txt_chk_app_update_normal">새로운 업데이트가 존재합니다. 업데이트 하시겠습니까?</string>
+    <string name="txt_chk_app_update_force">새로운 업데이트가 존재합니다. 업데이트 해야 앱을 실행할 수 있습니다. 업데이트 하시겠습니까?</string>
+    <string name="txt_chk_app_update_error">다운로드중 에러가 발생하였습니다.</string>
+    <string name="txt_chk_app_update_downloading">다운로드 중....</string>
+    <string name="txt_update_msg">새로운 앱 버전이 있습니다. 업데이트 하시겠습니까?</string>
+    <string name="txt_updatefail">업데이트 체크에 실패하였습니다.</string>
+    <string name="txt_update_guide_msg">새로운 앱 버전으로 업데이트 후 사용하시기 바랍니다.</string>
+    <string name="txt_cancel">취소</string>
+    <string name="txt_confirm">확인</string>
+
+    <!-- Splash Activity -->
+    <string name="txt_detail_decision_dialog_title">안내</string>
+    <string name="txt_permission_content">권한 허용이 거부되어 앱이 종료 됩니다.</string>
+    <string name="txt_permission_toast">권한을 허용해주세요.</string>
+
+    <!-- WorkNotice -->
+    <string name="txt_svc_app_notice_check">http://&mink_host;/miaps/minkSvc?</string>
+
+    <!-- Login Activity -->
+    <string name="txt_login_btn">로그인</string>
+    <string name="txt_login_hint_id">아이디</string>
+    <string name="txt_login_hint_pw">비밀번호</string>
+    <string name="txt_login_auto">" 자동 로그인"</string>
+    <string name="txt_login_id_save">" 아이디 저장"</string>
+    <string name="txt_login_alert_fail">아이디 또는 비밀번호를 확인해주세요.</string>
+    <string name="txt_login_alert_validation_fail">모든 항목을 입력해주세요.</string>
+    <string name="txt_login_alert_validation_fail_2">아이디 또는 비밀번호 정보를 찾을 수 없습니다.</string>
+    <string name="txt_login_alert_title">로그인</string>
+    <string name="txt_login_alert_close">확인</string>
+
+    <!-- left slide menu -->
+    <string name="txt_left_slide_title_1">전자결재</string>
+    <string name="txt_left_slide_title_2">서비스데스크</string>
+    <string name="txt_left_slide_title_3">출입관리</string>
+    <string name="txt_left_slide_title_4">차량관리</string>
+    <string name="txt_left_slide_menu_1">개인 결재함</string>
+    <string name="txt_left_slide_menu_2">부서 결재함</string>
+    <string name="txt_left_slide_title_txt1">계정선택</string>
+    <string name="txt_left_slide_title_txt2">Home</string>
+    <string name="txt_left_slide_title_txt3">IKEN</string>
+    <string name="txt_left_slide_title_txt4">계정추가</string>
+
+    <!-- top menu -->
+    <string name="txt_top_menu_title_1">홈</string>
+    <string name="txt_top_menu_title_2">전자결재</string>
+    <string name="txt_top_menu_title_3">서비스데스크</string>
+    <string name="txt_top_menu_title_4">출입관리</string>
+    <string name="txt_top_menu_title_5">차량관리</string>
+
+    <!-- 홈 -->
+    <string name="txt_home_title">KOLON 결재</string>
+    <string name="txt_home_no_data">결재 내역이 없습니다.</string>
+    <string name="txt_home_data_qty"><u>총 %1$s 건</u></string>
+    <string name="txt_home_data_qty2">의 미승인 건이 있습니다.</string>
+    <string name="txt_home_case">%1$s 건</string>
+
+    <!-- 전자결재 -->
+    <string name="txt_approval_title">전자결재</string>
+    <string name="txt_approval_personal">개인결재함</string>
+    <string name="txt_approval_depart">부서결재함</string>
+    <string name="txt_approval_tab_total">전체</string>
+    <string name="txt_approval_tab_select_menu">메뉴선택</string>
+    <string name="txt_approval_expand">펼치기</string>
+    <string name="txt_approval_close">접기</string>
+    <string name="txt_approval_opinion">의견</string>
+    <string name="txt_approval_attach">첨부파일</string>
+    <string name="txt_approval_case">건</string>
+    <string name="txt_approval_no_case">없음</string>
+    <string name="txt_approval_line">결재선</string>
+    <string name="txt_approval_refer">참  조</string>
+    <string name="txt_approval_progress">결재 진행상태</string>
+    <string name="txt_approval_opinion_view">의견 보기</string>
+    <string name="txt_approval_txt">결재</string>
+    <string name="txt_approval_draft">기안</string>
+    <string name="txt_approval_select_menu">메뉴 선택</string>
+    <string name="txt_approval_no_auth">열람 권한이 없습니다.</string>
+    <string name="txt_approval_db_approval">DB연동 양식 결재는 PC에서만 결재가 가능합니다.</string>
+    <string name="txt_approval_status_progress">진행</string>
+    <string name="txt_approval_status_no_accept">미접수</string>
+    <string name="txt_approval_status_hold_off">보류</string>
+    <string name="txt_approval_status_wait">대기</string>
+    <string name="txt_approval_bottom_menu_1">가결</string>
+    <string name="txt_approval_bottom_menu_2">부결</string>
+    <string name="txt_approval_bottom_menu_3">반송</string>
+    <string name="txt_approval_bottom_menu_4">보류</string>
+    <string name="txt_approval_bottom_menu_5">접수자전결</string>
+    <string name="txt_approval_bottom_menu_6">결재상신</string>
+    <string name="txt_approval_bottom_menu_7">공문반송</string>
+    <string name="txt_approval_bottom_menu_8">후결승인</string>
+    <string name="txt_approval_line_check">결재선을 확인해주세요.</string>
+    <string name="txt_approval_select">선택</string>
+    <string name="txt_approval_must">필수</string>
+    <string name="txt_approval_txt_1">하시겠습니까?</string>
+    <string name="txt_approval_txt_2">의견을 입력해주세요.</string>
+    <string name="txt_approval_success">%1$s 되었습니다.</string>
+    <string name="txt_approval_next_process">다음 결재 건을 보시겠습니까?</string>
+    <string name="txt_approval_next_process_2">목록으로</string>
+    <string name="txt_approval_next_process_3">다음 결재 건</string>
+    <string name="txt_approval_search_result">검색결과</string>
+    <string name="txt_approval_search_recently">최근 검색</string>
+    <string name="txt_approval_search_hint">이름, 부서 검색</string>
+    <string name="txt_approval_search_no_result">찾으시는 검색결과가 없습니다.</string>
+    <string name="txt_approval_search_txt1">검색어를 입력해주세요.</string>
+    <string name="txt_approval_search_txt2">제목</string>
+    <string name="txt_approval_search_txt3">기안자</string>
+    <string name="txt_approval_search_txt4">조직도</string>
+    <string name="txt_approval_line_txt1">결재칸 수:</string>
+    <string name="txt_approval_line_txt2">개인협조칸 수:</string>
+    <string name="txt_approval_line_txt3">부서협조칸 수:</string>
+    <string name="txt_approval_line_txt4">결재선 수정, 삭제 시 좌측으로 밀어서 진행해주세요.</string>
+    <string name="txt_approval_line_txt5">결재선 순서 변경 시 꾹 눌러 이동시켜 주세요.</string>
+    <string name="txt_approval_line_txt6">이미 추가 된 사용자 입니다.</string>
+    <string name="txt_approval_line_txt7">(%1$s)칸 수는(%2$s) 입니다. 다시 확인해주세요.</string>
+    <string name="txt_approval_line_add">결재선 추가</string>
+    <string name="txt_company">회사</string>
+    <string name="txt_approval_line_array_title">결재 종류</string>
+    <string name="txt_approval_line_array_edit_title">결재 종류 수정</string>
+    <string name="txt_approval_line_array1">일반결재</string>
+    <string name="txt_approval_line_array2">참조</string>
+    <string name="txt_approval_line_array3">개인협조</string>
+    <string name="txt_approval_line_array4">개인협조(병렬)</string>
+    <string name="txt_approval_line_array3_1">부서협조</string>
+    <string name="txt_approval_line_array4_1">부서협조(병렬)</string>
+    <string name="txt_approval_line_search_txt1">이름</string>
+    <string name="txt_approval_line_search_txt2">부서</string>
+
+    <!-- 서비스데스크 -->
+    <string name="txt_service_desk_title">서비스데스크</string>
+    <string name="txt_service_desk_tab_normal">일반</string>
+    <string name="txt_service_desk_tab_security">보안</string>
+    <string name="txt_service_desk_tab_auth">권한</string>
+    <string name="txt_service_cancel">반려</string>
+    <string name="txt_service_confirm">승인</string>
+
+    <string name="txt_service_desk_state">상태</string>
+    <string name="txt_service_desk_req_name">요청자</string>
+    <string name="txt_service_desk_officer">담당자</string>
+    <string name="txt_service_desk_content">내용</string>
+    <string name="txt_service_desk_end_date1">완료일</string>
+    <string name="txt_service_desk_end_date2">희망완료일</string>
+    <string name="txt_service_desk_reg_date">등록일시</string>
+    <string name="txt_service_desk_work">작업내용</string>
+    <string name="txt_service_desk_work_time">투입공수(분)</string>
+    <string name="txt_service_desk_hint">내용을 입력해주세요.</string>
+    <string name="txt_service_desk_work_add">작업내역 추가하기</string>
+    <string name="txt_service_desk_requester">신청자</string>
+    <string name="txt_service_desk_req_content">신청내용</string>
+    <string name="txt_service_desk_req_date">신청일</string>
+    <string name="txt_service_desk_req_reson">신청사유</string>
+    <string name="txt_service_desk_req_div">요청구분</string>
+    <string name="txt_service_desk_req_content2">신청내역</string>
+    <string name="txt_service_desk_req_date2">사용기간</string>
+    <string name="txt_service_desk_req_history">승인이력</string>
+    <string name="txt_service_desk_req_info">신청자 정보</string>
+    <string name="txt_service_desk_req_offer">제공처</string>
+    <string name="txt_service_desk_req_offer2">제공방식</string>
+    <string name="txt_service_desk_req_subj">신청제목</string>
+    <string name="txt_service_desk_detect">탐지내역</string>
+    <string name="txt_service_desk_file_name">파일명 : %1$s</string>
+    <string name="txt_service_desk_ban">금칙어</string>
+    <string name="txt_service_desk_jumin">주민등록번호</string>
+    <string name="txt_service_desk_telno">전화번호</string>
+    <string name="txt_service_desk_email">이메일주소</string>
+    <string name="txt_service_desk_drive_no">운전면허번호</string>
+    <string name="txt_service_desk_passport_no">여권번호</string>
+    <string name="txt_service_desk_foreign_no">외국인등록번호</string>
+    <string name="txt_service_desk_account_no">계좌번호</string>
+    <string name="txt_service_desk_card_no">카드번호</string>
+    <string name="txt_service_desk_file_notice">상기 파일의 개인정보 및 중요정보를 확인하였습니다.</string>
+    <string name="txt_service_desk_mail_filter">메일필터</string>
+    <string name="txt_service_desk_sender">발신자</string>
+    <string name="txt_service_desk_receiver">수신자</string>
+    <string name="txt_service_desk_sub">제목</string>
+    <string name="txt_service_desk_send_date">발송일시</string>
+    <string name="txt_service_desk_main_content">본문내용</string>
+    <string name="txt_service_desk_main_view">본문보기</string>
+    <string name="txt_service_desk_attach_info">상기 파일의 개인정보 및 중요정보를 확인하였습니다.</string>
+    <string name="txt_service_desk_popup_txt1">반려 하시겠습니까?</string>
+    <string name="txt_service_desk_popup_txt2">반려의견 선택</string>
+    <string name="txt_service_desk_popup_txt3">신청사유를 명확히 하여, 재신청 바랍니다.</string>
+    <string name="txt_service_desk_popup_txt4">신청사유와 신청기간이 일치하지 않습니다. 재신청 바랍니다.</string>
+    <string name="txt_service_desk_popup_txt5">매체사용의 &quot;용도&quot;를 작성해주세요.재신청 바랍니다.</string>
+    <string name="txt_service_desk_popup_txt6">건을</string>
+    <string name="txt_service_desk_popup_txt7">승인 하시겠습니까?</string>
+    <string name="txt_service_desk_auth1">승인대기</string>
+    <string name="txt_service_desk_auth2">승인진행</string>
+    <string name="txt_service_desk_auth3">승인완료</string>
+    <string name="txt_service_desk_auth4">승인반려</string>
+    <string name="txt_service_desk_auth5">위임자 선택</string>
+    <string name="txt_service_desk_auth6">전체선택</string>
+    <string name="txt_list_no_data">내역이 없습니다.</string>
+    <string name="txt_service_desk_file_check">파일 확인 여부가 모두 체크되어야 합니다.</string>
+    <string name="txt_service_desk_more">더보기</string>
+    <string name="txt_service_desk_err_info">투입공수, 내용, 완료일(날짜비교)을 확인해수제요</string>
+
+
+
+
+    <!-- 출입관리 -->
+    <string name="txt_enter_management_title">출입관리</string>
+
+    <!-- 차량관리 -->
+    <string name="txt_car_management_title">차량관리</string>
+
+
+    <!-- 설정 -->
+    <string name="txt_config_title">설정</string>
+    <string name="txt_config_push">알림 설정</string>
+    <string name="txt_config_ver">버전 정보</string>
+    <string name="txt_config_account">계정 관리</string>
+    <string name="txt_config_account_detail">계정이 두 개 이상인 경우 추가해서 사용 가능합니다.</string>
+    <string name="txt_config_textsize">글자 크기</string>
+    <string name="txt_config_textsize_detail">원하시는 글자 크기를 선택해주세요.</string>
+    <string name="txt_config_menu">메뉴 순서</string>
+    <string name="txt_config_menu_detail">자주 보는 서비스 순서대로 설정해주세요.</string>
+    <string name="txt_config_logout">로그아웃</string>
+    <string name="txt_config_push_info">서비스별로 알림을 받을지 개별 설정할 수 있습니다.</string>
+    <string name="txt_config_account_info">계정을 추가하거나 좌측으로 밀어 삭제 할 수 있습니다.</string>
+    <string name="txt_config_textsize_info">목록과 상세 화면 글자 크기에 반영됩니다.</string>
+    <string name="txt_config_menu_seq_info">"홈 화면과 슬라이드 메뉴의 메뉴를\n꾹 눌러서 순서 변경할 수 있습니다."</string>
+    <string name="txt_config_account_add">계정추가</string>
+    <string name="txt_config_account_add_1">추가하실 계정의 아이디와 비밀번호를 입력해주세요.</string>
+    <string name="txt_config_account_add_2">아이디 또는 비밀번호를 확인해주세요.</string>
+    <string name="txt_config_account_add_3">아이디</string>
+    <string name="txt_config_account_add_4">비밀번호</string>
+    <string name="txt_config_account_add_5">계정 추가하기</string>
+    <string name="txt_logout_alert_content">KOLON 결재에서\n로그아웃 합니다.</string>
+    <string name="txt_config_textsize_sample_text">결재 요청 건 입니다.</string>
+    <string name="txt_account_delete_alert">해당 계정을 삭제 하시겠습니까?</string>
+    <string name="txt_account_delete_alert2">해당 계정은 고정 겸직 계정이므로 삭제 불가합니다.</string>
+    <string name="txt_account_delete_alert3">선택 계정은 삭제 불가합니다.</string>
+    <string name="txt_account_multi_text">(겸직)</string>
+
+    <!-- 글자크기조절 view-->
+    <string name="txt_size_adj_1">글자크기 조절</string>
+    <string name="txt_size_adj_2">결재 요청 건 입니다.</string>
+    <string name="txt_size_adj_3">작게</string>
+    <string name="txt_size_adj_4">중간</string>
+    <string name="txt_size_adj_5">크게</string>
+    <string name="txt_size_adj_6">가장 크게</string>
+
+    <!-- KolonTalk 연동 -->
+
+    <string name="txt_kolontalk_not_installed">"[KOLON TALK]앱이 설치되어 있지 않습니다. Kolon Apps에서 설치를 진행하시겠습니까?"</string>
+    <string name="txt_kolonapps_web_url">"https://ikenapp.kolon.com/portal/kolon/legacyLoginKolonView.miaps?"</string>
+
+    <string name="txt_kolonIken_not_installed">"[KOLON IKEN]앱이 설치되어 있지 않습니다. Kolon Apps에서 설치를 진행하시겠습니까?"</string>
+
+</resources>

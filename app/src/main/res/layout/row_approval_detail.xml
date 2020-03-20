@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <!-- Shimmer detail-->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout_sd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/shimmer_approval_detail"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_approval_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:includeFontPadding="false"
+            android:text="[법인카드 일괄상신] 1234-****-****-5678 2019"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btn_call"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/sub_call" />
+
+            <TextView
+                android:id="@+id/tv_approval_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"
+                android:text="name"
+                android:textColor="#000000"
+                android:textSize="13dp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="12dp"
+                android:background="@color/pinkish_grey" />
+
+            <TextView
+                android:id="@+id/tv_approval_detail_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"
+                android:text="품질관리팀"
+                android:textColor="@color/brownish_grey"
+                android:textSize="13dp" />
+
+            <RelativeLayout
+                android:id="@+id/btn_approval_detail_open"
+                android:layout_width="66dp"
+                android:layout_height="24dp"
+                android:background="@drawable/drw_round_stroke_blue_btn">
+
+                <TextView
+                    android:id="@+id/tv_approval_detail_open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="11dp"
+                    android:layout_toLeftOf="@+id/iv_deatil_arrow"
+                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_approval_expand"
+                    android:textColor="@color/lightish_blue"
+                    android:textSize="11dp" />
+
+                <ImageView
+                    android:id="@+id/iv_deatil_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/drw_arrow_s" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/white_two" />
+
+
+        <!-- open / close -->
+        <LinearLayout
+            android:id="@+id/layout_approval_open"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_approval_detail_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"
+                android:text="2019-04-23 11:45"
+                android:textColor="@color/warm_grey"
+                android:textSize="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_gyuljaesun"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_approval_line"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/tv_colon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text=":"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/tv_approval_detail_line"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:singleLine="true"
+                        android:text="강종렬(주임) - 노규태(대리) - 홍자영(과장)"
+                        android:textColor="@color/black"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btn_approval_detail_plus"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@drawable/plus_ble" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_approval_detail_refer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_chamjo"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_approval_refer"
+                    android:textColor="@color/warm_grey"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:text=":"
+                    android:textColor="@color/warm_grey"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_approval_detail_refer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:text="김지원 팀원, 한정원 대리"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_opinion_comment"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:id="@+id/btn_approval_detail_opinion"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@drawable/drw_round_stroke_grey_btn"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/drw_opinion" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_approval_opinion"
+                    android:textColor="@drawable/color_tab_text_select2"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_approval_detail_opinion_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:gravity="end"
+                    android:includeFontPadding="false"
+                    android:text="3"
+                    android:textColor="@color/lightish_blue"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_approval_detail_opinion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="13dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:gravity="end"
+                    android:includeFontPadding="false"
+                    android:text="3"
+                    android:textColor="@drawable/color_tab_text_select2"
+                    android:textSize="13dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_approval_detail_attach_file"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/drw_round_stroke_grey_btn"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/drw_attatch_file" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_approval_attach"
+                    android:textColor="@drawable/color_tab_text_select2"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_approval_detail_attach_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:gravity="end"
+                    android:includeFontPadding="false"
+                    android:text="3"
+                    android:textColor="@color/lightish_blue"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_approval_detail_attach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="13dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:gravity="end"
+                    android:includeFontPadding="false"
+                    android:text="3"
+                    android:textColor="@drawable/color_tab_text_select2"
+                    android:textSize="13dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/white_two" />
+
+        <!-- form layout -->
+        <RelativeLayout
+            android:id="@+id/layout_approval_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+                android:id="@+id/form_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/btn_form_expand"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/closeup_btn" />
+        </RelativeLayout>
+
+        <com.kolon.sign2.approval.ApprovalBottomMenuView
+            android:id="@+id/view_approval_bottom_menu"
+            android:layout_width="match_parent"
+            android:layout_height="68dp" />
+
+    </LinearLayout>
+
+    <com.kolon.sign2.approval.ApprovalOpinionPopupView
+        android:id="@+id/popup_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/popup_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/drw_round_white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialog_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white_six" />
+
+            <RelativeLayout
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_alert_confirm"
+                    android:textColor="@color/lightish_blue" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

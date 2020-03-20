@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="groupTab_ids">
+        <item name="dynamic_groupTab_btn_1" type="id" />
+        <item name="dynamic_groupTab_btn_2" type="id" />
+        <item name="dynamic_groupTab_btn_3" type="id" />
+        <item name="dynamic_groupTab_btn_4" type="id" />
+        <item name="dynamic_groupTab_btn_5" type="id" />
+    </array>
+
+    <string-array name="textsize_title">
+        <item>작게</item>
+        <item>중간</item>
+        <item>크게</item>
+        <item>가장크게</item>
+    </string-array>
+    <array name="textsize_value">
+        <item>13dp</item>
+        <item>14dp</item>
+        <item>15dp</item>
+        <item>16dp</item>
+    </array>
+
+</resources>

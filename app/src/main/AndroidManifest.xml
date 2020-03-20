@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kolon.sign2">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name="com.kolon.sign2.KolonSign2AppsApplication"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="allowBackup">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.SchemeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter android:label="">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sign2dev" />
+
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.NoticeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".setting.SettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+
+        <activity
+            android:name=".setting.SettingPushAlarm"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".setting.SettingAccountManagement"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".setting.SettingTextSizeManager"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".setting.SettingMenuChange"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".approval.ApprovalDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".approval.ApprovalFormActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".approval.ApprovalLineActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".approval.ApprovalLineAddActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".approval.ApprovalProgressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".servicedesk.ServiceDeskDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".dynamic.dynamicDetail.DynamicDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppCompat.Light.NoActionBar"/>
+        <!-- Firebase Cloud Message -->
+        <service android:name=".fcm.MyFirebaseMessageService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

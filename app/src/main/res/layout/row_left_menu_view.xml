@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lay_menu_item_depth1"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white_three"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_menu_title_depth1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:text="@string/txt_left_slide_menu_1"
+            android:textColor="@color/lightish_blue"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay_menu_item_depth2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:includeFontPadding="false"
+            android:text="기결함"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_menu_item_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:includeFontPadding="false"
+            android:text="6"
+            android:textColor="@color/lightish_blue"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lay_menu_item_depth3"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/menu_3_depth" />
+
+        <TextView
+            android:id="@+id/tv_sub_menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:includeFontPadding="false"
+            android:text="인사총무"
+            android:textColor="@color/greyish_brown"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_sub_menu_item_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            android:includeFontPadding="false"
+            android:text="6"
+            android:textColor="@color/lightish_blue"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+</LinearLayout>

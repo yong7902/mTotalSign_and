@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:orientation="vertical"
+    app:leftEdgeSwipeOffset="0dp"
+    app:rightEdgeSwipeOffset="0dp">
+
+    <!-- Button View For Right to Left -->
+    <LinearLayout
+        android:id="@+id/ll_swipe_righttoleft"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_swipe_delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_delete"
+            android:gravity="center" />
+    </LinearLayout>
+    <!-- Another Button View For Left To Right -->
+
+
+    <!-- Top View, Row ItemView of RecyclerView -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="16dp">
+
+            <TextView
+                android:id="@+id/tv_account_company_nm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:paddingTop="13dp"
+                android:text="1111"
+                android:textColor="@color/black_3"
+                android:textSize="@dimen/text_15" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"
+                android:text="이름.."
+                android:textColor="@color/greyish_brown"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tv_account_dept_nm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:includeFontPadding="false"
+                android:text="부서.."
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/greyish_brown"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_main_account"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/chk_main_account"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/white"
+                android:button="@drawable/selector_checkbox_circle"
+                android:checked="false"
+                android:clickable="false"
+                android:focusable="false" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.daimajia.swipe.SwipeLayout>

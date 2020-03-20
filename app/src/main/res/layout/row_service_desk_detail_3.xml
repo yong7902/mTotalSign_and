@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <!-- 문서반출  상세-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Shimmer detail-->
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/shimmer_standard_detail"/>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white_three">
+
+                    <TextView
+                        android:id="@+id/tv_title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="11dp"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_requester"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="김코롱"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tv_job"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_toRightOf="@+id/tv_name"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="대리"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tv_team"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_name"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="18dp"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="Mobile융합팀"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="13dp" />
+
+                    <ImageView
+                        android:id="@+id/btn_sub_call"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/sub_call" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white_three">
+
+                    <TextView
+                        android:id="@+id/tv_title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="11dp"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_req_info"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_title3"
+                        android:layout_width="108dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_req_date2"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="2019-01-30"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_title4"
+                        android:layout_width="108dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_req_offer"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_offer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="2019-01-30"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_title5"
+                        android:layout_width="108dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_req_offer2"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_offer_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="2019-01-30"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_title6"
+                        android:layout_width="108dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_req_subj"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="2019-01-30"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_title7"
+                        android:layout_width="108dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_req_reson"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_reason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="2019-01-30"
+                        android:textColor="@color/warm_grey"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:background="@color/white_three">
+
+                    <TextView
+                        android:id="@+id/tv_title8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginBottom="11dp"
+                        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_detect"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <com.kolon.sign2.servicedesk.ServiceDeskDetailDocRowView
+                    android:id="@+id/view_detect1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kolon.sign2.servicedesk.ServiceDeskDetailDocRowView
+                    android:id="@+id/view_detect2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/btn_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/very_light_pink_two"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_title9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginBottom="13dp"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/txt_service_desk_more"
+                        android:textColor="@color/warm_grey"
+                        android:textSize="13dp" />
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="14dp"
+                        android:layout_marginLeft="3dp"
+                        android:background="@drawable/icon_expand_less_g" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btn_service_desk_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/red_pink" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/menu_icon_02" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_service_cancel"
+                    android:textColor="@color/black_3"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white_seven" />
+
+            <LinearLayout
+                android:id="@+id/btn_service_desk_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/cornflower_two" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/menu_icon_01" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_service_confirm"
+                    android:textColor="@color/black_3"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/popup_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/drw_round_white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialog_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white_six" />
+
+            <RelativeLayout
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_alert_confirm"
+                    android:textColor="@color/lightish_blue" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</RelativeLayout>

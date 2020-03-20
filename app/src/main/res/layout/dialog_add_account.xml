@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:background="@drawable/drw_round_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/noto_sans_cjk_kr_medium"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/txt_config_account_add_1"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/tv_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:includeFontPadding="false"
+        android:text="@string/txt_config_account_add_2"
+        android:textColor="@color/red"
+        android:textSize="13dp" />
+
+    <EditText
+        android:id="@+id/edit_id"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/drw_round_grey_cccccc2"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:hint="@string/txt_config_account_add_3"
+        android:includeFontPadding="false"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/warm_grey"
+        android:textSize="14dp" />
+
+    <EditText
+        android:id="@+id/edit_pass"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        android:inputType="textPassword"
+        android:background="@drawable/drw_round_grey_cccccc2"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:hint="@string/txt_config_account_add_4"
+        android:includeFontPadding="false"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/warm_grey"
+        android:textSize="14dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white_six" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:text="@string/txt_alert_cancel"
+            android:textColor="@color/warm_grey"
+            android:textSize="14dp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white_six" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            android:text="@string/txt_config_account_add_5"
+            android:textColor="@color/lightish_blue"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+</LinearLayout>

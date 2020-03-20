@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginBottom="1dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_textsize_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:textSize="@dimen/text_15"
+            android:textColor="@color/black"
+            android:fontFamily="@font/noto_sans_cjk_kr_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_textsize_sample"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="102dp"
+            android:layout_marginEnd="10dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_15"
+            android:textColor="@color/black"
+            android:fontFamily="@font/noto_sans_cjk_kr_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cb_textsize_selected"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <CheckBox
+            android:id="@+id/cb_textsize_selected"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:button="@drawable/selector_textsize"
+            android:layout_marginEnd="16dp"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/very_light_pink"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
