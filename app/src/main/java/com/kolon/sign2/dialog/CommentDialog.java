@@ -60,7 +60,7 @@ public class CommentDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //아웃사이드 클릭시 닫기
+        //아웃사이드 클릭시 닫기 해제
         getDialog().setCanceledOnTouchOutside(true);
         //키패드 올라올때 창을 밀어 올림
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -69,6 +69,7 @@ public class CommentDialog extends DialogFragment {
         TextView titleTv = (TextView)v.findViewById(R.id.tv_title);
         titleTv.setText(title);
 
+        /*
         RelativeLayout dialog_bg = (RelativeLayout)v.findViewById(R.id.dialog_bg);
         dialog_bg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +77,7 @@ public class CommentDialog extends DialogFragment {
                 dismissAllowingStateLoss();
             }
         });
+        */
 
         Button leftBtn =(Button)v.findViewById(R.id.btn_comment1);
         leftBtn.setOnClickListener(new View.OnClickListener() {

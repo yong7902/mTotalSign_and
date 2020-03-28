@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.kolon.sign2.R;
 import com.kolon.sign2.dialog.ListDialog;
 import com.kolon.sign2.vo.Res_AP_IF_016_VO;
@@ -31,6 +32,8 @@ public class ApprovalLineAdapter extends RecyclerView.Adapter<ApprovalLineAdapte
     private Vibrator vibrator;
     private final StartDragListener mStartDragListener;
     private Context mContext;
+
+    private SwipeRevealLayout openedLayout = null;
 
     private onClick mInterface;
     public interface onClick{
@@ -150,6 +153,7 @@ public class ApprovalLineAdapter extends RecyclerView.Adapter<ApprovalLineAdapte
             front_layout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
+
                     dragView(view, position);
                     return false;
                 }
@@ -159,11 +163,19 @@ public class ApprovalLineAdapter extends RecyclerView.Adapter<ApprovalLineAdapte
 
                 @Override
                 public void onClosed(SwipeRevealLayout view) {
+                //    openedLayout = null;
+                    if (openedLayout == view)
+                        openedLayout = null;
                 }
 
                 @Override
                 public void onOpened(SwipeRevealLayout view) {
+                    if (openedLayout != null)
+                        openedLayout.close(true);
 
+                    openedLayout = view;
+
+                    /*
                     for(int i=0;i<data.size();i++){
                         if(data.get(i).dragId.equals(view.viewTagId)){
                             data.get(i).isOpend = true;
@@ -173,6 +185,7 @@ public class ApprovalLineAdapter extends RecyclerView.Adapter<ApprovalLineAdapte
 
                     }
                     notifyDataSetChanged();
+                    */
                 }
 
                 @Override
@@ -212,4 +225,5 @@ public class ApprovalLineAdapter extends RecyclerView.Adapter<ApprovalLineAdapte
     public void onRowClear(AdapterViewHolder holder) {
         holder.itemView.setBackgroundColor(0xffffffff);
     }
+
 }

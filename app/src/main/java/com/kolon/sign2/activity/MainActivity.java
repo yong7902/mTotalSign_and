@@ -105,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SharedPreferenceManager mPref;
 
+    // 마지막으로 뒤로가기 버튼을 눌렀던 시간 저장
+    private long backKeyPressedTime = 0;
+    // 첫 번째 뒤로가기 버튼을 누를때 표시
+    private Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Constants.isLogin = true;
 
         //yong79. shimmer
-        shimmerStart();
+        //shimmerStart();
 
         registerReceiver();
 //        if(Constants.schemeMap != null &&  !TextUtils.isEmpty(Constants.schemeMap.get("sysId"))){
@@ -207,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     errMsg = getResources().getString(R.string.txt_network_error);
                 }
+                //shimmerStop();
                 //hideProgressBar();
 
                 TextDialog dialog = TextDialog.newInstance("", errMsg, getResources().getString(R.string.txt_alert_confirm));
@@ -553,11 +559,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             //위치가 홈이면 닫고 아니면 홈으로 이동
             if (fragmentType == FRAGMENT_HOME) {
-                super.onBackPressed();
+
+                // 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
+                // super.onBackPressed();
+
+                // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+                // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지났으면 Toast Show
+                // 2000 milliseconds = 2 seconds
+                if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+                    backKeyPressedTime = System.currentTimeMillis();
+                    toast = Toast.makeText(this, R.string.tx_quit_app, Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                // 마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
+                // 마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지나지 않았으면 종료
+                // 현재 표시된 Toast 취소
+                if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+                    finish();
+                    toast.cancel();
+                }
+
+
             } else {
                 changeFragment(FRAGMENT_HOME);
             }
         }
+
     }
 
     /**
@@ -629,6 +657,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userId = mPref.getStringPreference(Constants.PREF_USER_IF_ID);
         deptId = mPref.getStringPreference(Constants.PREF_DEPT_ID);
         companyCd = mPref.getStringPreference(Constants.PREF_COMPANY_CD);
+
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            //좌측 메뉴가 열려있다면 닫는다.
+            drawer_layout.closeDrawer(GravityCompat.START);
+        }
 
         getSystemMenuData();
         if (left_slide_menu_view != null) {
@@ -1038,11 +1071,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ShimmerFrameLayout mShimmerLayout = findViewById(R.id.shimmer_layout);
         mShimmerLayout.startShimmer();
         mShimmerLayout.setVisibility(View.VISIBLE);
+
+        RelativeLayout fragmentLayout = findViewById(R.id.fragment_layer);
+        fragmentLayout.setVisibility(View.GONE);
     }
 
     public void shimmerStop() {
         ShimmerFrameLayout mShimmerLayout = findViewById(R.id.shimmer_layout);
         mShimmerLayout.stopShimmer();
         mShimmerLayout.setVisibility(View.GONE);
+
+        RelativeLayout fragmentLayout = findViewById(R.id.fragment_layer);
+        fragmentLayout.setVisibility(View.VISIBLE);
     }
 }

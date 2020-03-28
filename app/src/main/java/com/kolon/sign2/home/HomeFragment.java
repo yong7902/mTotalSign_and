@@ -140,6 +140,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Res_AP_IF_002_VO result) {
                 //hideProgressBar();
+                ((MainActivity) mContext).shimmerStop();
                 shimmerStop();
                 String errMsg = "";
                 if (result != null) {

@@ -92,6 +92,8 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
     private ArrayList<AttachFileListVO> fileList = new ArrayList<>();
     private OnRowViewState mInterface;
 
+    private boolean isFinal = false;
+
     public interface OnRowViewState {
         void setApprovalLineView(boolean isView);//우측 결재선 표시 유무
 
@@ -131,6 +133,9 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
         this.deptId = deptId;
         this.category = category;
         this.position = position;
+
+        if (data.size() == position+1) //마지막 페이지인지 여부
+            isFinal = true;
 
         //String data[] = guidList.get(position).split("\\|");
 
@@ -590,7 +595,8 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
                              * 미결함 목록이 0건이 될 때까지 이동함
                              * 더 이상 결재건이 없을 경우 결재완료 Toast 팝업 띄움
                              * */
-                            checkRemainApprovalCount(title);
+                            //checkRemainApprovalCount(title);
+                            checkRemainApproval(title);
 
                             return;
                         } else {
@@ -615,6 +621,42 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
                 dialog.show(((ApprovalDetailActivity) mContext).getSupportFragmentManager());
             }
         });
+    }
+
+    //남은 결재건수를 체크_yong79
+    private void checkRemainApproval(String title) {
+
+        //boolean isFinal = true;
+
+        if (isFinal) { //목록으로
+            String msg = String.format(getResources().getString(R.string.txt_approval_success), title);
+            Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+
+            ((ApprovalDetailActivity) mContext).onBackPressed();
+        } else { //다음 결재
+            String msg = String.format(getResources().getString(R.string.txt_approval_success), title) + "\n" + mContext.getResources().getString(R.string.txt_approval_next_process);
+            TextDialog dialog = TextDialog.newInstance("", msg, mContext.getResources().getString(R.string.txt_approval_next_process_2),
+                    mContext.getResources().getString(R.string.txt_approval_next_process_3));
+            dialog.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (view.getId()) {
+                        case R.id.btn_left:
+                            //목록으로
+                            dialog.dismiss();
+                            ((ApprovalDetailActivity) mContext).onBackPressed();
+                            break;
+                        case R.id.btn_right:
+                            //다음 결재건
+                            dialog.dismiss();
+                            showProgressbar();
+                            ((ApprovalDetailActivity) mContext).nextApprovalLoading();
+                            break;
+                    }
+                }
+            });
+            dialog.show(((ApprovalDetailActivity) mContext).getSupportFragmentManager());
+        }
     }
 
     //남은 결재건수를 체크

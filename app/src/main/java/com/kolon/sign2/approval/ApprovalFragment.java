@@ -50,8 +50,8 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     private Button btn_approval_personal_select;
     private Button btn_approval_depart_select;
 
-    //    private RelativeLayout lay_depart_tab;
-//    private TextView txt_depart_tab;
+    private RelativeLayout lay_depart_tab;
+    private TextView txt_depart_tab;
     private RecyclerView lv_approval;
     private ApprovalDataAdapter adapter;
     private LinearLayout no_data;
@@ -67,6 +67,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     private ArrayList<Res_AP_IF_102_VO.result.menuArray> departTabData;//부서결재함 탭데이터
     private ArrayList<Res_AP_IF_102_VO.result.menuArray> depart_SubTabData;//부서결재함 메뉴 탭데이터
     private int sub_tab_position;//서브탭 위치
+    private int menu_tab_position = 0; //메뉴탭 위치
 
     private String userId, deptId, companyCd, menuId;
     private HashMap<String, String> menuListReq;//목록 데이터 요청
@@ -84,6 +85,8 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     private boolean loadingMore; //리스트 끝에서 추가 로딩여부
 
     private ShimmerFrameLayout mShimmerLayout;
+
+    private RelativeLayout deptMenuTab;
 
     public static ApprovalFragment newInstance(String userId, String deptId, String companyCd, ArrayList<Res_AP_IF_102_VO.result.menuArray> menuArrays, String menuId) {
         ApprovalFragment fragment = new ApprovalFragment();
@@ -138,10 +141,10 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
         tabView = (ApprovalScrollTabView) view.findViewById(R.id.tabview);
         tabView.setInterface(this);
 
-//        lay_depart_tab = (RelativeLayout)view.findViewById(R.id.lay_depart_tab);
-//        txt_depart_tab = (TextView)view.findViewById(R.id.txt_depart_tab);
-//        Button menuBtn = (Button)view.findViewById(R.id.btn_depart_tab_select_menu);
-//        menuBtn.setOnClickListener(this);
+        lay_depart_tab = (RelativeLayout)view.findViewById(R.id.lay_depart_tab);
+        txt_depart_tab = (TextView)view.findViewById(R.id.txt_depart_tab);
+        Button menuBtn = (Button)view.findViewById(R.id.btn_depart_tab_select_menu);
+        menuBtn.setOnClickListener(this);
 
         //yong79. shimmer
         mShimmerLayout = (ShimmerFrameLayout) view.findViewById(R.id.shimmer_layout);
@@ -269,9 +272,15 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                                 if (readFirst.equals(departTabData.get(selectPos).getMenuId())) {
                                     Log.d(TAG, "#### add sub:" + menuArrays.get(i).getMenuId());
                                     depart_SubTabData.add(menuArrays.get(i));
+
+//                                    menuTabDataSet(selectPos, menuArrays.get(i).getMenuName());
+//                                    if (menuId.equals(menuArrays.get(i).getMenuId())) {
+//                                        menuTabDataSet(depart_SubTabData.indexOf(), menuArrays.get(i).getMenuName());
+//                                    }
                                 }
                                 if (menuId.equals(menuArrays.get(i).getMenuId())) {
-                                    subTitle = menuArrays.get(i).getMenuName();
+                                    //subTitle = menuArrays.get(i).getMenuName();
+                                    menuTabDataSet(depart_SubTabData.indexOf(menuArrays.get(i))+1, menuArrays.get(i).getMenuName());
                                 }
                             }
                         }
@@ -383,7 +392,12 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                     }
 
                     //부서결재함일경우 맨앞에 헤더(메뉴선택)를 넣는다
-                    readData.add(0, info);
+                    /////readData.add(0, info);
+
+                    lay_depart_tab.setVisibility(View.VISIBLE);
+                }
+                else {
+                    lay_depart_tab.setVisibility(View.GONE);
                 }
             }
 
@@ -502,6 +516,8 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void selectPersonalTab() {
+        lay_depart_tab.setVisibility(View.GONE);
+
         btn_approval_personal_select.setSelected(true);
         btn_approval_depart_select.setSelected(false);
 
@@ -516,6 +532,9 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void selectDepartTab() {
+        lay_depart_tab.setVisibility(View.GONE);
+        menuTabDataSet(0, mContext.getResources().getString(R.string.txt_approval_tab_total));
+
         btn_approval_personal_select.setSelected(false);
         btn_approval_depart_select.setSelected(true);
         for (int i = 0; i < departTabData.size(); i++) {
@@ -565,7 +584,8 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void getInputMapData(int position) {
-        getInputMapData(position, 0);
+        //getInputMapData(position, 0);
+        getInputMapData(position, menu_tab_position);
     }
 
     //search 결과
@@ -606,6 +626,10 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                 //부서 결재함
                 pageNum = 0;
                 selectDepartTab();
+                break;
+            case R.id.btn_depart_tab_select_menu:
+                //리스트 메뉴
+                clickMenu();
                 break;
         }
     }
@@ -702,8 +726,12 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                 pageNum = 0;
                 if (position == 0) {
                     adapter.getAdapterData().get(0).setTitle(mContext.getResources().getString(R.string.txt_approval_tab_total));
+
+                    menuTabDataSet(position, mContext.getResources().getString(R.string.txt_approval_tab_total));
                 } else {
                     adapter.getAdapterData().get(0).setTitle(depart_SubTabData.get(position - 1).getMenuName());
+
+                    menuTabDataSet(position, depart_SubTabData.get(position - 1).getMenuName());
                 }
                 adapter.notifyItemChanged(0);
                 getInputMapData(sub_tab_position, position);
@@ -747,8 +775,12 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     public void select(int position) {
         pageNum = 0;
         sub_tab_position = position;
+        menu_tab_position = 0;
+
         getInputMapData(position);
         getDataList("shimmer");
+
+        menuTabDataSet(0, mContext.getResources().getString(R.string.txt_approval_tab_total));
     }
 
     public void changeTextSize(){
@@ -763,5 +795,10 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     private void shimmerStop() {
         mShimmerLayout.setVisibility(View.GONE);
         mShimmerLayout.stopShimmer();
+    }
+
+    private void menuTabDataSet(int position, String title) {
+        menu_tab_position = position;
+        txt_depart_tab.setText(title);
     }
 }
