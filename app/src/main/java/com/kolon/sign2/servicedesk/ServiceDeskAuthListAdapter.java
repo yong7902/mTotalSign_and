@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class ServiceDeskAuthListAdapter extends RecyclerView.Adapter<ServiceDeskAuthListAdapter.AdapterViewHolder> {
 
     private ArrayList<Res_AP_IF_037_VO.result.aprList> data;
+    private String selectCode;
     private Context context;
 
     private OnSelectItem mInterface;
@@ -35,9 +36,10 @@ public class ServiceDeskAuthListAdapter extends RecyclerView.Adapter<ServiceDesk
         this.mInterface = mInterface;
     }
 
-    public ServiceDeskAuthListAdapter(ArrayList<Res_AP_IF_037_VO.result.aprList> data) {
+    public ServiceDeskAuthListAdapter(ArrayList<Res_AP_IF_037_VO.result.aprList> data, String selectCode) {
         if(data == null) return;
         this.data = data;
+        this.selectCode = selectCode;
     }
 
     public void setData(ArrayList<Res_AP_IF_037_VO.result.aprList> data){
@@ -150,6 +152,10 @@ public class ServiceDeskAuthListAdapter extends RecyclerView.Adapter<ServiceDesk
                     if (mInterface != null) mInterface.checkPosition(position);
                 }
             });
+
+            if (selectCode != "D1") {
+                iv_check.setVisibility(View.GONE);
+            }
 
 
             CommonUtils.changeTextSize(context, tv_title);

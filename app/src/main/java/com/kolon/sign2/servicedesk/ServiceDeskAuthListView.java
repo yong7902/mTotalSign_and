@@ -128,7 +128,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
             }
         });
 
-        adapter = new ServiceDeskAuthListAdapter(aprList);
+        adapter = new ServiceDeskAuthListAdapter(aprList, selectCode);
         adapter.setInterface(this);
         rv.setAdapter(adapter);
 
@@ -168,10 +168,15 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         pageNum = 0;
         this.menuId = menuId;
         //서버 또는 전단계에서 넘어온 데이터 - 위임자 목록
+        /*
         String loginInfo = mPref.getStringPreference(Constants.PREF_LOGIN_IF_INFO);
         Res_AP_IF_004_VO.result.multiuserList user = new Gson().fromJson(loginInfo, new TypeToken< Res_AP_IF_004_VO.result.multiuserList>(){}.getType());
         userId = user.getUserId();
         String userNm = user.getUserName();
+        */
+
+        userId = mPref.getStringPreference(Constants.PREF_USER_IF_ID);
+        String userNm = mPref.getStringPreference(Constants.PREF_USER_NAME);
 
 
         //?? testid/////////////////////////////
