@@ -18,7 +18,7 @@ public class UserInfoResultVO {
     public static class Result {
         private String errorCd;      // 결과코드
         private String errorMsg;       // 오류 메세지
-        private String mdmYN;
+        private String mdmYn;
         private ArrayList<List> list;
 
 
@@ -38,12 +38,12 @@ public class UserInfoResultVO {
             this.errorMsg = errorMsg;
         }
 
-        public String getMdmYN() {
-            return mdmYN;
+        public String getMdmYn() {
+            return mdmYn;
         }
 
-        public void setMdmYN(String mdmYN) {
-            this.mdmYN = mdmYN;
+        public void setMdmYn(String mdmYN) {
+            this.mdmYn = mdmYn;
         }
 
         public ArrayList<List> getList() {
@@ -60,8 +60,8 @@ public class UserInfoResultVO {
         private String sysName;
         private String sysIcon;
         private String sysOrder;
-        private String sysPushYN;
-        private String autoTabYN;
+        private String sysPushYn;
+        private String autoTabYn;
 
         public String getSysId() {
             return sysId;
@@ -95,20 +95,20 @@ public class UserInfoResultVO {
             this.sysOrder = sysOrder;
         }
 
-        public String getSysPushYN() {
-            return sysPushYN;
+        public String getSysPushYn() {
+            return sysPushYn;
         }
 
-        public void setSysPushYN(String sysPushYN) {
-            this.sysPushYN = sysPushYN;
+        public void setSysPushYn(String sysPushYn) {
+            this.sysPushYn = sysPushYn;
         }
 
-        public String getAutoTabYN() {
-            return autoTabYN;
+        public String getAutoTabYn() {
+            return autoTabYn;
         }
 
-        public void setAutoTabYN(String autoTabYN) {
-            this.autoTabYN = autoTabYN;
+        public void setAutoTabYn(String autoTabYN) {
+            this.autoTabYn = autoTabYn;
         }
     }
 

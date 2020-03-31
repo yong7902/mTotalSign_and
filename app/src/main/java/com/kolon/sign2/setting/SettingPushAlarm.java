@@ -68,15 +68,16 @@ public class SettingPushAlarm extends Activity implements View.OnClickListener {
         mAppPushListView = (ListView)findViewById(R.id.lv_setting_app_list);
         mAppPushListView.setEmptyView(findViewById(android.R.id.empty));
         progress_bar = (RelativeLayout) findViewById(R.id.progress_bar);
-        getPushSettingList();
+        //getPushSettingList();
+        setAppListView();
     }
 
 
     private void setAppListView() {
-        if (null != mPushReceiveArray && mPushReceiveArray.size() > 0) {
+    //    if (null != mPushReceiveArray && mPushReceiveArray.size() > 0) {
             mPushReceiveListAdapter = new PushReceiveListAdapter(this, mPushReceiveArray, mPref);
             mAppPushListView.setAdapter(mPushReceiveListAdapter);
-        }
+    //    }
     }
 
     private void getPushSettingList() {

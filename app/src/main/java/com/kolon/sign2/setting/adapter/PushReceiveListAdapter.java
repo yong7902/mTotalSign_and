@@ -11,6 +11,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kolon.sign2.BuildConfig;
 import com.kolon.sign2.R;
 import com.kolon.sign2.network.NetworkPresenter;
@@ -21,6 +23,7 @@ import com.kolon.sign2.utils.Constants;
 import com.kolon.sign2.utils.SharedPreferenceManager;
 import com.kolon.sign2.vo.AlarmListResultVO;
 import com.kolon.sign2.vo.CommonResultVO;
+import com.kolon.sign2.vo.Res_AP_IF_101_VO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,12 +45,17 @@ public class PushReceiveListAdapter extends BaseAdapter {
     private ArrayList<AlarmListResultVO.List> mPushReceiveArrayList;
     private Context mContext;
     private SharedPreferenceManager mPref;
+    private Res_AP_IF_101_VO.result userAuthInfo;
 
     public PushReceiveListAdapter(Context context, ArrayList<AlarmListResultVO.List> list, SharedPreferenceManager pref) {
         mContext = context;
         mPushReceiveArrayList = list;
         mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mPref = pref;
+
+        String str = mPref.getStringPreference(Constants.PREF_USER_AUTH_INFO);
+        userAuthInfo = new Gson().fromJson(str, new TypeToken<Res_AP_IF_101_VO.result>() {
+        }.getType());
     }
 
     public PushReceiveListAdapter getInstance(Context context, ArrayList<AlarmListResultVO.List> list, SharedPreferenceManager pref) {
@@ -58,11 +66,11 @@ public class PushReceiveListAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return mPushReceiveArrayList.size();
+        return userAuthInfo.getSysArray().size();
     }
 
     public Object getItem(int position) {
-        return mPushReceiveArrayList.get(position);
+        return userAuthInfo.getSysArray().get(position);
     }
 
     public long getItemId(int arg0) {
@@ -91,23 +99,25 @@ public class PushReceiveListAdapter extends BaseAdapter {
         } else {
             vHolder = (ViewHolder)v.getTag();
         }
-        String appName = mPushReceiveArrayList.get(position).getSysNm();
+        String appName = userAuthInfo.getSysArray().get(position).getSysName();
         vHolder.mAppNameTextView.setText(appName);
-        Glide.with(mContext).load(mPushReceiveArrayList.get(position).getIconUrl()).into(vHolder.mIconImg);
+        Glide.with(mContext).load(userAuthInfo.getSysArray().get(position).getSysIcon()).into(vHolder.mIconImg);
 
         vHolder.mPushReceiveSwitch.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
                   String isPushYN = "";
-                  if ("Y".equalsIgnoreCase(mPushReceiveArrayList.get(position).getPushYn())) {
+
+                  if ("Y".equalsIgnoreCase(userAuthInfo.getSysArray().get(position).getSysPushYn())) {
                       isPushYN = "N";
                   } else {
                       isPushYN = "Y";
                   }
-                  updatePushYN(mPushReceiveArrayList.get(position).getSysId(), isPushYN, position);
+
+                  updatePushYN(userAuthInfo.getSysArray().get(position).getSysId(), isPushYN, position);
               }
           });
-        if ("Y".equalsIgnoreCase(mPushReceiveArrayList.get(position).getPushYn())) {
+        if ("Y".equalsIgnoreCase(userAuthInfo.getSysArray().get(position).getSysPushYn())) {
             vHolder.mPushReceiveSwitch.setChecked(true);
         } else {
             vHolder.mPushReceiveSwitch.setChecked(false);
@@ -121,7 +131,7 @@ public class PushReceiveListAdapter extends BaseAdapter {
         NetworkPresenter presenter = new NetworkPresenter();
         HashMap hm = new HashMap();
         hm.put("dvcId", mPref.getStringPreference(Constants.PREF_DEVICE_ID));
-        hm.put("pushYn", mPref.getStringPreference(Constants.PREF_TOKEN_KEY));
+        hm.put("pushYn", isPushYN);
         hm.put("userId", mPref.getStringPreference(Constants.PREF_USER_ID));
         hm.put("sysId", sysId);
         String timeStamp = CommonUtils.getTimeStamp();
@@ -135,7 +145,7 @@ public class PushReceiveListAdapter extends BaseAdapter {
                     if (result != null) {
                         if ("200".equals(result.getStatus().getStatusCd())) {
                             if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
-                                mPushReceiveArrayList.get(position).setPushYn(isPushYN);
+                                userAuthInfo.getSysArray().get(position).setSysPushYn(isPushYN);
                                 notifyDataSetChanged();
                                 return;
                             } else {

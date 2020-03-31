@@ -26,15 +26,15 @@ public class Res_AP_IF_101_VO extends statusVO {
         private userInfoClass userInfo;
 
         public class userInfoClass implements Serializable{
-            public String getMdmYN() {
-                return mdmYN;
+            public String getMdmYn() {
+                return mdmYn;
             }
 
-            public void setMdmYN(String mdmYN) {
-                this.mdmYN = mdmYN;
+            public void setMdmYn(String mdmYN) {
+                this.mdmYn = mdmYn;
             }
 
-            String mdmYN;//mdm 적용여부
+            String mdmYn;//mdm 적용여부
         }
 
         private ArrayList<sysArray> sysArray;
@@ -45,8 +45,8 @@ public class Res_AP_IF_101_VO extends statusVO {
             String sysName;//시스템 이름
             String sysIcon;//시스템 아이콘URL
             String sysOrder;//	시스템 정렬순서
-            String sysPushYN;//	시스템 푸시 알림 여부
-            String autoTabYN;//	업무 리스트 구성 시 TAB을 자동으로 그릴 지 여부
+            String sysPushYn;//	시스템 푸시 알림 여부
+            String autoTabYn;//	업무 리스트 구성 시 TAB을 자동으로 그릴 지 여부
             String sysIconYn;//	시스템 아이콘 유무
 
             public String getSysId() {
@@ -81,20 +81,20 @@ public class Res_AP_IF_101_VO extends statusVO {
                 this.sysOrder = sysOrder;
             }
 
-            public String getSysPushYN() {
-                return sysPushYN;
+            public String getSysPushYn() {
+                return sysPushYn;
             }
 
-            public void setSysPushYN(String sysPushYN) {
-                this.sysPushYN = sysPushYN;
+            public void setSysPushYn(String sysPushYN) {
+                this.sysPushYn = sysPushYn;
             }
 
-            public String getAutoTabYN() {
-                return autoTabYN;
+            public String getAutoTabYn() {
+                return autoTabYn;
             }
 
-            public void setAutoTabYN(String autoTabYN) {
-                this.autoTabYN = autoTabYN;
+            public void setAutoTabYn(String autoTabYn) {
+                this.autoTabYn = autoTabYn;
             }
 
             public String getSysIconYn() {
