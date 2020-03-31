@@ -30,6 +30,7 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
     private boolean isClose;
     private String mTitleText = "";
     private String mRightBtnText = "";
+    private boolean mCommentRequire = true;
 
     private DynamicApprovalListener mInterface;
     public interface DynamicApprovalListener{
@@ -39,11 +40,12 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
         this.mInterface = mInterface;
     }
 
-    public static DynamicApprovalDialog newInstance(String title, String rightBtnText) {
+    public static DynamicApprovalDialog newInstance(String title, String rightBtnText, boolean commentRequire) {
         DynamicApprovalDialog dialog = new DynamicApprovalDialog();
         Bundle args = new Bundle();
         args.putString("title", title);
         args.putString("rightBtnText", rightBtnText);
+        args.putBoolean("commentRequire", commentRequire);
         dialog.setArguments(args);
         return dialog;
     }
@@ -56,6 +58,7 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
         if (getArguments() != null) {
             mTitleText = getArguments().getString("title");
             mRightBtnText = getArguments().getString("rightBtnText");
+            mCommentRequire = getArguments().getBoolean("commentRequire");
         }
     }
 
@@ -78,6 +81,18 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
         tv_ok = v.findViewById(R.id.tv_dynamic_approval_right_text);
         tv_ok.setText(mRightBtnText);
         comment_edit = v.findViewById(R.id.tv_dynamic_approval_comment_edit);
+
+        if (mCommentRequire) {
+            comment_edit.setHint(mContext.getResources().getString(R.string.txt_app_reject_hint));
+            tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
+            isClose = false;
+        }
+        else {
+            comment_edit.setHint(mContext.getResources().getString(R.string.txt_app_ok_hint));
+            tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.lightish_blue));
+            isClose = true;
+        }
+
         comment_edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,7 +101,7 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count == 0) {
+                if (count == 0 && mCommentRequire) {
                     isClose = false;
                     tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
                 } else {
@@ -106,13 +121,13 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
                 if (hasFocus) {
                     comment_edit.setHint("");
                 } else {
-                    comment_edit.setHint(mContext.getResources().getString(R.string.txt_approval_txt_2));
+                    if (mCommentRequire)
+                        comment_edit.setHint(mContext.getResources().getString(R.string.txt_app_reject_hint));
+                    else
+                        comment_edit.setHint(mContext.getResources().getString(R.string.txt_app_ok_hint));
                 }
             }
         });
-
-
-        isClose = false;
 
         return v;
     }

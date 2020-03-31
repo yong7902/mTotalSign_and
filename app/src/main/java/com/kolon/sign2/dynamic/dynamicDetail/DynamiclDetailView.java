@@ -34,7 +34,9 @@ import com.kolon.sign2.vo.AttachFileListVO;
 import com.kolon.sign2.vo.Res_AP_IF_104_VO;
 import com.kolon.sign2.vo.Res_Doc_Viewer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -192,6 +194,11 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     private void initEvnet() {
         //TODO : 결재 승인 호출
         accpetLayout.setOnClickListener(v -> {
+            //공수 입력 체크
+            if (null != mDynamicEditWorkView && !checkEditWorkInput()) {
+                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_desk_err_info), Toast.LENGTH_LONG).show();
+                return;
+            }
             String dialogTitle = mAcceptTextview.getText().toString() + mContext.getString(R.string.txt_approval_txt_1);
             showApprovalDialog(dialogTitle, mAcceptTextview.getText().toString());
         });
@@ -204,7 +211,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     }
 
     private void showCancelDialog(String title, String rightText) {
-        DynamicApprovalDialog dialog = DynamicApprovalDialog.newInstance(title, rightText);
+        DynamicApprovalDialog dialog = DynamicApprovalDialog.newInstance(title, rightText, true);
         dialog.setInterface(new DynamicApprovalDialog.DynamicApprovalListener() {
             @Override
             public void getMessage(String comment) {
@@ -217,7 +224,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     }
 
     private void showApprovalDialog(String title, String rightText) {
-        DynamicApprovalDialog dialog = DynamicApprovalDialog.newInstance(title, rightText);
+        DynamicApprovalDialog dialog = DynamicApprovalDialog.newInstance(title, rightText, false);
         dialog.setInterface(new DynamicApprovalDialog.DynamicApprovalListener() {
             @Override
             public void getMessage(String comment) {
@@ -585,6 +592,21 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
                 }
             }
         }
+    }
+
+    //필수값을 체크 - 투입공수, 내용, 완료일
+    private boolean checkEditWorkInput() {
+        //투입공수 체크
+        String min = mDynamicEditWorkView.getWorkTime().toString();
+        if (TextUtils.isEmpty(min) || Integer.parseInt(min) == 0) {
+            return false;
+        }
+        //내용 체크
+        String contents = mDynamicEditWorkView.getContents().toString().trim();
+        if (TextUtils.isEmpty(contents)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

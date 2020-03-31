@@ -33,7 +33,7 @@
             android:background="@drawable/drw_round_grey_cccccc2"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:singleLine="true"
