@@ -1,5 +1,6 @@
 package com.kolon.sign2.dynamic;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.kolon.sign2.R;
 import com.kolon.sign2.activity.MainActivity;
+import com.kolon.sign2.dynamic.dynamicDetail.DynamicDetailActivity;
 import com.kolon.sign2.network.NetworkPresenter;
 import com.kolon.sign2.servicedesk.ServiceDeskAuthListView;
 import com.kolon.sign2.dynamic.viewmodel.DynamicListViewModel;
@@ -746,7 +748,34 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
     @Override
     public void onSelectItem(String docId) {
         //권한 상세
+
         Toast.makeText(mContext, "권한 상세로 이동\n doc no:"+docId, Toast.LENGTH_SHORT).show();
+    }
+
+    private void detailServiceAuth(String docId) {
+
+        /*
+        Intent intent = new Intent(mContext, DynamicDetailActivity.class);
+
+        intent.putExtra("position", getAdapterPosition());
+        intent.putExtra("userId", mUserId);
+        intent.putExtra("sysId", mSysId);
+        intent.putExtra("sysNm", mSysNm);
+        intent.putExtra("menuId", mMeunId);
+        intent.putExtra("docId", item.getDocId());
+        intent.putExtra("param01", item.getParam01());
+        intent.putExtra("param02", item.getParam02());
+        intent.putExtra("param03", item.getParam03());
+        intent.putExtra("param04", item.getParam04());
+        intent.putExtra("param05", item.getParam05());
+        intent.putExtra("listcount", list.size());
+        intent.putExtra("object", list);
+        //             itemView.getContext().startActivity(intent);
+        if (mContext instanceof Activity) {
+            ((Activity) mContext).startActivityForResult(intent, 100);
+        }
+
+         */
     }
 
     private void shimmerStart() {

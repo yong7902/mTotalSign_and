@@ -164,6 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void getSystemMenuData(boolean onlyLeftMenu) {
 
         userId = mPref.getStringPreference(Constants.PREF_USER_IF_ID);
+        deptId = mPref.getStringPreference(Constants.PREF_DEPT_ID);
+
         HashMap hm = new HashMap();
         hm.put("userId", userId);
         hm.put("sysId", "");//시스템 ID
