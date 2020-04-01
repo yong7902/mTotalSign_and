@@ -144,7 +144,7 @@ public class PushReceiveListAdapter extends BaseAdapter {
                     String errMsg = "";
                     if (result != null) {
                         if ("200".equals(result.getStatus().getStatusCd())) {
-                            if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
+                            if ("success".equalsIgnoreCase(result.getResult().getErrorCd())) {
                                 userAuthInfo.getSysArray().get(position).setSysPushYn(isPushYN);
                                 notifyDataSetChanged();
                                 return;
