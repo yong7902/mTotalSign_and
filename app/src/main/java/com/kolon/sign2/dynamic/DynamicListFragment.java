@@ -38,6 +38,7 @@ import com.kolon.sign2.utils.DpiUtil;
 import com.kolon.sign2.utils.SharedPreferenceManager;
 import com.kolon.sign2.view.ChildOptionListView;
 import com.kolon.sign2.view.ChildOptionMenuView;
+import com.kolon.sign2.vo.Res_AP_IF_037_VO;
 import com.kolon.sign2.vo.Res_AP_IF_102_VO;
 
 import java.util.ArrayList;
@@ -743,14 +744,43 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
     /**
      * 권한 목록에서 아이템을 클릭
-     * @param docId 클릭한 아이템의 docId(docNo)
+     * @param list 클릭한 아이템의 docId(docNo)
      * */
     @Override
-    public void onSelectItem(String docId) {
+    public void onSelectItem(ArrayList<Res_AP_IF_037_VO.result.aprList> list, int position) {
         //권한 상세
 
-        Toast.makeText(mContext, "권한 상세로 이동\n doc no:"+docId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "권한 상세로 이동\n doc no:"+docId, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent((MainActivity) mContext, DynamicDetailActivity.class);
+
+        intent.putExtra("position", position);
+        intent.putExtra("userId", mUserId);
+        intent.putExtra("sysId", mSysId);
+        intent.putExtra("sysNm", mSysNm);
+        intent.putExtra("menuId", mMenuID);
+        intent.putExtra("docId", list.get(position).getDocNo());
+        /*
+        intent.putExtra("param01", item.getParam01());
+        intent.putExtra("param02", item.getParam02());
+        intent.putExtra("param03", item.getParam03());
+        intent.putExtra("param04", item.getParam04());
+        intent.putExtra("param05", item.getParam05());
+        */
+        intent.putExtra("listcount", list.size());
+        intent.putExtra("object", list);
+
+        startActivity(intent);
+
+        //startActivityForResult(intent, 100);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult requestCode:" + requestCode + "  resultCode:" + resultCode);
+    }
+
 
     private void detailServiceAuth(String docId) {
 

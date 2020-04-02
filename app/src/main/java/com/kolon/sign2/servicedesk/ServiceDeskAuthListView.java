@@ -74,7 +74,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     private OnAuthListOnItemClick mInterface;
 
     public interface OnAuthListOnItemClick {
-        void onSelectItem(String docNo);
+        //void onSelectItem(String docNo);
+        void onSelectItem(ArrayList<Res_AP_IF_037_VO.result.aprList> list, int position);
     }
 
     public void setInterface(OnAuthListOnItemClick mInterface) {
@@ -644,7 +645,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     @Override
     public void selectPosition(int position) {
         if (mInterface != null) {
-            mInterface.onSelectItem(aprList.get(position).getDocNo());
+            //mInterface.onSelectItem(aprList.get(position).getDocNo());
+            mInterface.onSelectItem(aprList, position);
         }
     }
 
