@@ -224,6 +224,11 @@ public class ApprovalLineAdapter extends RecyclerView.Adapter<ApprovalLineAdapte
     @Override
     public void onRowClear(AdapterViewHolder holder) {
         holder.itemView.setBackgroundColor(0xffffffff);
+
+        for (int i=0; i<data.size(); i++) {
+            data.get(i).setSn(Integer.toString(i+1));
+        }
+        notifyDataSetChanged();
     }
 
 }

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -80,7 +81,7 @@ public class ServiceDeskSecurityCancelDialog extends DialogFragment implements V
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count == 0) {
                     isClose = false;
-                    tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
+                    tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.greyish));
                 } else {
                     isClose = true;
                     tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.lightish_blue));
@@ -142,6 +143,8 @@ public class ServiceDeskSecurityCancelDialog extends DialogFragment implements V
                 if (isClose) {
                     if(mInterface != null) mInterface.getMessage(comment_edit.getText().toString());
                     dismissAllowingStateLoss();
+                } else {
+                    Toast.makeText(mContext,mContext.getResources().getString(R.string.txt_approval_txt_2), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.layer_comment: case R.id.btn_close_comment_layer:

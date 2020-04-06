@@ -18,7 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kolon.sign2.R;
@@ -73,6 +75,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
     private OnAuthListOnItemClick mInterface;
 
+    private ShimmerFrameLayout mShimmerLayout;
+
     public interface OnAuthListOnItemClick {
         //void onSelectItem(String docNo);
         void onSelectItem(ArrayList<Res_AP_IF_037_VO.result.aprList> list, int position);
@@ -111,6 +115,14 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         layout_all_select = (LinearLayout) v.findViewById(R.id.layout_all_select);
         layout_no_data = (LinearLayout) v.findViewById(R.id.layout_no_data);
         layout_no_data.setVisibility(View.VISIBLE);
+
+        SwipeRefreshLayout refreshLayout = v.findViewById(R.id.refresh_layout);
+        refreshLayout.setOnRefreshListener(() -> {
+            refreshLayout.setRefreshing(false);
+
+                shimmerStart();
+                setTab(this.menuId);
+        });
 
         rv = (RecyclerView) v.findViewById(R.id.rv_auth_list);
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -156,6 +168,9 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         btn_service_desk_name.setOnClickListener(this);
         tv_service_desk_name = (TextView) v.findViewById(R.id.tv_service_desk_name);
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
+
+        //yong79. shimmer
+        mShimmerLayout = (ShimmerFrameLayout) v.findViewById(R.id.shimmer_layout);
 
         tv_title1 = (TextView) v.findViewById(R.id.tv_title1);
 
@@ -234,13 +249,13 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         aprList = new ArrayList<>();
         adapter.notifyDataSetChanged();
         layout_no_data.setVisibility(View.VISIBLE);
-        layout_all_select.setVisibility(View.INVISIBLE);
-        rv.setVisibility(View.INVISIBLE);
+        layout_all_select.setVisibility(View.GONE);
+        rv.setVisibility(View.GONE);
     }
 
     //위임자목록
     private void getAuthorizerList(String userId, String userNm) {
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
         HashMap hm = new HashMap();
         hm.put("userId", userId);
 
@@ -286,7 +301,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                 } else {
                     errMsg = getResources().getString(R.string.txt_network_error);
                 }
-                progressBar.setVisibility(View.GONE);
+                //progressBar.setVisibility(View.GONE);
                 viewMessage(errMsg);
             }
         });
@@ -294,7 +309,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
     //권한 목록
     private void getAuthList(String userId, String code) {
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
+        shimmerStart();
 
         HashMap hm = new HashMap();
         hm.put("userId", userId);
@@ -312,7 +328,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
             @Override
             public void onResponse(Res_AP_IF_037_VO result) {
 
-                progressBar.setVisibility(View.VISIBLE);
+                //progressBar.setVisibility(View.VISIBLE);
                 String errMsg = "";
                 if (result != null) {
                     if ("200".equals(result.getStatus().getStatusCd())) {
@@ -370,8 +386,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
         if (aprList == null || aprList.size() == 0) {
             layout_no_data.setVisibility(View.VISIBLE);
-            layout_all_select.setVisibility(View.INVISIBLE);
-            rv.setVisibility(View.INVISIBLE);
+            layout_all_select.setVisibility(View.GONE);
+            rv.setVisibility(View.GONE);
         } else {
 
             if ("S06".equals(menuId)) {
@@ -391,7 +407,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
             layout_no_data.setVisibility(View.GONE);
             rv.setVisibility(View.VISIBLE);
         }
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
+        shimmerStop();
     }
 
 
@@ -400,8 +417,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
         //에러가 생겼으므로 이전 이력은 지운다.
         layout_no_data.setVisibility(View.VISIBLE);
-        layout_all_select.setVisibility(View.INVISIBLE);
-        rv.setVisibility(View.INVISIBLE);
+        layout_all_select.setVisibility(View.GONE);
+        rv.setVisibility(View.GONE);
 
 
         TextDialog dialog;
@@ -653,5 +670,20 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     public void textSizeAdj() {
         CommonUtils.changeTextSize(mContext, tv_title1);
         adapter.notifyDataSetChanged();
+    }
+
+    public void shimmerStart() {
+        //Toast.makeText(mContext, "shimerStart", Toast.LENGTH_LONG).show();
+        //lv_home.setVisibility(View.GONE);
+        //no_data.setVisibility(View.GONE);
+        layout_no_data.setVisibility(View.GONE);
+        mShimmerLayout.setVisibility(View.VISIBLE);
+        mShimmerLayout.startShimmer();
+    }
+
+    public void shimmerStop() {
+        //Toast.makeText(mContext, "shimerStop", Toast.LENGTH_LONG).show();
+        mShimmerLayout.setVisibility(View.GONE);
+        mShimmerLayout.stopShimmer();
     }
 }

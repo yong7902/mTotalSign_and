@@ -254,8 +254,9 @@ public class ApprovalLineSearchPopup extends DialogFragment {
                         } else {
                             info.setJob(readData.get(i).getRoleName() + "/" + readData.get(i).getJobTitle());
                         }
-                        info.setCompany(readData.get(i).companyCd);
+                        info.setCompany(readData.get(i).orgName);
                         info.setTeam(readData.get(i).getOrgUnit());
+
                         info.setTime("");
                         data.add(info);
                     }
@@ -463,6 +464,5 @@ public class ApprovalLineSearchPopup extends DialogFragment {
         public void setCompany(String company) {
             this.company = company;
         }
-
     }
 }

@@ -485,20 +485,15 @@ public class ApprovalLineActivity extends AppCompatActivity implements View.OnCl
             }.getType());
         }
 
-        //동일 아이디는 덮어씌움
-        boolean checkId = true;
+        //동일 아이디는 삭제 후 저장
         for(int i=0;i<readData.size();i++){
             if(returnData.getIkenId().equals(readData.get(i).getIkenId())){
-                readData.set(i, returnData);
-                checkId = false;
-                break;
+                readData.remove(i);
             }
         }
 
-        if(checkId){
-            readData.add(returnData);
-        }
-
+        //저장
+        readData.add(0,returnData);
 
         mPref.setStringPreference(Constants.PREF_RECENTLY_SEARCH_DATA, g.toJson(readData));
     }

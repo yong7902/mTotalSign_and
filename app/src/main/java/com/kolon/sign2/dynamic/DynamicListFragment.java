@@ -40,6 +40,7 @@ import com.kolon.sign2.view.ChildOptionListView;
 import com.kolon.sign2.view.ChildOptionMenuView;
 import com.kolon.sign2.vo.Res_AP_IF_037_VO;
 import com.kolon.sign2.vo.Res_AP_IF_102_VO;
+import com.kolon.sign2.vo.Res_AP_IF_103_VO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -175,6 +176,9 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
                 getSystemMenuData();
             } else {
                 //Todo autoList가 아닌 경우 List 그려주기 위한 처리 필요
+//                if(authListView != null){
+//                    authListView.setTab(mMenuID);
+//                }
             }
         });
 
@@ -768,7 +772,15 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         intent.putExtra("param05", item.getParam05());
         */
         intent.putExtra("listcount", list.size());
-        intent.putExtra("object", list);
+
+        ArrayList<Res_AP_IF_103_VO.dynamicListList> dynamicListLists = new ArrayList<>();
+        for (Res_AP_IF_037_VO.result.aprList listVo : list) {
+            Res_AP_IF_103_VO.dynamicListList dynamicListList = new Res_AP_IF_103_VO.dynamicListList();
+            dynamicListList.setDocId(listVo.getDocNo());
+            dynamicListLists.add(dynamicListList);
+        }
+
+        intent.putExtra("object", dynamicListLists);
 
         startActivity(intent);
 

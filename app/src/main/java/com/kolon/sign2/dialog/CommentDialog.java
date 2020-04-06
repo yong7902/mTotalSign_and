@@ -120,7 +120,7 @@ public class CommentDialog extends DialogFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (isMust && count == 0) {
                     isClose = false;
-                    rightBtn.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
+                    rightBtn.setTextColor(ContextCompat.getColor(mContext, R.color.greyish));
                 } else {
                     isClose = true;
                     rightBtn.setTextColor(ContextCompat.getColor(mContext, R.color.lightish_blue));
@@ -141,7 +141,7 @@ public class CommentDialog extends DialogFragment {
                     //의견이 필수일때 초기 버튼글자 색
                     if (isMust) {
                         isClose = false;
-                        rightBtn.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
+                        rightBtn.setTextColor(ContextCompat.getColor(mContext, R.color.greyish));
                         //hint (필수) 의견을...
                         comment_edit.setHint("("+ mContext.getResources().getString(R.string.txt_approval_must) +") "+mContext.getResources().getString(R.string.txt_approval_txt_2));
                     }else{
@@ -156,7 +156,7 @@ public class CommentDialog extends DialogFragment {
         //의견이 필수일때 초기 버튼글자 색
         if (isMust) {
             isClose = false;
-            rightBtn.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
+            rightBtn.setTextColor(ContextCompat.getColor(mContext, R.color.greyish));
             //hint (필수) 의견을...
             comment_edit.setHint("("+ mContext.getResources().getString(R.string.txt_approval_must) +") "+mContext.getResources().getString(R.string.txt_approval_txt_2));
         }else{

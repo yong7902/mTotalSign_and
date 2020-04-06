@@ -127,11 +127,16 @@ public class AccountSwipeAdapter extends RecyclerSwipeAdapter<RecyclerView.ViewH
             }
             holder.mName.setText(mList.get(position).getUserName() + " " + job+" "+multi);
             holder.mCompanyNm.setText(mList.get(position).getCompanyName());
+
             holder.mSwipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
             holder.mSwipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.mSwipeLayout.findViewById(R.id.ll_swipe_righttoleft));
             holder.mSwipeLayout.setClickToClose(true);
             holder.mSwipeLayout.addSwipeListener(swipeListener);
 
+            //삭제 불가능 계정 처리
+            if ("N".equalsIgnoreCase(mList.get(position).getDelYn())) {
+                holder.mSwipeLayout.findViewById(R.id.ll_swipe_righttoleft).setVisibility(View.GONE);
+            }
 
             holder.mSwipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
                 @Override

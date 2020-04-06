@@ -21,6 +21,19 @@
         android:textColor="@color/black"
         android:textSize="15dp" />
 
+    <TextView
+        android:id="@+id/txt_depart_tab_cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+        android:text=""
+        android:textColor="@color/lightish_blue"
+        android:textSize="15dp"
+        android:layout_toRightOf="@+id/txt_depart_tab"
+        />
+
     <Button
         android:id="@+id/btn_depart_tab_select_menu"
         android:layout_width="70dp"

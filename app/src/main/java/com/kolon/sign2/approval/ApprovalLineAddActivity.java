@@ -625,6 +625,7 @@ public class ApprovalLineAddActivity extends AppCompatActivity implements View.O
                         setData.setOrgUnit(data.getDeptName());
                         setData.setRoleName(data.getRoleName());
                         setData.companyCd = data.getCompanyCd();
+                        setData.orgName = data.getCompanyName();
                         viewProcessSelectPopup(userId, setData);
                     }
 

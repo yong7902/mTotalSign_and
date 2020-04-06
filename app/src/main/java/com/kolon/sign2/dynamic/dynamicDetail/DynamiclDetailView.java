@@ -238,10 +238,11 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     }
 
     private void sendApproval(String actionType, String actionOpinion) {
-        String param02 = "";
-        String param03 = "";
-        String param04 = "";
-        String param05 = "";
+        String param01 = mParam01;
+        String param02 = mParam02;
+        String param03 = mParam03;
+        String param04 = mParam04;
+        String param05 = mParam05;
         if (null != mDynamicEditWorkView) {
             param02 = mDynamicEditWorkView.getWorkTime(); // 공수 분
             param03 = mDynamicEditWorkView.getContents();  // 작업내역
@@ -249,7 +250,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
 //            Toast.makeText(mContext, "workTime = "+ param01 + "contents =" + param02 + "date = " + param03, Toast.LENGTH_SHORT).show();
         }
 
-        getDynamicDetailAction(mUserId, mSysId, mMenuId, mDocId, actionType, actionOpinion, mParam01, param02, param03, param04, param05);
+        getDynamicDetailAction(mUserId, mSysId, mMenuId, mDocId, actionType, actionOpinion, param01, param02, param03, param04, param05);
     }
 
 
@@ -396,6 +397,11 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
         mMenuId = menuId;
         mDocId = docId;
         mParam01 = param01;
+        mParam02 = param02;
+        mParam03 = param03;
+        mParam04 = param04;
+        mParam05 = param05;
+
         NetworkPresenter presenter = new NetworkPresenter();
         presenter.getDynamicDetailList(hm, (NetworkPresenter.getDynamicDetailListListener) result -> {
             String errMsg = getResources().getString(R.string.txt_network_error);

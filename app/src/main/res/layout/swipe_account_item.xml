@@ -12,7 +12,7 @@
     <!-- Button View For Right to Left -->
     <LinearLayout
         android:id="@+id/ll_swipe_righttoleft"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 

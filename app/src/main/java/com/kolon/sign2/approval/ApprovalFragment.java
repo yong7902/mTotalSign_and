@@ -52,6 +52,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
 
     private RelativeLayout lay_depart_tab;
     private TextView txt_depart_tab;
+    private TextView txt_depart_tab_cnt;
     private RecyclerView lv_approval;
     private ApprovalDataAdapter adapter;
     private LinearLayout no_data;
@@ -143,6 +144,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
 
         lay_depart_tab = (RelativeLayout)view.findViewById(R.id.lay_depart_tab);
         txt_depart_tab = (TextView)view.findViewById(R.id.txt_depart_tab);
+        txt_depart_tab_cnt = (TextView)view.findViewById(R.id.txt_depart_tab_cnt);
         Button menuBtn = (Button)view.findViewById(R.id.btn_depart_tab_select_menu);
         menuBtn.setOnClickListener(this);
 
@@ -280,7 +282,11 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                                 }
                                 if (menuId.equals(menuArrays.get(i).getMenuId())) {
                                     //subTitle = menuArrays.get(i).getMenuName();
-                                    menuTabDataSet(depart_SubTabData.indexOf(menuArrays.get(i))+1, menuArrays.get(i).getMenuName());
+                                    String cnt = "";
+                                    if ("Y".equals(menuArrays.get(i).getCountYn())) {
+                                        cnt = menuArrays.get(i).getCountNum();
+                                    }
+                                    menuTabDataSet(depart_SubTabData.indexOf(menuArrays.get(i))+1, menuArrays.get(i).getMenuName(), cnt);
                                 }
                             }
                         }
@@ -533,7 +539,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
 
     private void selectDepartTab() {
         lay_depart_tab.setVisibility(View.GONE);
-        menuTabDataSet(0, mContext.getResources().getString(R.string.txt_approval_tab_total));
+        menuTabDataSet(0, mContext.getResources().getString(R.string.txt_approval_tab_total), "");
 
         btn_approval_personal_select.setSelected(false);
         btn_approval_depart_select.setSelected(true);
@@ -727,11 +733,16 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                 if (position == 0) {
                     adapter.getAdapterData().get(0).setTitle(mContext.getResources().getString(R.string.txt_approval_tab_total));
 
-                    menuTabDataSet(position, mContext.getResources().getString(R.string.txt_approval_tab_total));
+                    menuTabDataSet(position, mContext.getResources().getString(R.string.txt_approval_tab_total), "");
                 } else {
                     adapter.getAdapterData().get(0).setTitle(depart_SubTabData.get(position - 1).getMenuName());
 
-                    menuTabDataSet(position, depart_SubTabData.get(position - 1).getMenuName());
+                    String cnt = "";
+                    if ("Y".equals(depart_SubTabData.get(position - 1).getCountYn())) {
+                        cnt = depart_SubTabData.get(position - 1).getCountNum().toString();
+                    }
+
+                    menuTabDataSet(position, depart_SubTabData.get(position - 1).getMenuName(), cnt);
                 }
                 adapter.notifyItemChanged(0);
                 getInputMapData(sub_tab_position, position);
@@ -780,7 +791,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
         getInputMapData(position);
         getDataList("shimmer");
 
-        menuTabDataSet(0, mContext.getResources().getString(R.string.txt_approval_tab_total));
+        menuTabDataSet(0, mContext.getResources().getString(R.string.txt_approval_tab_total), "");
     }
 
     public void changeTextSize(){
@@ -797,8 +808,9 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
         mShimmerLayout.stopShimmer();
     }
 
-    private void menuTabDataSet(int position, String title) {
+    private void menuTabDataSet(int position, String title, String cnt) {
         menu_tab_position = position;
         txt_depart_tab.setText(title);
+        txt_depart_tab_cnt.setText(cnt);
     }
 }

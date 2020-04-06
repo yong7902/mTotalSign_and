@@ -24,6 +24,7 @@ public class Res_AP_IF_203_VO extends statusVO {
             String roleName;//	직책
 
             public String companyCd ="";//회사 코드 -최근검색 전용
+            public String orgName ="";
 
             public String getIkenId() {
                 return ikenId;

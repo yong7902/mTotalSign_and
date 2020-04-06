@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -84,7 +85,7 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
 
         if (mCommentRequire) {
             comment_edit.setHint(mContext.getResources().getString(R.string.txt_app_reject_hint));
-            tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
+            tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.greyish));
             isClose = false;
         }
         else {
@@ -103,7 +104,7 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count == 0 && mCommentRequire) {
                     isClose = false;
-                    tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.warm_grey));
+                    tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.greyish));
                 } else {
                     isClose = true;
                     tv_ok.setTextColor(ContextCompat.getColor(mContext, R.color.lightish_blue));
@@ -150,6 +151,8 @@ public class DynamicApprovalDialog extends DialogFragment implements View.OnClic
                 if (isClose) {
                     if(mInterface != null) mInterface.getMessage(comment_edit.getText().toString());
                     dismissAllowingStateLoss();
+                } else {
+                    Toast.makeText(mContext,mContext.getResources().getString(R.string.txt_approval_txt_2), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
