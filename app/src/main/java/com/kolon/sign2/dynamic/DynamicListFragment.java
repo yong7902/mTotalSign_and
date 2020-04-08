@@ -176,9 +176,9 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
                 getSystemMenuData();
             } else {
                 //Todo autoList가 아닌 경우 List 그려주기 위한 처리 필요
-//                if(authListView != null){
-//                    authListView.setTab(mMenuID);
-//                }
+                if(authListView != null){
+                    authListView.setTab(mMenuID);
+                }
             }
         });
 

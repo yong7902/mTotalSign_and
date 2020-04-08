@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.kolon.sign2.R;
+import com.kolon.sign2.utils.Constants;
 import com.kolon.sign2.utils.SharedPreferenceManager;
 import com.kolon.sign2.view.AccountManageView;
 import com.kolon.sign2.vo.Res_AP_IF_004_VO;
 
 import static com.kolon.sign2.utils.Constants.PREF_CHANGED_ACCOUNT_DATA;
+import static com.kolon.sign2.utils.Constants.PREF_MOD_ACCOUNT_DATA;
 
 /**
  * 계정관리
@@ -27,6 +29,7 @@ public class SettingAccountManagement extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_account_management);
         mPref = SharedPreferenceManager.getInstance(this);
+        mPref.setStringPreference(Constants.PREF_CHANGED_ACCOUNT_DATA, "");
         initView();
     }
 
@@ -57,6 +60,12 @@ public class SettingAccountManagement extends AppCompatActivity implements View.
             public void selectItem(String originId, Res_AP_IF_004_VO.result.multiuserList item) {
                 String value = new Gson().toJson(item);
                 mPref.setStringPreference(PREF_CHANGED_ACCOUNT_DATA, value);
+                modData();
+            }
+
+            @Override
+            public void modData() {
+                mPref.setStringPreference(PREF_MOD_ACCOUNT_DATA, "Y");
             }
         });
         accView.setType(0);

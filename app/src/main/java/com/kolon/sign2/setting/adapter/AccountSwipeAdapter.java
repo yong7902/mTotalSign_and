@@ -17,8 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kolon.sign2.R;
 import com.kolon.sign2.dialog.TextDialog;
+import com.kolon.sign2.utils.Constants;
+import com.kolon.sign2.utils.SharedPreferenceManager;
+import com.kolon.sign2.vo.LoginResultVO;
 import com.kolon.sign2.vo.Res_AP_IF_004_VO;
 import com.kolon.sign2.vo.TextsizeVO;
 
@@ -33,7 +37,8 @@ import retrofit2.Retrofit;
 public class AccountSwipeAdapter extends RecyclerSwipeAdapter<RecyclerView.ViewHolder> {
 
     private final int TYPE_LIST_ITEM = 0;
-    private final int TYPE_BOTTOM_ADD = 1;
+    private final int TYPE_LIST_ITEM_NO_SWIPE = 1;
+    private final int TYPE_BOTTOM_ADD = 2;
 
     private Context mContext;
     //private ArrayList<TextsizeVO> mList;
@@ -42,11 +47,22 @@ public class AccountSwipeAdapter extends RecyclerSwipeAdapter<RecyclerView.ViewH
     private Retrofit mRetrofit;
     private ArrayList<Res_AP_IF_004_VO.result.multiuserList> mList;
 
+    private String loginUserId;
+    private String loginDeptCode;
+
 
     public AccountSwipeAdapter(Context context, ArrayList<Res_AP_IF_004_VO.result.multiuserList> data, ListEditInterface callback) {
         this.mContext = context;
         this.mList = data;
         this.mCallback = callback;
+
+        SharedPreferenceManager mPref = SharedPreferenceManager.getInstance(mContext);
+        String loginStr = mPref.getStringPreference(Constants.PREF_LOGIN_INFO);
+        LoginResultVO loginInfo = new Gson().fromJson(loginStr, new TypeToken<LoginResultVO>() {
+        }.getType());
+
+        this.loginUserId = loginInfo.getAccount();
+        this.loginDeptCode = loginInfo.getDepartmentCode();
     }
 
     public void changeList(ArrayList<Res_AP_IF_004_VO.result.multiuserList> data) {
@@ -60,6 +76,9 @@ public class AccountSwipeAdapter extends RecyclerSwipeAdapter<RecyclerView.ViewH
         if (viewType == TYPE_BOTTOM_ADD) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_account_add, parent, false);
             return new BottomAddHolder(view);
+        } else if (viewType == TYPE_LIST_ITEM_NO_SWIPE){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipe_no_account_item, parent, false);
+            return new RowViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipe_account_item, parent, false);
             return new RowViewHolder(view);
@@ -113,8 +132,8 @@ public class AccountSwipeAdapter extends RecyclerSwipeAdapter<RecyclerView.ViewH
                 }
             };
 
-            String multi = "";//겸직표시
-            if("N".equalsIgnoreCase(mList.get(position).getDelYn())){
+            String multi = "";//겸직표시 delYn = "N" 이며, deptCode가 다른 계
+            if("N".equalsIgnoreCase(mList.get(position).getDelYn()) && !loginDeptCode.equals(mList.get(position).getDeptCode())){
                 multi = mContext.getResources().getString(R.string.txt_account_multi_text);
             }
 
@@ -134,9 +153,9 @@ public class AccountSwipeAdapter extends RecyclerSwipeAdapter<RecyclerView.ViewH
             holder.mSwipeLayout.addSwipeListener(swipeListener);
 
             //삭제 불가능 계정 처리
-            if ("N".equalsIgnoreCase(mList.get(position).getDelYn())) {
-                holder.mSwipeLayout.findViewById(R.id.ll_swipe_righttoleft).setVisibility(View.GONE);
-            }
+//            if ("N".equalsIgnoreCase(mList.get(position).getDelYn())){
+//                holder.mSwipeLayout.findViewById(R.id.ll_swipe_righttoleft).setVisibility(View.GONE);
+//            }
 
             holder.mSwipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -183,7 +202,10 @@ public class AccountSwipeAdapter extends RecyclerSwipeAdapter<RecyclerView.ViewH
         if(mList == null || mList.size() == 0|| position == mList.size()){
             return TYPE_BOTTOM_ADD;
         }
-        return TYPE_LIST_ITEM;
+        if ("N".equals(mList.get(position).getDelYn()))
+            return TYPE_LIST_ITEM_NO_SWIPE;
+        else
+            return TYPE_LIST_ITEM;
     }
 
     @Override

@@ -240,7 +240,7 @@
     <string name="txt_config_menu_detail">자주 보는 서비스 순서대로 설정해주세요.</string>
     <string name="txt_config_logout">로그아웃</string>
     <string name="txt_config_push_info">서비스별로 알림을 받을지 개별 설정할 수 있습니다.</string>
-    <string name="txt_config_account_info">계정을 추가하거나 좌측으로 밀어 삭제 할 수 있습니다.</string>
+    <string name="txt_config_account_info">계정을 추가하거나 좌측으로 밀어 삭제 할 수 있습니다.\n(로그인계정과 겸직계정은 삭제 불가합니다.)</string>
     <string name="txt_config_textsize_info">목록과 상세 화면 글자 크기에 반영됩니다.</string>
     <string name="txt_config_menu_seq_info">"홈 화면과 슬라이드 메뉴의 메뉴를\n꾹 눌러서 순서 변경할 수 있습니다."</string>
     <string name="txt_config_account_add">계정추가</string>

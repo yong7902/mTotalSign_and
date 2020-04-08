@@ -241,6 +241,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
+            android:visibility="gone"
             app:shimmer_duration="1500">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -250,10 +251,10 @@
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--            android:id="@+id/refresh_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_auth_list"
@@ -262,9 +263,10 @@
                 android:layout_weight="1"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+<!--        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
-        <LinearLayout android:visibility="gone"
+
+        <LinearLayout
             android:id="@+id/layout_bottom_button"
             android:layout_width="match_parent"
             android:layout_height="68dp"
@@ -337,6 +339,7 @@
                     android:textSize="12dp" />
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -349,8 +352,10 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="74dp"
-            android:layout_height="74dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="74dp"
+            android:minHeight="74dp"
             android:background="@drawable/empty_icon" />
 
         <TextView
@@ -358,10 +363,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
-            android:gravity="center_horizontal"
-            android:text="@string/txt_list_no_data"
+            android:includeFontPadding="false"
+            android:text="@string/txt_empty_list"
             android:textColor="@color/brownish_grey"
-            android:textSize="14dp" />
+            android:textSize="@dimen/text_14" />
     </LinearLayout>
 
     <ProgressBar

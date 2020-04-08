@@ -60,6 +60,8 @@ public class AccountManageView extends LinearLayout {
         void clickAdd();
 
         void selectItem(String originId, Res_AP_IF_004_VO.result.multiuserList item);
+
+        void modData();
     }
 
     public void setInterface(accountInterface mInterface) {
@@ -103,7 +105,7 @@ public class AccountManageView extends LinearLayout {
         addView(v);
     }
 
-    private void setData(){
+    public void setData(){
         SharedPreferenceManager mPref = SharedPreferenceManager.getInstance(mContext);
         String userId = mPref.getStringPreference(Constants.PREF_USER_IF_ID);
         HashMap hm = new HashMap();
@@ -229,6 +231,8 @@ public class AccountManageView extends LinearLayout {
                         if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
                             //계정 추가 성공 -> 전체 계정을 다시 가져온다
                             setData();
+                            if (mInterface != null)
+                                mInterface.modData();
                             return;
                         } else {
                             errMsg = result.getResult().getErrorMsg();
@@ -268,7 +272,7 @@ public class AccountManageView extends LinearLayout {
     }
 
     private void sendServerDeleteAccount(ArrayList<Res_AP_IF_004_VO.result.multiuserList> data, int position) {
-        String deleteId = data.get(position).getUserId();
+        String deleteId = data.get(position).getSubUserId();
         account_progress_bar.setVisibility(View.VISIBLE);
         NetworkPresenter presenter = new NetworkPresenter();
         SharedPreferenceManager mPref = SharedPreferenceManager.getInstance(mContext);
@@ -290,6 +294,8 @@ public class AccountManageView extends LinearLayout {
                             data.remove(position);
                             mAccountListSwipeAdapter.changeList(data);
 
+                            if (mInterface != null)
+                                mInterface.modData();
                             //멀티계정 재 저장
 
                             return;

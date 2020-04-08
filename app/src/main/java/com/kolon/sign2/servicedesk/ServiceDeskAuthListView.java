@@ -116,6 +116,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         layout_no_data = (LinearLayout) v.findViewById(R.id.layout_no_data);
         layout_no_data.setVisibility(View.VISIBLE);
 
+        /*
         SwipeRefreshLayout refreshLayout = v.findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(() -> {
             refreshLayout.setRefreshing(false);
@@ -123,6 +124,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                 shimmerStart();
                 setTab(this.menuId);
         });
+        */
 
         rv = (RecyclerView) v.findViewById(R.id.rv_auth_list);
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -141,7 +143,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
             }
         });
 
-        adapter = new ServiceDeskAuthListAdapter(aprList, selectCode);
+        adapter = new ServiceDeskAuthListAdapter(aprList);
         adapter.setInterface(this);
         rv.setAdapter(adapter);
 
@@ -200,6 +202,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         ////////////////////////////////////////////
         if ("S06".equals(menuId)) {
             selectCode = "D1";
+            layout_all_select.setVisibility(View.VISIBLE);
             layout_bottom_button.setVisibility(View.VISIBLE);
         } else if ("S07".equals(menuId)) {
             selectCode = "D2";
@@ -226,6 +229,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         this.menuId = menuId;
         if ("S06".equals(menuId)) {
             selectCode = "D1";
+            layout_all_select.setVisibility(View.VISIBLE);
             layout_bottom_button.setVisibility(View.VISIBLE);
         } else if ("S07".equals(menuId)) {
             selectCode = "D2";
@@ -242,6 +246,18 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         }
         pageNum = 0;
         aprList = new ArrayList<>();
+        //adapter.notifyDataSetChanged();
+
+        //adapter.setData(aprList, selectCode);
+        //adapter.notifyItemMoved(0,adapter.getItemCount()-1);
+        //adapter.notifyDataSetChanged();
+        //adapter.refreshData();
+
+        adapter = null;
+        adapter = new ServiceDeskAuthListAdapter(aprList);
+        adapter.setInterface(this);
+        rv.setAdapter(adapter);
+
         getAuthList(userId, selectCode);
     }
 
@@ -249,8 +265,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         aprList = new ArrayList<>();
         adapter.notifyDataSetChanged();
         layout_no_data.setVisibility(View.VISIBLE);
-        layout_all_select.setVisibility(View.GONE);
-        rv.setVisibility(View.GONE);
+        layout_all_select.setVisibility(View.INVISIBLE);
+        rv.setVisibility(View.INVISIBLE);
     }
 
     //위임자목록
@@ -382,12 +398,13 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
     private void setListData() {
 
-        adapter.setData(aprList);
+        adapter.setData(aprList, selectCode);
 
         if (aprList == null || aprList.size() == 0) {
             layout_no_data.setVisibility(View.VISIBLE);
             layout_all_select.setVisibility(View.GONE);
-            rv.setVisibility(View.GONE);
+            layout_bottom_button.setVisibility(View.GONE);
+            rv.setVisibility(View.INVISIBLE);
         } else {
 
             if ("S06".equals(menuId)) {
@@ -417,8 +434,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
         //에러가 생겼으므로 이전 이력은 지운다.
         layout_no_data.setVisibility(View.VISIBLE);
-        layout_all_select.setVisibility(View.GONE);
-        rv.setVisibility(View.GONE);
+        layout_all_select.setVisibility(View.INVISIBLE);
+        rv.setVisibility(View.INVISIBLE);
 
 
         TextDialog dialog;

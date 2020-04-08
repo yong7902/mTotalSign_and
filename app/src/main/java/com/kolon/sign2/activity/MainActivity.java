@@ -734,13 +734,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (left_slide_menu_view != null) {
                 left_slide_menu_view.showBoxLayer();
                 String changeInfo = mPref.getStringPreference(Constants.PREF_CHANGED_ACCOUNT_DATA);
-                Type type = new TypeToken<Res_AP_IF_004_VO.result.multiuserList>() {
-                }.getType();
-                Res_AP_IF_004_VO.result.multiuserList changeInfoData = new Gson().fromJson(changeInfo, type);
-                if (changeInfoData != null) {
+
+                if (!changeInfo.isEmpty()) {
+                    Type type = new TypeToken<Res_AP_IF_004_VO.result.multiuserList>() {
+                    }.getType();
+                    Res_AP_IF_004_VO.result.multiuserList changeInfoData = new Gson().fromJson(changeInfo, type);
                     left_slide_menu_view.setInfo(changeInfoData.getUserName(), changeInfoData.getTitleName(), changeInfoData.getDeptName(), changeInfoData.getRoleName());
                     //적용한후 지워버림.
                     mPref.setStringPreference(Constants.PREF_CHANGED_ACCOUNT_DATA, "");
+                }
+                //계정설정이 변경 되었을경우, leftmenu 리스트를 갱신한다.
+                if ("Y".equals(mPref.getStringPreference(Constants.PREF_MOD_ACCOUNT_DATA))){
+                    left_slide_menu_view.refreshAccountList();
+                    mPref.setStringPreference(Constants.PREF_MOD_ACCOUNT_DATA, "");
                 }
             }
         }else if(requestCode == 100){

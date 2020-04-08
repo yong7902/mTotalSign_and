@@ -36,14 +36,16 @@ public class ServiceDeskAuthListAdapter extends RecyclerView.Adapter<ServiceDesk
         this.mInterface = mInterface;
     }
 
-    public ServiceDeskAuthListAdapter(ArrayList<Res_AP_IF_037_VO.result.aprList> data, String selectCode) {
+    public ServiceDeskAuthListAdapter(ArrayList<Res_AP_IF_037_VO.result.aprList> data) {
         if(data == null) return;
         this.data = data;
-        this.selectCode = selectCode;
+        //this.selectCode = selectCode;
     }
 
-    public void setData(ArrayList<Res_AP_IF_037_VO.result.aprList> data){
+    public void setData(ArrayList<Res_AP_IF_037_VO.result.aprList> data, String selectCode){
         this.data = data;
+        this.selectCode = selectCode;
+
         notifyDataSetChanged();
     }
 

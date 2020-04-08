@@ -139,6 +139,10 @@ public class LeftSlideMenuView extends LinearLayout implements View.OnClickListe
                     ((MainActivity) mContext).changeAccount(item);
                 }
             }
+
+            @Override
+            public void modData() {
+            }
         });
         accView.setType(1);
 
@@ -146,6 +150,10 @@ public class LeftSlideMenuView extends LinearLayout implements View.OnClickListe
 
         addView(v);
 
+    }
+
+    public void refreshAccountList() {
+        accView.setData();
     }
 
     public void setInfo(String name, String job, String dept, String role){
@@ -338,4 +346,5 @@ public class LeftSlideMenuView extends LinearLayout implements View.OnClickListe
             }
         }
     }
+
 }

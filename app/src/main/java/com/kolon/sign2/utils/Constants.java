@@ -56,6 +56,7 @@ public class Constants {
 
     //change account data
     public static final String PREF_CHANGED_ACCOUNT_DATA = "pref_changed_account_data";
+    public static final String PREF_MOD_ACCOUNT_DATA = "pref_mod_account_data";
 
 
     public static boolean isLogin = false;//로그인 상태파악
