@@ -129,125 +129,55 @@ public class ApprovalBottomMenuView extends LinearLayout implements View.OnClick
         if("N".equalsIgnoreCase(readData.getApprDetailItem().getApporvalPlag())){
             setVisibility(View.GONE);
             return;
-        }else{
+        }else {
             setVisibility(View.VISIBLE);
-        }
 
-        //하단메뉴 상태 misform == 1 인 경우 버튼 hidden하고 ‘DB연동 양식 결재는 PC에서만 결재가 가능합니다.” 메시지 노출
-        if ("1".equals(readData.getApprDetailItem().getMisform())) {
-            setVisibility(View.VISIBLE);
-            lay_bottom_txt.setVisibility(View.VISIBLE);
-        } else {
-            /**
-             * -버튼노출 가능 조건 : 상위리스트 메뉴 종류>
-             *   1. 개인결재함 & 미결함(P)
-             *    1) aprstate == ‘A04002’ and activity == ‘진행’
-             *   2. 개인결재함 & 후결함(?)
-             *   3. 부서결재함 & 미처리함(앞의 3자리가 004)
-             *    1) status == ‘미접수’
-             *    2) status == ‘보류’ and processorid == 사용자id
-             *
-             * - 버튼 종류
-             *   1. 개인결재함 & 미결함(P)
-             *    1) misform == 0 > 가결,부결,반송
-             *    2) misform == 9 > 가결,부결
-             *   2. 개인결재함 & 후결함(?) > 가결
-             *   3. 부서결재함 & 미처리함(앞의 3자리가 004)
-             *    1) state == ‘A02005’ > 가결,부결,반송,보류,접수자전결
-             *    2) state == ‘A02012’ > 가결,부결,반송,보류,접수자전결
-             *    3) state == ‘A02011’ > 결재상신,공문반송,접수자전결
-             */
-            /**
-             * 우상단 결재선 버튼 노출
-             * 버튼종류가 3.3)일 경우 노출
-             * 3. 부서결재함 & 미처리함(앞의 3자리가 004)
-             * 3) state == ‘A02011’ > 결재상신,공문반송,접수자전결
-             * */
-            String category = readData.getApprDetailItem().getCategory();
-
-            if (APPROVAL_MIGYUL.equalsIgnoreCase(category) && //"A04002".equals(readData.getApprDetailItem().getAprstate()) &&
-                    mContext.getResources().getString(R.string.txt_approval_status_progress).equals(readData.getApprDetailItem().getStatus())) {
-                // 1. 개인결재함 & 미결함(P) 1) aprstate == ‘A04002’ and activity == ‘진행’
-                lay_bottom_menu.setVisibility(View.VISIBLE);
+            //하단메뉴 상태 misform == 1 인 경우 버튼 hidden하고 ‘DB연동 양식 결재는 PC에서만 결재가 가능합니다.” 메시지 노출
+            if ("1".equals(readData.getApprDetailItem().getMisform())) {
                 setVisibility(View.VISIBLE);
-                if ("0".equals(readData.getApprDetailItem().getMisform())) {
-                    //1) misform == 0 > 가결,부결,반송
-                    btn_bottom_menu_1.setVisibility(View.VISIBLE);
-                    btn_bottom_menu_2.setVisibility(View.VISIBLE);
-                    btn_bottom_menu_3.setVisibility(View.VISIBLE);
-                    btn_bottom_menu_4.setVisibility(View.GONE);
-                    btn_bottom_menu_5.setVisibility(View.GONE);
-                    //가결
-                    iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccept));
-                    iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_01);
-                    tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_1));
-                    //부결
-                    iv_bottom_menu_div_2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red_pink));
-                    iv_bottom_menu_icon_2.setBackgroundResource(R.drawable.menu_icon_02);
-                    tv_bottom_menu_title_2.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_2));
-                    //반송
-                    iv_bottom_menu_div_3.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower));
-                    iv_bottom_menu_icon_3.setBackgroundResource(R.drawable.menu_icon_03);
-                    tv_bottom_menu_title_3.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_3));
-                } else if ("9".equals(readData.getApprDetailItem().getMisform())) {
-                    setVisibility(View.VISIBLE);
-                    //2) misform == 9 > 가결,부결
-                    btn_bottom_menu_1.setVisibility(View.VISIBLE);
-                    btn_bottom_menu_2.setVisibility(View.VISIBLE);
-                    btn_bottom_menu_3.setVisibility(View.GONE);
-                    btn_bottom_menu_4.setVisibility(View.GONE);
-                    btn_bottom_menu_5.setVisibility(View.GONE);
-                    //가결
-                    iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower_two));
-                    iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_01);
-                    tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_1));
-                    //부결
-                    iv_bottom_menu_div_2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red_pink));
-                    iv_bottom_menu_icon_2.setBackgroundResource(R.drawable.menu_icon_02);
-                    tv_bottom_menu_title_2.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_2));
+                lay_bottom_txt.setVisibility(View.VISIBLE);
+            } else {
+                /**
+                 * -버튼노출 가능 조건 : 상위리스트 메뉴 종류>
+                 *   1. 개인결재함 & 미결함(P)
+                 *    1) aprstate == ‘A04002’ and activity == ‘진행’
+                 *   2. 개인결재함 & 후결함(?)
+                 *   3. 부서결재함 & 미처리함(앞의 3자리가 004)
+                 *    1) status == ‘미접수’
+                 *    2) status == ‘보류’ and processorid == 사용자id
+                 *
+                 * - 버튼 종류
+                 *   1. 개인결재함 & 미결함(P)
+                 *    1) misform == 0 > 가결,부결,반송
+                 *    2) misform == 9 > 가결,부결
+                 *   2. 개인결재함 & 후결함(?) > 가결
+                 *   3. 부서결재함 & 미처리함(앞의 3자리가 004)
+                 *    1) state == ‘A02005’ > 가결,부결,반송,보류,접수자전결
+                 *    2) state == ‘A02012’ > 가결,부결,반송,보류,접수자전결
+                 *    3) state == ‘A02011’ > 결재상신,공문반송,접수자전결
+                 */
+                /**
+                 * 우상단 결재선 버튼 노출
+                 * 버튼종류가 3.3)일 경우 노출
+                 * 3. 부서결재함 & 미처리함(앞의 3자리가 004)
+                 * 3) state == ‘A02011’ > 결재상신,공문반송,접수자전결
+                 * */
+                String category = readData.getApprDetailItem().getCategory();
 
-                }
-            } else if (APPROVAL_HOOGYUL.equalsIgnoreCase(category)) {
-                //2. 개인결재함 & 후결함(?) > 후결승인
-                setVisibility(View.VISIBLE);
-                lay_bottom_menu.setVisibility(View.VISIBLE);
-                btn_bottom_menu_1.setVisibility(View.VISIBLE);
-                btn_bottom_menu_2.setVisibility(View.GONE);
-                btn_bottom_menu_3.setVisibility(View.GONE);
-                btn_bottom_menu_4.setVisibility(View.GONE);
-                btn_bottom_menu_5.setVisibility(View.GONE);
-                //가결
-                iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower_two));
-                iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_01);
-                tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_8));
-            } else if (APPROVAL_MICHULI.equalsIgnoreCase(category)) {
-                //3. 부서결재함 & 미처리함(앞의 3자리가 004)
-                boolean isMenuView = false;
-//                if (mContext.getResources().getString(R.string.txt_approval_status_no_accept).equals(readData.getApprDetailItem().getStatus())) {
-//                    //1) status == ‘미접수’
-//                    lay_bottom_menu.setVisibility(View.VISIBLE);
-//                    isMenuView = true;
-//                } else if (mContext.getResources().getString(R.string.txt_approval_status_hold_off).equals(readData.getApprDetailItem().getStatus())
-//                        && userId.equals(readData.getApprDetailItem().getProcessorid())) {
-//                    // 2) status == ‘보류’ and processorid == 사용자id
-//                    lay_bottom_menu.setVisibility(View.VISIBLE);
-//                    isMenuView = true;
-//                }
-                isMenuView = true;
-                if (isMenuView) {
+                if (APPROVAL_MIGYUL.equalsIgnoreCase(category)) { //&& //"A04002".equals(readData.getApprDetailItem().getAprstate()) &&
+                    //mContext.getResources().getString(R.string.txt_approval_status_progress).equals(readData.getApprDetailItem().getStatus())) {
+                    // 1. 개인결재함 & 미결함(P) 1) aprstate == ‘A04002’ and activity == ‘진행’
                     lay_bottom_menu.setVisibility(View.VISIBLE);
                     setVisibility(View.VISIBLE);
-                    String state = readData.getApprDetailItem().getState();
-                    if ("A02005".equals(state) || ("A02012".equals(state))) {
-                        //1) state == ‘A02005’ > 가결,부결,반송,보류,접수자전결
-                        //2) state == ‘A02012’ > 가결,부결,반송,보류,접수자전결
+                    if ("0".equals(readData.getApprDetailItem().getMisform())) {
+                        //1) misform == 0 > 가결,부결,반송
                         btn_bottom_menu_1.setVisibility(View.VISIBLE);
                         btn_bottom_menu_2.setVisibility(View.VISIBLE);
                         btn_bottom_menu_3.setVisibility(View.VISIBLE);
-                        btn_bottom_menu_4.setVisibility(View.VISIBLE);
-                        btn_bottom_menu_5.setVisibility(View.VISIBLE);
+                        btn_bottom_menu_4.setVisibility(View.GONE);
+                        btn_bottom_menu_5.setVisibility(View.GONE);
                         //가결
-                        iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower_two));
+                        iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccept));
                         iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_01);
                         tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_1));
                         //부결
@@ -258,36 +188,105 @@ public class ApprovalBottomMenuView extends LinearLayout implements View.OnClick
                         iv_bottom_menu_div_3.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower));
                         iv_bottom_menu_icon_3.setBackgroundResource(R.drawable.menu_icon_03);
                         tv_bottom_menu_title_3.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_3));
-                        //보류
-                        iv_bottom_menu_div_4.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal));
-                        iv_bottom_menu_icon_4.setBackgroundResource(R.drawable.menu_icon_04);
-                        tv_bottom_menu_title_4.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_4));
-                        //접수자전결
-                        iv_bottom_menu_div_5.setBackgroundColor(ContextCompat.getColor(mContext, R.color.blue));
-                        iv_bottom_menu_icon_5.setBackgroundResource(R.drawable.menu_icon_05);
-                        tv_bottom_menu_title_5.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_5));
-
-                    } else if ("A02011".equals(state)) {
-                        //3) state == ‘A02011’ > 결재상신,공문반송,접수자전결
+                    } else if ("9".equals(readData.getApprDetailItem().getMisform())) {
+                        setVisibility(View.VISIBLE);
+                        //2) misform == 9 > 가결,부결
                         btn_bottom_menu_1.setVisibility(View.VISIBLE);
                         btn_bottom_menu_2.setVisibility(View.VISIBLE);
-                        btn_bottom_menu_3.setVisibility(View.VISIBLE);
+                        btn_bottom_menu_3.setVisibility(View.GONE);
                         btn_bottom_menu_4.setVisibility(View.GONE);
                         btn_bottom_menu_5.setVisibility(View.GONE);
-                        //결재상신
-                        iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.bright_orange));
-                        iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_06);
-                        tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_6));
-                        //공문반송
-                        iv_bottom_menu_div_2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower));
-                        iv_bottom_menu_icon_2.setBackgroundResource(R.drawable.menu_icon_03);
-                        tv_bottom_menu_title_2.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_7));
-                        //접수자전결
-                        iv_bottom_menu_div_3.setBackgroundColor(ContextCompat.getColor(mContext, R.color.blue));
-                        iv_bottom_menu_icon_3.setBackgroundResource(R.drawable.menu_icon_05);
-                        tv_bottom_menu_title_3.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_5));
+                        //가결
+                        iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower_two));
+                        iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_01);
+                        tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_1));
+                        //부결
+                        iv_bottom_menu_div_2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red_pink));
+                        iv_bottom_menu_icon_2.setBackgroundResource(R.drawable.menu_icon_02);
+                        tv_bottom_menu_title_2.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_2));
+
                     }
-                }
+                } else if (APPROVAL_HOOGYUL.equalsIgnoreCase(category)) {
+                    //2. 개인결재함 & 후결함(?) > 후결승인
+                    setVisibility(View.VISIBLE);
+                    lay_bottom_menu.setVisibility(View.VISIBLE);
+                    btn_bottom_menu_1.setVisibility(View.VISIBLE);
+                    btn_bottom_menu_2.setVisibility(View.GONE);
+                    btn_bottom_menu_3.setVisibility(View.GONE);
+                    btn_bottom_menu_4.setVisibility(View.GONE);
+                    btn_bottom_menu_5.setVisibility(View.GONE);
+                    //가결
+                    iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower_two));
+                    iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_01);
+                    tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_8));
+                } else if (APPROVAL_MICHULI.equalsIgnoreCase(category)) {
+                    //3. 부서결재함 & 미처리함(앞의 3자리가 004)
+                    boolean isMenuView = false;
+//                if (mContext.getResources().getString(R.string.txt_approval_status_no_accept).equals(readData.getApprDetailItem().getStatus())) {
+//                    //1) status == ‘미접수’
+//                    lay_bottom_menu.setVisibility(View.VISIBLE);
+//                    isMenuView = true;
+//                } else if (mContext.getResources().getString(R.string.txt_approval_status_hold_off).equals(readData.getApprDetailItem().getStatus())
+//                        && userId.equals(readData.getApprDetailItem().getProcessorid())) {
+//                    // 2) status == ‘보류’ and processorid == 사용자id
+//                    lay_bottom_menu.setVisibility(View.VISIBLE);
+//                    isMenuView = true;
+//                }
+                    isMenuView = true;
+                    if (isMenuView) {
+                        lay_bottom_menu.setVisibility(View.VISIBLE);
+                        setVisibility(View.VISIBLE);
+                        String state = readData.getApprDetailItem().getState();
+                        if ("A02005".equals(state) || ("A02012".equals(state))) {
+                            //1) state == ‘A02005’ > 가결,부결,반송,보류,접수자전결
+                            //2) state == ‘A02012’ > 가결,부결,반송,보류,접수자전결
+                            btn_bottom_menu_1.setVisibility(View.VISIBLE);
+                            btn_bottom_menu_2.setVisibility(View.VISIBLE);
+                            btn_bottom_menu_3.setVisibility(View.VISIBLE);
+                            btn_bottom_menu_4.setVisibility(View.VISIBLE);
+                            btn_bottom_menu_5.setVisibility(View.VISIBLE);
+                            //가결
+                            iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower_two));
+                            iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_01);
+                            tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_1));
+                            //부결
+                            iv_bottom_menu_div_2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.red_pink));
+                            iv_bottom_menu_icon_2.setBackgroundResource(R.drawable.menu_icon_02);
+                            tv_bottom_menu_title_2.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_2));
+                            //반송
+                            iv_bottom_menu_div_3.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower));
+                            iv_bottom_menu_icon_3.setBackgroundResource(R.drawable.menu_icon_03);
+                            tv_bottom_menu_title_3.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_3));
+                            //보류
+                            iv_bottom_menu_div_4.setBackgroundColor(ContextCompat.getColor(mContext, R.color.teal));
+                            iv_bottom_menu_icon_4.setBackgroundResource(R.drawable.menu_icon_04);
+                            tv_bottom_menu_title_4.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_4));
+                            //접수자전결
+                            iv_bottom_menu_div_5.setBackgroundColor(ContextCompat.getColor(mContext, R.color.blue));
+                            iv_bottom_menu_icon_5.setBackgroundResource(R.drawable.menu_icon_05);
+                            tv_bottom_menu_title_5.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_5));
+
+                        } else if ("A02011".equals(state)) {
+                            //3) state == ‘A02011’ > 결재상신,공문반송,접수자전결
+                            btn_bottom_menu_1.setVisibility(View.VISIBLE);
+                            btn_bottom_menu_2.setVisibility(View.VISIBLE);
+                            btn_bottom_menu_3.setVisibility(View.VISIBLE);
+                            btn_bottom_menu_4.setVisibility(View.GONE);
+                            btn_bottom_menu_5.setVisibility(View.GONE);
+                            //결재상신
+                            iv_bottom_menu_div_1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.bright_orange));
+                            iv_bottom_menu_icon_1.setBackgroundResource(R.drawable.menu_icon_06);
+                            tv_bottom_menu_title_1.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_6));
+                            //공문반송
+                            iv_bottom_menu_div_2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.cornflower));
+                            iv_bottom_menu_icon_2.setBackgroundResource(R.drawable.menu_icon_03);
+                            tv_bottom_menu_title_2.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_7));
+                            //접수자전결
+                            iv_bottom_menu_div_3.setBackgroundColor(ContextCompat.getColor(mContext, R.color.blue));
+                            iv_bottom_menu_icon_3.setBackgroundResource(R.drawable.menu_icon_05);
+                            tv_bottom_menu_title_3.setText(mContext.getResources().getString(R.string.txt_approval_bottom_menu_5));
+                        }
+                    }
 
 //                /**
 //                 * 우상단 결재선 버튼 노출
@@ -302,15 +301,17 @@ public class ApprovalBottomMenuView extends LinearLayout implements View.OnClick
 //                        mInterface.setApprovalLineView(true);
 //                    }
 //                }
-                //결재 버튼 노출 = getApporvalPlag가 Y일때
-                if (mInterface != null) {
-                    if ("Y".equalsIgnoreCase(readData.getApprDetailItem().getApporvalPlag()) && "A02011".equals(readData.getApprDetailItem().getState())) {
-                        mInterface.setApprovalLineView(true);
-                    } else {
-                        mInterface.setApprovalLineView(false);
+                    //결재 버튼 노출 = getApporvalPlag가 Y일때
+                    if (mInterface != null) {
+                        //if ("Y".equalsIgnoreCase(readData.getApprDetailItem().getApporvalPlag()) && "A02011".equals(readData.getApprDetailItem().getState())) {
+                        if (APPROVAL_MICHULI.equalsIgnoreCase(category) && "A02011".equals(readData.getApprDetailItem().getState())) {
+                            mInterface.setApprovalLineView(true);
+                        } else {
+                            mInterface.setApprovalLineView(false);
+                        }
                     }
+                    //   Log.d(TAG, "#### state:" + readData.getApprDetailItem().getState() + "  getStatus:" + readData.getApprDetailItem().getStatus() + "   getProcessorid:" + readData.getApprDetailItem().getProcessorid());
                 }
-             //   Log.d(TAG, "#### state:" + readData.getApprDetailItem().getState() + "  getStatus:" + readData.getApprDetailItem().getStatus() + "   getProcessorid:" + readData.getApprDetailItem().getProcessorid());
             }
         }
     }
@@ -342,6 +343,7 @@ public class ApprovalBottomMenuView extends LinearLayout implements View.OnClick
             temp = "6";
         } else if (title.equals(mContext.getResources().getString(R.string.txt_approval_bottom_menu_6))) {
             //결재상신
+            isCommentMust = false;
             temp = "1";
             //결재선 상신시
             if (!isApprovalLineOk) {
@@ -363,6 +365,7 @@ public class ApprovalBottomMenuView extends LinearLayout implements View.OnClick
             temp = "2";
         } else if (title.equals(mContext.getResources().getString(R.string.txt_approval_bottom_menu_8))) {
             //후결승인
+            isCommentMust = false;
             temp = "1"; //??  //test 임시로 가결로 넣었음. 추후 후결승인에 맞는 actionCode 필요
         }
         /**
