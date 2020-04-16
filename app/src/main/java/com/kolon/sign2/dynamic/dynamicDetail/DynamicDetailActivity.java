@@ -110,7 +110,22 @@ public class DynamicDetailActivity extends AppCompatActivity {
         });
     }
 
+    public void nextApprovalLoading(int nowPosition) {
+        //승인한 아이템 삭제
+        adapter.getItemData().remove(nowPosition);
+        adapter.notifyDataSetChanged();
+
+        //페이지 이동 처리
+        pager.setCurrentItem(nowPosition);
+    }
+
     public void finishDetailActivity() {
         finish();
     }
+
+    public void finishDetailActivityParentRefresh() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
 }

@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
+    >
 
     <TextView
         android:id="@+id/detail_item_title"
@@ -15,7 +18,7 @@
         android:paddingEnd="10dp"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_14"
-        tools:text="상태aaaaaaa aaaaaaaaaaaaaaaaaaa" />
+        tools:text="상태" />
 
     <TextView
         android:id="@+id/detail_item_contents"

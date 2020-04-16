@@ -32,11 +32,6 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/sub_call" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +39,7 @@
                 android:layout_marginLeft="2dp"
                 android:fontFamily="@font/noto_sans_cjk_kr_regular"
                 android:includeFontPadding="false"
-                android:text="               "
+                android:text="                     "
                 android:textColor="#000000"
                 android:textSize="13dp" />
 
@@ -94,14 +89,6 @@
                     android:text=""
                     android:textColor="@color/lightish_blue"
                     android:textSize="11dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="8dp"
-                    android:background="@drawable/drw_arrow_s" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -128,24 +115,6 @@
                 android:background="@color/shimmer_background"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/drw_opinion" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
-                    android:includeFontPadding="false"
-                    android:text="@string/txt_approval_opinion"
-                    android:textColor="@drawable/color_tab_text_select2"
-                    android:textSize="13dp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -156,24 +125,6 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/drw_attatch_file" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
-                    android:includeFontPadding="false"
-                    android:text="@string/txt_approval_attach"
-                    android:textColor="@drawable/color_tab_text_select2"
-                    android:textSize="13dp" />
-
             </LinearLayout>
         </LinearLayout>
 

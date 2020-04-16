@@ -67,7 +67,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     private SharedPreferenceManager mPref;
 
     //페이징 처리 -----------------------------------
-    boolean pagingProcess = false;//페이징처리여부
+    boolean pagingProcess = true;//페이징처리여부
     int pageSize = 20;//한번에 보여주는 사이즈
     int pageNum = 0; //0, 1 ,2 ,3 이 아니라 0 20 40 등 시작페이지이고 pageSize만큼 더해저야함.
     boolean loadingMore; //리스트 끝에서 추가 로딩여부
@@ -114,7 +114,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         layout_bottom_button = (LinearLayout) v.findViewById(R.id.layout_bottom_button);
         layout_all_select = (LinearLayout) v.findViewById(R.id.layout_all_select);
         layout_no_data = (LinearLayout) v.findViewById(R.id.layout_no_data);
-        layout_no_data.setVisibility(View.VISIBLE);
+        //layout_no_data.setVisibility(View.VISIBLE);
 
         /*
         SwipeRefreshLayout refreshLayout = v.findViewById(R.id.refresh_layout);
@@ -137,7 +137,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
                 if (last == totalCnt) {
                     if (pagingProcess && loadingMore) {
-                        getAuthList(userId, selectCode);
+                        getAuthList(userId, selectCode, "progress");
                     }
                 }
             }
@@ -202,6 +202,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         ////////////////////////////////////////////
         if ("S06".equals(menuId)) {
             selectCode = "D1";
+            iv_service_desk_all_check.setSelected(false);
             layout_all_select.setVisibility(View.VISIBLE);
             layout_bottom_button.setVisibility(View.VISIBLE);
         } else if ("S07".equals(menuId)) {
@@ -229,8 +230,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         this.menuId = menuId;
         if ("S06".equals(menuId)) {
             selectCode = "D1";
-            layout_all_select.setVisibility(View.VISIBLE);
-            layout_bottom_button.setVisibility(View.VISIBLE);
+        //    layout_all_select.setVisibility(View.VISIBLE);
+        //    layout_bottom_button.setVisibility(View.VISIBLE);
         } else if ("S07".equals(menuId)) {
             selectCode = "D2";
             layout_all_select.setVisibility(View.GONE);
@@ -258,7 +259,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         adapter.setInterface(this);
         rv.setAdapter(adapter);
 
-        getAuthList(userId, selectCode);
+        getAuthList(userId, selectCode, "");
     }
 
     public void resetData() {
@@ -272,6 +273,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     //위임자목록
     private void getAuthorizerList(String userId, String userNm) {
         //progressBar.setVisibility(View.VISIBLE);
+        shimmerStart();
+
         HashMap hm = new HashMap();
         hm.put("userId", userId);
 
@@ -324,25 +327,34 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     }
 
     //권한 목록
-    private void getAuthList(String userId, String code) {
+    private void getAuthList(String userId, String code, String loadingAction) {
         //progressBar.setVisibility(View.VISIBLE);
-        shimmerStart();
+
+        if (loadingAction == "progress")
+            progressBar.setVisibility(View.VISIBLE);
+        else
+            shimmerStart();
 
         HashMap hm = new HashMap();
         hm.put("userId", userId);
         hm.put("code", code);
         if (pagingProcess) {
-            hm.put("startNum", pageNum); //page num
-            hm.put("endNum", pageSize);//page size
+            hm.put("pageNum", pageNum); //page num
+            hm.put("pageCnt", pageSize);//page size
 
             pageNum = pageNum + pageSize;//처음0 그다음 pageSize만큼 증가 20 , 40, 60...
         } else {
-            hm.put("startNum", ""); //page num
-            hm.put("endNum", "");//page size
+            hm.put("pageNum", ""); //page num
+            hm.put("pageCnt", "");//page size
         }
         presenter.getServiceDeskAprList(hm, new NetworkPresenter.getServiceDeskAprListListener() {
             @Override
             public void onResponse(Res_AP_IF_037_VO result) {
+
+                if (loadingAction == "progress")
+                    progressBar.setVisibility(View.GONE);
+                else
+                    shimmerStop();
 
                 //progressBar.setVisibility(View.VISIBLE);
                 String errMsg = "";
@@ -409,6 +421,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
             if ("S06".equals(menuId)) {
                 selectCode = "D1";
+                iv_service_desk_all_check.setSelected(false);
+                layout_all_select.setVisibility(View.VISIBLE);
                 layout_bottom_button.setVisibility(View.VISIBLE);
             } else if ("S07".equals(menuId)) {
                 selectCode = "D2";
@@ -424,8 +438,9 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
             layout_no_data.setVisibility(View.GONE);
             rv.setVisibility(View.VISIBLE);
         }
+
         //progressBar.setVisibility(View.GONE);
-        shimmerStop();
+        //shimmerStop();
     }
 
 
@@ -537,7 +552,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                             aprList = new ArrayList<>();
 
                             setAuthName();
-                            getAuthList(userId, selectCode);
+                            getAuthList(userId, selectCode, "");
                         }
                     }
                 });
@@ -624,7 +639,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                             }
                             Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 
-                            getAuthList(userId, selectCode);
+                            getAuthList(userId, selectCode, "");
                             return;
                         } else {
                             errMsg = result.getResult().getErrorMsg();

@@ -277,12 +277,21 @@ public class ApprovalDetailActivity extends AppCompatActivity implements View.On
         });
     }
 
-    public void nextApprovalLoading() {
-        getGuidList();
+    public void nextApprovalLoading(int nowPosition) {
+        //승인한 아이템 삭제
+        adapter.getItemData().remove(nowPosition);
+        adapter.notifyDataSetChanged();
+
+        //페이지 이동 처리
+        pager.setCurrentItem(nowPosition);
     }
 
     @Override
     public void onBackPressed() {
+        finish();
+    }
+    public void onBackPressedParentRefresh() {
+        setResult(RESULT_OK);
         finish();
     }
 

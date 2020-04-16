@@ -53,27 +53,9 @@
             android:background="@color/shimmer_background"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"
-            android:text="                      "
+            android:text="                                            "
             android:textColor="@color/greyish_brown"
             android:textSize="13dp" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_lock" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_file" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/icons_14_comment" />
 
         <View
             android:layout_width="match_parent"
@@ -145,27 +127,9 @@
             android:background="@color/shimmer_background"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"
-            android:text="                      "
+            android:text="                                            "
             android:textColor="@color/greyish_brown"
             android:textSize="13dp" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_lock" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_file" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/icons_14_comment" />
 
         <View
             android:layout_width="match_parent"
@@ -237,27 +201,9 @@
             android:background="@color/shimmer_background"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"
-            android:text="                      "
+            android:text="                                            "
             android:textColor="@color/greyish_brown"
             android:textSize="13dp" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_lock" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_file" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/icons_14_comment" />
 
         <View
             android:layout_width="match_parent"
@@ -329,27 +275,9 @@
             android:background="@color/shimmer_background"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"
-            android:text="                      "
+            android:text="                                            "
             android:textColor="@color/greyish_brown"
             android:textSize="13dp" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_lock" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_file" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/icons_14_comment" />
 
         <View
             android:layout_width="match_parent"
@@ -421,27 +349,9 @@
             android:background="@color/shimmer_background"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"
-            android:text="                      "
+            android:text="                                            "
             android:textColor="@color/greyish_brown"
             android:textSize="13dp" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_lock" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/icons_14_file" />
-
-        <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="7dp"
-            android:background="@drawable/icons_14_comment" />
 
         <View
             android:layout_width="match_parent"

@@ -82,6 +82,7 @@
                 android:fontFamily="@font/noto_sans_cjk_kr_medium"
                 android:includeFontPadding="false"
                 android:text="신청제목이 들어갑니다."
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -114,7 +115,7 @@
                     android:includeFontPadding="false"
                     android:text="0000-00-00 00:00"
                     android:textColor="@color/warm_grey"
-                    android:textSize="11dp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
         </LinearLayout>

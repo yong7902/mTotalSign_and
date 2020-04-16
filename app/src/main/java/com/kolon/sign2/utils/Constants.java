@@ -57,7 +57,8 @@ public class Constants {
     //change account data
     public static final String PREF_CHANGED_ACCOUNT_DATA = "pref_changed_account_data";
     public static final String PREF_MOD_ACCOUNT_DATA = "pref_mod_account_data";
-
+    public static final String PREF_CHANGED_SYS_ORDER = "pref_changed_sys_order";
+    public static final String PREF_CHANGED_TEXT_SIZE = "pref_changed_text_size";
 
     public static boolean isLogin = false;//로그인 상태파악
     public static HashMap<String, String> schemeMap = new HashMap<>();//scheme로 들어온 데이터

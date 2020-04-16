@@ -1,8 +1,10 @@
 package com.kolon.sign2.dynamic.dynamicDetail;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +48,7 @@ public class ApprovalHistoryAdapter extends RecyclerView.Adapter<ApprovalHistory
         TextView contentsTv;
         TextView dateTv;
         TextView detailContentsTv;
+        LinearLayout detailContentsLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +58,7 @@ public class ApprovalHistoryAdapter extends RecyclerView.Adapter<ApprovalHistory
             contentsTv = (TextView) itemView.findViewById(R.id.item_approval_history_contents_tv);
             dateTv = (TextView) itemView.findViewById(R.id.item_approval_history_date_tv);
             detailContentsTv = (TextView) itemView.findViewById(R.id.item_approval_history_detail_contents_tv);
+            detailContentsLayout = (LinearLayout) itemView.findViewById(R.id.item_approval_history_detail_contents_layout);
 
             CommonUtils.textSizeSetting(itemView.getContext(), orderManagerTv);
             CommonUtils.textSizeSetting(itemView.getContext(), statusInfoTv);
@@ -71,7 +75,7 @@ public class ApprovalHistoryAdapter extends RecyclerView.Adapter<ApprovalHistory
             dateTv.setText(item.getAttr05());
 
             if (!item.getAttr06().isEmpty()) {
-                detailContentsTv.setVisibility(View.VISIBLE);
+                detailContentsLayout.setVisibility(View.VISIBLE);
                 detailContentsTv.setText(item.getAttr06());
             }
 

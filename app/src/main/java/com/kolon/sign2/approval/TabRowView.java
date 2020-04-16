@@ -54,8 +54,8 @@ public class TabRowView extends LinearLayout implements View.OnClickListener {
     }
 
     public void setData(Res_AP_IF_102_VO.result.menuArray data, int position){
-        int leftMargin = (int)DpiUtil.convertDpToPixel(mContext, 23);
-        int rightMargin = (int)DpiUtil.convertDpToPixel(mContext, 23);
+        int leftMargin = (int)DpiUtil.convertDpToPixel(mContext, 21);
+        int rightMargin = (int)DpiUtil.convertDpToPixel(mContext, 21);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         if (position == 0) {
             //첫째칸 좌측은 14
@@ -68,16 +68,23 @@ public class TabRowView extends LinearLayout implements View.OnClickListener {
             params.setMargins(leftMargin, 0, rightMargin, 0);
         }
         params.addRule(RelativeLayout.CENTER_VERTICAL);
-       lay.setLayoutParams(params);
+        lay.setLayoutParams(params);
 
 
         tv_tab_row.setText(data.getMenuName());
-        if (TextUtils.isEmpty(data.getCountNum()) || "0".equals(data.getCountNum())) {
+
+        boolean isBadge = true;
+        if (TextUtils.isEmpty(data.getCountNum()) || "0".equals(data.getCountNum()))
+            isBadge = false;
+        if (!"Y".equals((data.getBadgeYn())))
+            isBadge = false;
+        if (!isBadge) {
             btn_tab_no.setVisibility(View.GONE);
         } else {
             btn_tab_no.setVisibility(View.VISIBLE);
             btn_tab_no.setText(data.getCountNum());
         }
+
 
         if (data.isSelected) {
             tv_tab_row.setSelected(true);

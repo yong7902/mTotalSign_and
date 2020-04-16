@@ -48,6 +48,8 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     private String TAG = DynamiclDetailView.class.getSimpleName();
     private Context mContext;
     private int DP_10;
+    private int DP_11;
+    private int DP_12;
     private int DP_16;
 
     private ConstraintLayout mTitleTypeLayout;
@@ -81,6 +83,9 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     private HashMap<Integer, String> layoutHm = new HashMap<>();
 
     private ShimmerFrameLayout mShimmerLayout;
+
+    private int mPosition;
+    private boolean mIsFinal = false;
 
     public DynamiclDetailView(Context context) {
         super(context);
@@ -116,6 +121,8 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
         mAcceptTextview = v.findViewById(R.id.accept_text1);
         mButtonContainer.setVisibility(View.GONE);
         DP_10 = (int) DpiUtil.convertDpToPixel(mContext, 10);
+        DP_11 = (int) DpiUtil.convertDpToPixel(mContext, 11);
+        DP_12 = (int) DpiUtil.convertDpToPixel(mContext, 12);
         DP_16 = (int) DpiUtil.convertDpToPixel(mContext, 16);
 
         //yong79. shimmer
@@ -216,7 +223,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
             @Override
             public void getMessage(String comment) {
                 if (null != mRejectTextview.getTag()) {
-                    sendApproval(mRejectTextview.getTag().toString(), comment);
+                    sendApproval(mRejectTextview.getTag().toString(), comment, rightText);
                 }
             }
         });
@@ -229,15 +236,14 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
             @Override
             public void getMessage(String comment) {
                 if (null != mAcceptTextview.getTag()) {
-                    sendApproval(mAcceptTextview.getTag().toString(), comment);
-
+                    sendApproval(mAcceptTextview.getTag().toString(), comment, rightText);
                 }
             }
         });
         dialog.show(CommonUtils.getFragmentManager(mContext));
     }
 
-    private void sendApproval(String actionType, String actionOpinion) {
+    private void sendApproval(String actionType, String actionOpinion, String title) {
         String param01 = mParam01;
         String param02 = mParam02;
         String param03 = mParam03;
@@ -250,7 +256,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
 //            Toast.makeText(mContext, "workTime = "+ param01 + "contents =" + param02 + "date = " + param03, Toast.LENGTH_SHORT).show();
         }
 
-        getDynamicDetailAction(mUserId, mSysId, mMenuId, mDocId, actionType, actionOpinion, param01, param02, param03, param04, param05);
+        getDynamicDetailAction(mUserId, mSysId, mMenuId, mDocId, actionType, actionOpinion, param01, param02, param03, param04, param05, title);
     }
 
 
@@ -295,7 +301,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
         TextView tv = new TextView(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(DP_16, 0, 0, 0);
+        params.setMargins(DP_16, DP_12, DP_16, DP_11);
 
 
         tv.setText(divideText);
@@ -380,7 +386,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     /**
      * 동적 상세 데이터
      */
-    public void getDynamicDetailList(String userId, String sysId, String menuId, String docId, String param01, String param02, String param03, String param04, String param05) {
+    public void getDynamicDetailList(String userId, String sysId, String menuId, String docId, String param01, String param02, String param03, String param04, String param05, boolean isFinal, int position) {
         //showProgressBar();
         HashMap hm = new HashMap();
         hm.put("userId", userId);
@@ -401,6 +407,9 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
         mParam03 = param03;
         mParam04 = param04;
         mParam05 = param05;
+
+        mIsFinal = isFinal;
+        mPosition = position;
 
         NetworkPresenter presenter = new NetworkPresenter();
         presenter.getDynamicDetailList(hm, (NetworkPresenter.getDynamicDetailListListener) result -> {
@@ -435,7 +444,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
      * 동적 상세 버튼 액션
      */
     public void getDynamicDetailAction(String userId, String sysId, String menuId, String docId, String actionType, String actionOpinion,
-                                       String param01, String param02, String param03, String param04, String param05) {
+                                       String param01, String param02, String param03, String param04, String param05, String title) {
         showProgressBar();
         HashMap hm = new HashMap();
         hm.put("userId", userId);
@@ -460,8 +469,9 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
             if (result != null) {
                 if ("200".equals(result.getStatus().getStatusCd())) {
                     if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
-                        errMsg = result.getResult().getErrorMsg();
-                        viewMessage(errMsg, true);
+                        checkRemainApproval(title);
+                        //errMsg = result.getResult().getErrorMsg();
+                        //viewMessage(errMsg, true);
                         return;
                     } else {
                         errMsg = result.getResult().getErrorMsg();
@@ -477,6 +487,41 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
             }
         });
     }
+
+    //남은 결재건수를 체크_yong79
+    private void checkRemainApproval(String title) {
+
+        //boolean isFinal = true;
+        if (mIsFinal) { //목록으로
+            String msg = String.format(getResources().getString(R.string.txt_approval_success), title);
+            Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+
+            ((DynamicDetailActivity) mContext).finishDetailActivityParentRefresh();
+        } else { //다음 결재
+            String msg = String.format(getResources().getString(R.string.txt_approval_success), title) + "\n" + mContext.getResources().getString(R.string.txt_approval_next_process);
+            TextDialog dialog = TextDialog.newInstance("", msg, mContext.getResources().getString(R.string.txt_approval_next_process_2),
+                    mContext.getResources().getString(R.string.txt_approval_next_process_3));
+            dialog.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (view.getId()) {
+                        case R.id.btn_left:
+                            //목록으로
+                            dialog.dismiss();
+                            ((DynamicDetailActivity) mContext).finishDetailActivityParentRefresh();
+                            break;
+                        case R.id.btn_right:
+                            //다음 결재건
+                            dialog.dismiss();
+                            ((DynamicDetailActivity) mContext).nextApprovalLoading(mPosition);
+                            break;
+                    }
+                }
+            });
+            dialog.show(((DynamicDetailActivity) mContext).getSupportFragmentManager());
+        }
+    }
+
 
     //error message
     private void viewMessage(String errMsg, boolean isFinish) {

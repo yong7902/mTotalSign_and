@@ -64,7 +64,8 @@
                 android:layout_height="42dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/sub_call" />
+                android:background="@color/shimmer_background" />
+
         </RelativeLayout>
 
         <LinearLayout
@@ -343,7 +344,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/comment_shape">
+                android:background="@color/shimmer_background">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -467,7 +468,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/comment_shape">
+                android:background="@color/shimmer_background">
 
                 <TextView
                     android:layout_width="match_parent"

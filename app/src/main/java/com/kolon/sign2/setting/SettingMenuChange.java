@@ -149,6 +149,7 @@ public class SettingMenuChange extends Activity implements View.OnClickListener 
                             if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
                                 String info = new Gson().toJson(userAuthInfo);
                                 mPref.setStringPreference(Constants.PREF_USER_AUTH_INFO, info);
+                                mPref.setStringPreference(Constants.PREF_CHANGED_SYS_ORDER, "Y");
                             }
                         }
                     }

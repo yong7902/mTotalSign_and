@@ -160,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void getSystemMenuData(){
         getSystemMenuData(false);
+        //설정에서 홈이동시 딜레이 없이 타이틀 적용
+        txt_menu_title.setText(getResources().getString(R.string.txt_home_title));
     }
     private void getSystemMenuData(boolean onlyLeftMenu) {
 
@@ -722,20 +724,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("#### requestCode:" + requestCode + "  resultCode:" + resultCode + "  " + mPref.getStringPreference(Constants.PREF_USER_IF_ID));
         if (requestCode == 0) { //계정 외 업무 상세에서 복귀
-            drawLayout();
+            if (resultCode == RESULT_OK) //결재 처리가 된경우만 리프레시 한다.
+                drawLayout();
         } else if (requestCode == 1) {
             //계정관련 작업후 리로딩..
             String str = mPref.getStringPreference(Constants.PREF_USER_AUTH_INFO);
             userAuthInfo = new Gson().fromJson(str, new TypeToken<Res_AP_IF_101_VO.result>() {
             }.getType());
 
-            getSystemMenuData();
+            //getSystemMenuData();
+            // 계정을 변경 하였거나, 시스템 순서가 변경 되었을 경우 화면을 리프레시 한다.
+            if (!mPref.getStringPreference(Constants.PREF_CHANGED_ACCOUNT_DATA).isEmpty() || !mPref.getStringPreference(Constants.PREF_CHANGED_SYS_ORDER).isEmpty()) {
+                getSystemMenuData();
+                mPref.setStringPreference(Constants.PREF_CHANGED_SYS_ORDER, "");
+            }
 
             if (left_slide_menu_view != null) {
                 left_slide_menu_view.showBoxLayer();
                 String changeInfo = mPref.getStringPreference(Constants.PREF_CHANGED_ACCOUNT_DATA);
 
+                //계정을 변경한 경우, 계정정보 적용 및 리프레시
                 if (!changeInfo.isEmpty()) {
+
                     Type type = new TypeToken<Res_AP_IF_004_VO.result.multiuserList>() {
                     }.getType();
                     Res_AP_IF_004_VO.result.multiuserList changeInfoData = new Gson().fromJson(changeInfo, type);
@@ -743,15 +753,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //적용한후 지워버림.
                     mPref.setStringPreference(Constants.PREF_CHANGED_ACCOUNT_DATA, "");
                 }
-                //계정설정이 변경 되었을경우, leftmenu 리스트를 갱신한다.
+
+                //계정설정이 변경 되었을경우, leftmenu 리스트를 갱신한다. (계정목록)
                 if ("Y".equals(mPref.getStringPreference(Constants.PREF_MOD_ACCOUNT_DATA))){
                     left_slide_menu_view.refreshAccountList();
                     mPref.setStringPreference(Constants.PREF_MOD_ACCOUNT_DATA, "");
                 }
             }
+
+            //글자 크기 변경 적용
+            if (!mPref.getStringPreference(Constants.PREF_CHANGED_TEXT_SIZE).isEmpty()) {
+                mPref.setStringPreference(Constants.PREF_CHANGED_TEXT_SIZE, "");
+                if (fragmentType == FRAGMENT_HOME) {
+                    //홈
+                    HomeFragment f = (HomeFragment) frgmnt;
+                    f.changeTextSize();
+                } else if (fragmentType == FRAGMENT_APPROVAL) {
+                    //전자결재
+                    ApprovalFragment f = (ApprovalFragment) frgmnt;
+                    f.changeTextSize();
+                } else if (fragmentType == FRAGMENT_DYNAMIC) {
+                    //서비스데스크
+                    DynamicListFragment f = (DynamicListFragment) frgmnt;
+                    f.changeTextSize();
+                }
+            }
+
         }else if(requestCode == 100){
             //동적 리스트에서 상세 이동시 복귀
             ((DynamicListFragment)frgmnt).changeTextSize();
+            if (resultCode == RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
+                ((DynamicListFragment) frgmnt).listRefresh();
+            }
         }
     }
 
@@ -1092,4 +1125,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RelativeLayout fragmentLayout = findViewById(R.id.fragment_layer);
         fragmentLayout.setVisibility(View.VISIBLE);
     }
+
+    public void setMenuArray(ArrayList<Res_AP_IF_102_VO.result.menuArray> menuArray) {
+        this.menuArray = menuArray;
+    }
+
+    public ArrayList<Res_AP_IF_102_VO.result.menuArray> getMenuArray() {
+        return menuArray;
+    }
+
+    public void updateBadgeCnt(String sysId, String menuId) {
+
+        userId = mPref.getStringPreference(Constants.PREF_USER_IF_ID);
+        deptId = mPref.getStringPreference(Constants.PREF_DEPT_ID);
+
+        HashMap hm = new HashMap();
+        hm.put("userId", userId);
+        hm.put("sysId", sysId);//시스템 ID
+        hm.put("menuId", menuId);//menu ID
+        hm.put("deptId", deptId);
+
+        NetworkPresenter presenter = new NetworkPresenter();
+        presenter.getSystemMenu(hm, new NetworkPresenter.getSystemMenuResult() {
+            @Override
+            public void onResponse(Res_AP_IF_102_VO result) {
+                Log.d(TAG, "#### updateBadgeCnt:" + new Gson().toJson(result));
+                if (result != null) {
+                    if ("200".equals(result.getStatus().getStatusCd())) {
+                        if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
+
+                            //menuArray 업데이트
+                            for (Res_AP_IF_102_VO.result.menuArray menu : result.getResult().getMenuArray()) {
+                                if ("Y".equals(menu.getBadgeYn())) {
+                                    String menuId= menu.getMenuId();
+                                    for (int i=0; i < menuArray.size(); i++) {
+                                        if (menuId.equals(menuArray.get(i).getMenuId())) {
+                                            menuArray.get(i).setCountNum(menuArray.get(i).getCountNum());
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            //뱃지 업데이트
+                            if (fragmentType == FRAGMENT_APPROVAL) {
+                                //전자결재
+                                ((ApprovalFragment)frgmnt).updateTab();
+                            } else if (fragmentType == FRAGMENT_DYNAMIC) {
+                                //다이나믹
+                                ((DynamicListFragment)frgmnt).updateTab();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+
 }

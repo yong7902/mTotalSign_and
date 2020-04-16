@@ -1,5 +1,6 @@
 package com.kolon.sign2.approval;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.LocaleDisplayNames;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.kolon.sign2.R;
 import com.kolon.sign2.activity.MainActivity;
@@ -118,7 +120,8 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
             deptId = getArguments().getString("deptId");
             companyCd = getArguments().getString("companyCd");
             menuId = getArguments().getString("menuId");
-            ArrayList<Res_AP_IF_102_VO.result.menuArray> temp = (ArrayList<Res_AP_IF_102_VO.result.menuArray>) getArguments().getSerializable("menuArrays");
+            //ArrayList<Res_AP_IF_102_VO.result.menuArray> temp = (ArrayList<Res_AP_IF_102_VO.result.menuArray>) getArguments().getSerializable("menuArrays");
+            ArrayList<Res_AP_IF_102_VO.result.menuArray> temp = ((MainActivity)mContext).getMenuArray();
             menuArrays = new ArrayList<>();
             for (int i = 0; i < temp.size(); i++) {
                 if ("sign".equals(temp.get(i).getSysId())) {
@@ -264,7 +267,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                     for (int i = 0; i < menuArrays.size(); i++) {
                         /**
                          * 서버데이터 확인 parentMenuId 로 구별
-                         * */
+                         **/
                         String parentMenuId = menuArrays.get(i).getParentMenuId();
                         if (!TextUtils.isEmpty(parentMenuId)) {
                             if (menuArrays.get(i).getMenuId().length() > 3) {
@@ -302,7 +305,6 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         lv_approval.setLayoutManager(linearLayoutManager);
         lv_approval.setAdapter(adapter);
-
 
         return view;
     }
@@ -731,11 +733,13 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
 
                 pageNum = 0;
                 if (position == 0) {
-                    adapter.getAdapterData().get(0).setTitle(mContext.getResources().getString(R.string.txt_approval_tab_total));
+                    //yong79 아래 why??
+                    //adapter.getAdapterData().get(0).setTitle(mContext.getResources().getString(R.string.txt_approval_tab_total));
 
                     menuTabDataSet(position, mContext.getResources().getString(R.string.txt_approval_tab_total), "");
                 } else {
-                    adapter.getAdapterData().get(0).setTitle(depart_SubTabData.get(position - 1).getMenuName());
+                    //yong79 아래 why??
+                    //adapter.getAdapterData().get(0).setTitle(depart_SubTabData.get(position - 1).getMenuName());
 
                     String cnt = "";
                     if ("Y".equals(depart_SubTabData.get(position - 1).getCountYn())) {
@@ -767,6 +771,13 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult requestCode:" + requestCode + "  resultCode:" + resultCode);
+
+        if (resultCode == Activity.RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
+            ((MainActivity) mContext).updateBadgeCnt("sign", "");
+            getDataList("shimmer");
+        }
+
+        /*
         switch (requestCode) {
             case REQ_DETAIL:
                 //재 로딩 - 실제로는 항목부터 로딩해야함..
@@ -775,6 +786,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
             case REQ_SEARCH:
                 break;
         }
+        */
     }
 
     /**
@@ -812,5 +824,73 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
         menu_tab_position = position;
         txt_depart_tab.setText(title);
         txt_depart_tab_cnt.setText(cnt);
+    }
+
+    public void updateTab(){
+        //전체 메뉴 데이터 갱신
+        ArrayList<Res_AP_IF_102_VO.result.menuArray> temp = ((MainActivity)mContext).getMenuArray();
+        menuArrays = new ArrayList<>();
+        for (int i = 0; i < temp.size(); i++) {
+            if ("sign".equals(temp.get(i).getSysId())) {
+                menuArrays.add(temp.get(i));
+            }
+        }
+
+        //스크롤 메뉴 탭 update
+        personalTabData = new ArrayList<>();
+        departTabData = new ArrayList<>();
+        for (int i = 0; i < menuArrays.size(); i++) {
+            if (!TextUtils.isEmpty(menuArrays.get(i).getMenuId()) && menuArrays.get(i).getMenuId().length() == 1) {
+                //개인
+                personalTabData.add(menuArrays.get(i));
+            } else if (!TextUtils.isEmpty(menuArrays.get(i).getMenuId()) && menuArrays.get(i).getMenuId().length() == 3) {
+                //부서
+                departTabData.add(menuArrays.get(i));
+            }
+        }
+        if (btn_approval_personal_select.isSelected()) {
+            //개인
+            tabView.setData(personalTabData);
+        } else {
+            //부서
+            tabView.setData(departTabData);
+        }
+
+        //필터 메뉴 탭 update
+        if (lay_depart_tab.getVisibility()==View.VISIBLE) {
+            //메뉴선택부분 작업
+            depart_SubTabData = new ArrayList<>();
+            String menuName = "";
+            for (int i = 0; i < menuArrays.size(); i++) {
+                String category = menuListReq.get("category");
+
+                String parentMenuId = menuArrays.get(i).getParentMenuId();
+                if (!TextUtils.isEmpty(parentMenuId)) {
+                    //parentMenuId가 있고 category가 4자이상이면 category도 잘라서 비교
+                    if (category.equals(menuArrays.get(i).getMenuId())) {
+                        menuName = menuArrays.get(i).getMenuName();
+                    }
+
+                    if (category.length() >= 3) {
+                        category = category.substring(0, 3);
+                    }
+
+                    if (menuArrays.get(i).getMenuId().length() >= 3) {
+                        //menuid가 4자이상
+                        String readFirst = menuArrays.get(i).getMenuId().substring(0, 3);// 메뉴아이디 앞3자리를 읽어온다
+                        Log.d(TAG, "sub:" + readFirst);
+                        if (readFirst.equals(category)) {
+                            Log.d(TAG, "add sub:" + menuArrays.get(i).getMenuId());
+                            depart_SubTabData.add(menuArrays.get(i));
+                        }
+                    }
+                }
+            }
+            if (menu_tab_position != 0) {
+                txt_depart_tab_cnt.setText(depart_SubTabData.get(menu_tab_position-1).getCountNum());
+            }
+        }
+
+
     }
 }

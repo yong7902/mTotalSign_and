@@ -632,7 +632,7 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
             String msg = String.format(getResources().getString(R.string.txt_approval_success), title);
             Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
 
-            ((ApprovalDetailActivity) mContext).onBackPressed();
+            ((ApprovalDetailActivity) mContext).onBackPressedParentRefresh();
         } else { //다음 결재
             String msg = String.format(getResources().getString(R.string.txt_approval_success), title) + "\n" + mContext.getResources().getString(R.string.txt_approval_next_process);
             TextDialog dialog = TextDialog.newInstance("", msg, mContext.getResources().getString(R.string.txt_approval_next_process_2),
@@ -644,13 +644,13 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
                         case R.id.btn_left:
                             //목록으로
                             dialog.dismiss();
-                            ((ApprovalDetailActivity) mContext).onBackPressed();
+                            ((ApprovalDetailActivity) mContext).onBackPressedParentRefresh();
                             break;
                         case R.id.btn_right:
                             //다음 결재건
                             dialog.dismiss();
                             showProgressbar();
-                            ((ApprovalDetailActivity) mContext).nextApprovalLoading();
+                            ((ApprovalDetailActivity) mContext).nextApprovalLoading(position);
                             break;
                     }
                 }
@@ -702,7 +702,7 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
                                                 //다음 결재건
                                                 dialog.dismiss();
                                                 showProgressbar();
-                                                ((ApprovalDetailActivity) mContext).nextApprovalLoading();
+                                                ((ApprovalDetailActivity) mContext).nextApprovalLoading(position);
                                                 break;
                                         }
                                     }

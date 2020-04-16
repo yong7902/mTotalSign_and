@@ -9,16 +9,18 @@ public class MenuVO {
     private String menuId;
     private String menuName;
     private String countNum;
+    private String badgeYn;
     private String autoDetailYN;
     private String autoListYN;
 
     private ArrayList<Res_AP_IF_102_VO.result.menuArray> childList;
 
-    public MenuVO(String sysId, String menuId, String menuName, String countNum, String autoDetailYN, String autoListYN) {
+    public MenuVO(String sysId, String menuId, String menuName, String countNum, String badgeYn, String autoDetailYN, String autoListYN) {
         this.sysId = sysId;
         this.menuId = menuId;
         this.menuName = menuName;
         this.countNum = countNum;
+        this.badgeYn = badgeYn;
         this.autoDetailYN = autoDetailYN;
         this.autoListYN = autoListYN;
         this.childList = new ArrayList<>();
@@ -30,6 +32,14 @@ public class MenuVO {
 
     public void setCountNum(String countNum) {
         this.countNum = countNum;
+    }
+
+    public String getBadgeYn() {
+        return badgeYn;
+    }
+
+    public void setBadgeYn(String badgeYn) {
+        this.badgeYn = badgeYn;
     }
 
     public String getMenuName() {

@@ -25,8 +25,8 @@
 
     <!-- app update-->
     <string name="txt_svc_app_version_check">http://&mink_host;/portal/minkSvc</string>
-    <string name="txt_chk_app_update_normal">새로운 업데이트가 존재합니다. 업데이트 하시겠습니까?</string>
-    <string name="txt_chk_app_update_force">새로운 업데이트가 존재합니다. 업데이트 해야 앱을 실행할 수 있습니다. 업데이트 하시겠습니까?</string>
+    <string name="txt_chk_app_update_normal">업데이트 사항이 있습니다. \n업데이트를 진행 하시겠습니까?</string>
+    <string name="txt_chk_app_update_force">업데이트 사항이 있습니다. \n업데이트를 하셔야 서비스 이용이 가능합니다. \n[취소] 누르실 경우 앱이 종료 됩니다.</string>
     <string name="txt_chk_app_update_error">다운로드중 에러가 발생하였습니다.</string>
     <string name="txt_chk_app_update_downloading">다운로드 중....</string>
     <string name="txt_update_msg">새로운 앱 버전이 있습니다. 업데이트 하시겠습니까?</string>

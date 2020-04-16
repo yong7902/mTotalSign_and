@@ -27,6 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DynamicListViewModel extends BaseViewModel {
     private MutableLiveData<ArrayList<Res_AP_IF_103_VO.dynamicListList>> rvLiveData = new MutableLiveData<>();
 
+    private int pageSize = 10;//한번에 보여주는 사이즈
+    private int pageNum = 0; //0, 1 ,2 ,3 이 아니라 0 20 40 등 시작페이지이고 pageSize만큼 더해저야함.
+
     public MutableLiveData<ArrayList<Res_AP_IF_103_VO.dynamicListList>> getRvLiveData() {
         if (rvLiveData == null) {
             rvLiveData = new MutableLiveData<>();
@@ -34,13 +37,29 @@ public class DynamicListViewModel extends BaseViewModel {
         return rvLiveData;
     }
 
+    public boolean loadingMore = false;
 
     //TODO : Server interface 연결시 인터페이스로 확인해볼 것
-    public void call_IF_103(Context context, String userId, String sysId, String menuId) {
+    public void call_IF_103(Context context, String userId, String sysId, String menuId, String loadingType) {
+        if (loadingType != "loadingMore")
+            pageNum = 0;
+
         HashMap hm = new HashMap();
         hm.put("userId", userId);
         hm.put("sysId", sysId);
         hm.put("menuId", menuId);
+
+        hm.put("pageNum", pageNum); //page num
+        hm.put("pageCnt", pageSize);//page size
+
+        if (loadingType == "loadingMore") {
+            if (rvLiveData.getValue().size() < pageNum) { //페이지숫자보다 데이터가 적은경우 데이터를 모두 가져온것으로 판단하고 리턴
+                return;
+            }
+            ((MainActivity) context).showProgressBar();
+            pageNum = pageNum + pageSize;//처음0 그다음 pageSize만큼 증가 20 , 40, 60...
+        }
+
         //((MainActivity) context).showProgressBar();
 
         String timeStamp = CommonUtils.getTimeStamp();
@@ -53,14 +72,20 @@ public class DynamicListViewModel extends BaseViewModel {
         c.enqueue(new Callback<Res_AP_IF_103_VO>() {
             @Override
             public void onResponse(Call<Res_AP_IF_103_VO> call, Response<Res_AP_IF_103_VO> response) {
-                //((MainActivity) context).hideProgressBar();
+                ((MainActivity) context).hideProgressBar();
                 Log.d(this.getClass().getSimpleName(), "#### Res_AP_IF_103_VO res:" + new Gson().toJson(response.body()));
                 if (null != response && null != response.body()) {
                     if (null != response.body().getResult()) {
                         if (response.body().getResult().getErrorCd().equalsIgnoreCase("S")) {
                             ArrayList<Res_AP_IF_103_VO.dynamicListList> ll = response.body().getResult().getDynamicListList();
-                            rvLiveData.setValue(ll);
-                        } else {
+                            if (loadingType == "loadingMore") {
+                                ArrayList<Res_AP_IF_103_VO.dynamicListList> tmpList = rvLiveData.getValue();
+                                tmpList.addAll(ll);
+                                rvLiveData.postValue(tmpList);
+                            } else
+                                rvLiveData.setValue(ll);
+
+                        } else {//
                             ArrayList<Res_AP_IF_103_VO.dynamicListList> ll = response.body().getResult().getDynamicListList();
                             rvLiveData.setValue(ll);
                         }
@@ -70,7 +95,7 @@ public class DynamicListViewModel extends BaseViewModel {
 
             @Override
             public void onFailure(Call<Res_AP_IF_103_VO> call, Throwable t) {
-                //((MainActivity) context).hideProgressBar();
+                ((MainActivity) context).hideProgressBar();
             }
         });
     }

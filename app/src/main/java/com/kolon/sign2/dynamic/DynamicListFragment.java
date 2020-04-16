@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -94,6 +97,11 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
     private ServiceDeskAuthListView authListView;
 
     private ShimmerFrameLayout mShimmerLayout;
+    private RelativeLayout progressBar;
+//
+    private int pageSize = 10;//한번에 보여주는 사이즈
+//    private int pageNum = 0; //0, 1 ,2 ,3 이 아니라 0 20 40 등 시작페이지이고 pageSize만큼 더해저야함.
+//    private boolean loadingMore=true; //리스트 끝에서 추가 로딩여부
 
     public static DynamicListFragment newInstance(String userId, String deptId, String companyCd, ArrayList<Res_AP_IF_102_VO.result.menuArray> menuArrays, String menuId, String sysNm, String sysId) {
         DynamicListFragment fragment = new DynamicListFragment();
@@ -142,7 +150,8 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
         initView();
 
-        menuArrays = (ArrayList<Res_AP_IF_102_VO.result.menuArray>) getArguments().getSerializable("menuArrays");
+        //menuArrays = (ArrayList<Res_AP_IF_102_VO.result.menuArray>) getArguments().getSerializable("menuArrays");
+        menuArrays = ((MainActivity)mContext).getMenuArray();
         menuArrays = redividingMenu(mSysId); //List 메뉴에 따른 새로운 저장
         bindingObserver();
         //TODO : MENU를 뭐를 눌렀는지 data Param에서 받아온다.
@@ -160,20 +169,39 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
         childTabContainer = view.findViewById(R.id.ll_servicedesk_group_child_menu_container);
         contentsRecyclerView = view.findViewById(R.id.rv_servicedesk_group_main_rv);
+        contentsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int last = ((LinearLayoutManager) contentsRecyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition() + 1;
+                int totalCnt = contentsRecyclerView.getAdapter().getItemCount();
+
+                if (totalCnt >= pageSize && last == totalCnt) {
+                    viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID, "loadingMore");
+                }
+
+            }
+        });
+
         mEmptyListView = view.findViewById(R.id.cl_empty_list);
 
         //yong79. shimmer
         mShimmerLayout = (ShimmerFrameLayout) view.findViewById(R.id.shimmer_layout);
+        progressBar = (RelativeLayout) view.findViewById(R.id.progress_bar);
 
         SwipeRefreshLayout refreshLayout = view.findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(() -> {
             refreshLayout.setRefreshing(false);
             if (!mIsAutoList.isEmpty() && mIsAutoList.equalsIgnoreCase("Y")) {
-
                 shimmerStart();
-
-                viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID);
-                getSystemMenuData();
+                viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID, "");
+                //getSystemMenuData();
             } else {
                 //Todo autoList가 아닌 경우 List 그려주기 위한 처리 필요
                 if(authListView != null){
@@ -199,7 +227,9 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
                 contentsRecyclerView.setVisibility(View.GONE);
                 mEmptyListView.setVisibility(View.GONE);
 
-                shimmerStart();
+            //    shimmerStart();
+                //((MainActivity) mContext).showProgressBar();
+
             } else {
                 if (lists.isEmpty()) {
                     contentsRecyclerView.setVisibility(View.GONE);
@@ -211,6 +241,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
                     contentsAdapter.notifyDataSetChanged();
                 }
                 shimmerStop();
+                //((MainActivity) mContext).hideProgressBar();
             }
 
         });
@@ -300,7 +331,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         Button btn = new Button(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 0,
-                (int) DpiUtil.convertDpToPixel(mContext, 32), 1);
+                (int) DpiUtil.convertDpToPixel(mContext, 36), 1);
 
         btn.setText(groupName);
 
@@ -345,13 +376,13 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         while (itr.hasNext()) {
             list = itr.next();
             if (list.getGroupName().equals(SELECTED_MENU_KEY) && !list.getMenuName().isEmpty() && list.getFilterTabOption().equalsIgnoreCase("")) {
-                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getAutoDetailYn(),list.getAutoListYn());
+                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getBadgeYn(), list.getAutoDetailYn(),list.getAutoListYn());
                 item.setChildList(findOutChildList(list.getMenuId()));
                 menuItems.add(item);
 
             }
             if (list.getGroupName().equals(SELECTED_MENU_KEY) && !list.getMenuName().isEmpty() && list.getFilterTabOption().equalsIgnoreCase("list")) {
-                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getAutoDetailYn(),list.getAutoListYn());
+                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getBadgeYn(), list.getAutoDetailYn(),list.getAutoListYn());
                 listMenuItems.add(item);
             }
         }
@@ -364,12 +395,12 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             setupMenuTabItem();
             setupTabMode();
             setupMenuTabListener();
-
-
         } else {
             tabAppbar.setVisibility(View.GONE);
             menuTabLayout.setVisibility(View.GONE);
         }
+
+
         if (!listMenuItems.isEmpty()) {
             if (mMenuIDParam.isEmpty()) {
                 drawChildList(listMenuItems);
@@ -384,8 +415,8 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             if (!mIsAutoList.isEmpty() && mIsAutoList.equalsIgnoreCase("Y")) {
                 if (mMenuIDParam.isEmpty()) {
                     shimmerStart();
-                    viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID);
-                    getSystemMenuData();
+                    viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID, "");
+                    //getSystemMenuData();
                 }
             } else {
                 //Todo autoList가 아닌 경우 List 그려주기 위한 처리 필요
@@ -444,7 +475,8 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         for (MenuVO item : menuItems) {
             TabLayout.Tab tab = menuTabLayout.newTab();
             tab.setText(item.getMenuName());
-            setupTabBadge(tab, item.getCountNum());
+            //if ("Y".equals(item.getBadgeYn()))
+            setupTabBadge(tab, item.getCountNum(), item.getBadgeYn());
 
             if (mMenuIDParam.equalsIgnoreCase(item.getMenuId())) {
                 postion = count;
@@ -467,15 +499,22 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         }
     }
 
-    private void setupTabBadge(TabLayout.Tab tab, String cnt) {
-        if (!cnt.isEmpty() && !cnt.equals("0")) {
+    private void setupTabBadge(TabLayout.Tab tab, String cnt, String badgeYn) {
+        if (!cnt.isEmpty() && !cnt.equals("0") && badgeYn.equals("Y")) {
             BadgeDrawable badge = tab.getOrCreateBadge();
             badge.setVisible(true);
             badge.setBackgroundColor(ContextCompat.getColor(mContext, R.color.tomato));
             badge.setNumber(Integer.parseInt(cnt));
-            badge.setVerticalOffset(25);
+            badge.setVerticalOffset(30);
             badge.setHorizontalOffset(-20);
+        } else  {
+            BadgeDrawable badge = tab.getOrCreateBadge();
+            badge.setVisible(false);
         }
+    }
+
+    public void updateTabBadge() {
+
     }
 
     private void isDrawChildMenu(int position) {
@@ -501,8 +540,8 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 //                    mMenuIDParam = "";
 //                }
                 shimmerStart();
-                viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID);
-                getSystemMenuData();
+                viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID, "");
+                //getSystemMenuData();
             } else {
                 //Todo autoList가 아닌 경우 List 그려주기 위한 처리 필요
                 viewAuthListView();
@@ -514,7 +553,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
     private ArrayList<MenuVO> refactorChildListToMenuItem(MenuVO menuVo) {
         ArrayList<MenuVO> menuItems = new ArrayList<>();
         for (Res_AP_IF_102_VO.result.menuArray list : menuVo.getChildList()) {
-            menuItems.add(new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getAutoDetailYn(), list.getAutoListYn()));
+            menuItems.add(new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getBadgeYn(), list.getAutoDetailYn(), list.getAutoListYn()));
         }
         return menuItems;
     }
@@ -580,8 +619,8 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
                 if (!isDuplicateCall) {
                     isDuplicateCall = true;
                     shimmerStart();
-                    viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID);
-                    getSystemMenuData();
+                    viewModel.call_IF_103(mContext,mUserId, mSysId, mMenuID, "");
+                    //getSystemMenuData();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -664,7 +703,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
     /**
      * 서버에서 메뉴 데이터를 가져온다.
      */
-    private void getSystemMenuData() {
+    public void getSystemMenuData() {
 
         HashMap hm = new HashMap();
         hm.put("userId", mUserId);
@@ -711,12 +750,12 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         while (itr.hasNext()) {
             list = itr.next();
             if (list.getGroupName().equals(SELECTED_MENU_KEY) && list.getFilterTabOption().equalsIgnoreCase("")) {
-                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getAutoDetailYn(),list.getAutoListYn());
+                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getBadgeYn(), list.getAutoDetailYn(),list.getAutoListYn());
                 item.setChildList(findOutChildList(list.getMenuId()));
                 menuItems.add(item);
             }
             if (list.getGroupName().equals(SELECTED_MENU_KEY) && /*list.getParentMenuId().isEmpty() &&*/  list.getParentMenuId().equalsIgnoreCase(mMenuID) && list.getFilterTabOption().equalsIgnoreCase("list")) {
-                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getAutoDetailYn(),list.getAutoListYn());
+                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getBadgeYn(), list.getAutoDetailYn(),list.getAutoListYn());
                 listMenuItems.add(item);
             }
         }
@@ -724,7 +763,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             for (int index = 0; index < menuItems.size(); index++) {
                 TabLayout.Tab tab = menuTabLayout.getTabAt(index);
                 tab.setText(menuItems.get(index).getMenuName());
-                setupTabBadge(tab, menuItems.get(index).getCountNum());
+                setupTabBadge(tab, menuItems.get(index).getCountNum(), menuItems.get(index).getBadgeYn());
             }
         }
         if (!listMenuItems.isEmpty()) {
@@ -782,15 +821,35 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
         intent.putExtra("object", dynamicListLists);
 
-        startActivity(intent);
+        //startActivity(intent);
 
-        //startActivityForResult(intent, 100);
+        startActivityForResult(intent, 100);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult requestCode:" + requestCode + "  resultCode:" + resultCode);
+
+        if (resultCode == Activity.RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
+            //shimmerStart();
+            //viewModel.call_IF_103(mContext, mUserId, mSysId, mMenuID, "");
+            //권한 목록 리프레시
+            if(mCustomLayout.getVisibility() == View.VISIBLE) {
+                ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
+                if (authListView != null) {
+                    authListView.setData(mMenuID);
+                }
+            }
+        }
+
+    }
+
+    //상세 처리 후 리스트 갱신
+    public void listRefresh() {
+        ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
+        shimmerStart();
+        viewModel.call_IF_103(mContext, mUserId, mSysId, mMenuID, "");
     }
 
 
@@ -832,4 +891,46 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         mShimmerLayout.setVisibility(View.GONE);
         mShimmerLayout.stopShimmer();
     }
+
+    public void updateTab(){
+        menuArrays = ((MainActivity)mContext).getMenuArray();
+        menuArrays = redividingMenu(mSysId); //List 메뉴에 따른 새로운 저장
+
+        Iterator<Res_AP_IF_102_VO.result.menuArray> itr = menuArrays.iterator();
+        Res_AP_IF_102_VO.result.menuArray list;
+
+        ArrayList<MenuVO> listMenuItems = new ArrayList<>();
+        menuItems = new ArrayList<>();
+
+        while (itr.hasNext()) {
+            list = itr.next();
+            if (list.getGroupName().equals(SELECTED_MENU_KEY) && !list.getMenuName().isEmpty() && list.getFilterTabOption().equalsIgnoreCase("")) {
+                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getBadgeYn(), list.getAutoDetailYn(),list.getAutoListYn());
+                item.setChildList(findOutChildList(list.getMenuId()));
+                menuItems.add(item);
+
+            }
+            if (list.getGroupName().equals(SELECTED_MENU_KEY) && !list.getMenuName().isEmpty() && list.getFilterTabOption().equalsIgnoreCase("list")) {
+                MenuVO item = new MenuVO(list.getSysId(), list.getMenuId(), list.getMenuName(), list.getCountNum(), list.getBadgeYn(), list.getAutoDetailYn(),list.getAutoListYn());
+                listMenuItems.add(item);
+            }
+        }
+
+        //탭 update
+        if (!menuItems.isEmpty()) {
+            for (int i = 0; i < menuItems.size(); i++) {
+                if ("Y".equals(menuItems.get(i).getBadgeYn())) {
+                    TabLayout.Tab tab = menuTabLayout.getTabAt(i);
+                    setupTabBadge(tab, menuItems.get(i).getCountNum(), menuItems.get(i).getBadgeYn());
+                }
+            }
+        }
+
+        //필터 탭 update
+        if (!listMenuItems.isEmpty()){
+            mChildOptionListView.setMenuItems(listMenuItems);
+            mChildOptionListView.updateCount(mMenuID);
+        }
+    }
+
 }

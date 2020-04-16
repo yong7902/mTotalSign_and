@@ -142,6 +142,14 @@ public class Res_AP_IF_102_VO extends statusVO {
                 this.countYn = countYn;
             }
 
+            public String getBadgeYn() {
+                return badgeYn;
+            }
+
+            public void setBadgeYn(String badgeYn) {
+                this.badgeYn = badgeYn;
+            }
+
             public String getApprovalIFId() {
                 return approvalIFId;
             }
@@ -165,6 +173,7 @@ public class Res_AP_IF_102_VO extends statusVO {
             String groupName = "";//	그룹 이름 (ex: 전자결재-개인결재함-미결함일 경우 > 개인결재함)
             String parentMenuId = "";//		상위 메뉴 ID, 최상단(시스템 바로 아래) 일 경우 공백
             String countYn = "";//	메뉴트리에서 건수 표시 유무
+            String badgeYn = "";//  리스트 탭에서 배지 표시 유무
             String countNum = "";//	건수, countYN=Y 일 경우 필수
             String autoListYn = "";//		동적화면구성 리스트화면 유무
             String autoDetailYn = "";//		동적화면구성 상세화면 유무

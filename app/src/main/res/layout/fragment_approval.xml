@@ -13,16 +13,18 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="320dp"
-            android:layout_height="32dp"
+            android:layout_width="360dp"
+            android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/drw_round_grey_btn">
 
             <Button
                 android:id="@+id/btn_approval_personal_select"
-                android:layout_width="160dp"
-                android:layout_height="32dp"
+                android:layout_width="180dp"
+                android:layout_height="36dp"
                 android:background="@drawable/drw_round_select_btn"
                 android:fontFamily="@font/noto_sans_cjk_kr_medium"
                 android:includeFontPadding="false"
@@ -33,8 +35,8 @@
 
             <Button
                 android:id="@+id/btn_approval_depart_select"
-                android:layout_width="160dp"
-                android:layout_height="32dp"
+                android:layout_width="180dp"
+                android:layout_height="36dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/drw_round_select_btn"
                 android:fontFamily="@font/noto_sans_cjk_kr_medium"

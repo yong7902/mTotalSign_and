@@ -110,6 +110,8 @@ public class SettingTextSizeManager extends Activity implements View.OnClickList
 
                     mTextsizeArray.get(position).setChecked(true);
                     mTextsizeListAdapter.notifyDataSetChanged();
+
+                    mPref.setStringPreference(Constants.PREF_CHANGED_TEXT_SIZE, "Y");
                 }
             });
         }

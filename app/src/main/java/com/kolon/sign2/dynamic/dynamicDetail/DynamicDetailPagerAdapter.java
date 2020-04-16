@@ -62,7 +62,9 @@ public class DynamicDetailPagerAdapter extends PagerAdapter {
             if(textSizeAdj){
       //          view.textSizeAdj();
             }else{
-                view.getDynamicDetailList(userId, sysId, menuId, data.get(position).getDocId(), data.get(position).getParam01(), data.get(position).getParam02(), data.get(position).getParam03(), data.get(position).getParam04(), data.get(position).getParam05());
+                //마지막페이지 여부
+                boolean isFinal = data.size() == position+1 ? true : false;
+                view.getDynamicDetailList(userId, sysId, menuId, data.get(position).getDocId(), data.get(position).getParam01(), data.get(position).getParam02(), data.get(position).getParam03(), data.get(position).getParam04(), data.get(position).getParam05(), isFinal, position);
             }
         }
 
