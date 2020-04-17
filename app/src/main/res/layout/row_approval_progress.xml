@@ -122,7 +122,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/comment_shape">
 
             <TextView
@@ -143,14 +142,15 @@
     </RelativeLayout>
 
     <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/very_light_pink_two" />
+    <View
         android:id="@+id/view_div"
         android:layout_width="match_parent"
-        android:layout_height="9dp"
+        android:layout_height="4dp"
         android:background="@color/very_light_pink_two"
         android:visibility="gone" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/very_light_pink_two" />
 </LinearLayout>

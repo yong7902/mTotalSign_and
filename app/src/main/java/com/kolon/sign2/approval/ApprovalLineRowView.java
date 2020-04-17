@@ -88,15 +88,23 @@ public class ApprovalLineRowView extends LinearLayout {
             btn_state.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, (int)DpiUtil.convertDpToPixel(mContext, 17)));
         }
 
-        if(position == 0){
+        if(data.getActionType() == "기안"){ //기안인 경우 파란색
             btn_state.setBackgroundResource(R.drawable.drw_round_blue_btn);
             btn_state.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+
             div.setVisibility(View.VISIBLE);
         }else{
             btn_state.setBackgroundResource(R.drawable.drw_round_stroke_grey2_btn);
             btn_state.setTextColor(ContextCompat.getColor(mContext, R.color.brownish_grey));
             div.setVisibility(View.GONE);
         }
+
+        if(position == 0){ //1번 결재인경우 두꺼운 구분선
+            div.setVisibility(View.VISIBLE);
+        }else{
+            div.setVisibility(View.GONE);
+        }
+
         btn_state.setText(data.getActionType());
 
         //상태
@@ -114,7 +122,7 @@ public class ApprovalLineRowView extends LinearLayout {
             tv_name.setText(data.getDepartment());
             tv_team.setText("");
         }else{
-            tv_name.setText(data.getName() + "/" + data.getPosition());//이름
+            tv_name.setText(data.getName() + " " + data.getPosition());//이름
             tv_team.setText(data.getDepartment());
         }
 

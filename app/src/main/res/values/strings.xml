@@ -219,6 +219,7 @@
     <string name="txt_service_desk_file_check">파일 확인 여부가 모두 체크되어야 합니다.</string>
     <string name="txt_service_desk_more">더보기</string>
     <string name="txt_service_desk_err_info">작업내역 입력(투입공수,내용)을 확인해주세요.</string>
+    <string name="txt_service_desk_err_no_select">결재 대상을 선택해주세요.</string>
 
 
     <!-- 출입관리 -->

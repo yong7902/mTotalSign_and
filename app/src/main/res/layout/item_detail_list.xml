@@ -13,9 +13,9 @@
         android:layout_marginBottom="1dp"
         android:background="@color/white"
         android:paddingStart="@dimen/layoutStart_16"
-        android:paddingTop="@dimen/layout_20"
+        android:paddingTop="@dimen/layoutTop_15"
         android:paddingEnd="@dimen/layoutStart_16"
-        android:paddingBottom="@dimen/layoutBottom_11">
+        android:paddingBottom="@dimen/layoutTop_15">
 
 
         <TextView
@@ -50,7 +50,7 @@
             android:id="@+id/item_detail_list_title_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layoutTop_12"
+            android:layout_marginTop="11dp"
             android:fontFamily="@font/noto_sans_cjk_kr_medium"
             android:singleLine="true"
             android:textColor="@color/colorBlack"
@@ -65,7 +65,7 @@
             android:id="@+id/item_detail_list_requester_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layoutTop_15"
+            android:layout_marginTop="11dp"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:textColor="@color/greyish_brown"
             android:textSize="13dp"

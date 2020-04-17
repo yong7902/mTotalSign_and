@@ -13,8 +13,8 @@
         android:gravity="center_vertical">
 
         <TextView
-            android:layout_marginTop="19dp"
-            android:layout_marginBottom="19dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:id="@+id/approval_line_add_txt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,8 +45,8 @@
         android:gravity="center_vertical">
 
         <TextView
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/approval_line_add_txt3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

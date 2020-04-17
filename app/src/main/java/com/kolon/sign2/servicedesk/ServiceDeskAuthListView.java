@@ -24,9 +24,11 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kolon.sign2.R;
+import com.kolon.sign2.activity.MainActivity;
 import com.kolon.sign2.dialog.CommentDialog;
 import com.kolon.sign2.dialog.ListDialog;
 import com.kolon.sign2.dialog.TextDialog;
+import com.kolon.sign2.dynamic.DynamicListFragment;
 import com.kolon.sign2.network.NetworkPresenter;
 import com.kolon.sign2.utils.CommonUtils;
 import com.kolon.sign2.utils.Constants;
@@ -583,7 +585,10 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                 cnt++;
             }
         }
-        if (cnt == 0) return;
+        if (cnt == 0) {
+            Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_desk_err_no_select), Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String title = cnt + mContext.getResources().getString(R.string.txt_service_desk_popup_txt6) + " " + mContext.getResources().getString(R.string.txt_service_confirm);
         String okStr = mContext.getResources().getString(R.string.txt_service_confirm);
@@ -602,12 +607,17 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
             public void getMessage(String comment) {
                 dialog.dismiss();
                 sendConfirmServer(apprGb, comment);
+                //test();
             }
         });
         dialog.show(getFragmentManager(mContext));
     }
+    private void test() {
+        ((MainActivity) mContext).authListRefresh();
+    }
 
     private void sendConfirmServer(String apprGb, String comment) {
+
         progressBar.setVisibility(View.VISIBLE);
 
         ArrayList<Req_AP_IF_039_VO.aprApproveList> listData = new ArrayList<>();
@@ -639,7 +649,9 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                             }
                             Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 
-                            getAuthList(userId, selectCode, "");
+                            //getAuthList(userId, selectCode, "");
+                            progressBar.setVisibility(View.GONE);
+                            ((MainActivity) mContext).authListRefresh();
                             return;
                         } else {
                             errMsg = result.getResult().getErrorMsg();

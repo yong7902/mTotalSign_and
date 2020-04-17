@@ -159,6 +159,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         drawGroupTab();
         //drawMenuTab(); // initGroupTabItem 의 btn.setOnClickListener 에서도 불러오므로 2번 불러옴(서버 2번호출됨). 이곳은 주석처리
 
+        mMenuIDParam = "";
         return view;
     }
 
@@ -211,7 +212,6 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         });
 
         mCustomLayout = view.findViewById(R.id.custom_layout);
-
     }
 
     private void bindingObserver() {
@@ -428,7 +428,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
     //권한목록 뷰를 붙인다.
     private void viewAuthListView(){
-
+        shimmerStop();
         if ("S06".equals(mMenuID) || "S07".equals(mMenuID) || "S08".equals(mMenuID) || "S09".equals(mMenuID)) {
             //기존 동적 레이아웃 지움
             contentsRecyclerView.setVisibility(View.GONE);
@@ -831,21 +831,29 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult requestCode:" + requestCode + "  resultCode:" + resultCode);
 
-        if (resultCode == Activity.RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
+        //if (resultCode == Activity.RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
             //shimmerStart();
             //viewModel.call_IF_103(mContext, mUserId, mSysId, mMenuID, "");
             //권한 목록 리프레시
             if(mCustomLayout.getVisibility() == View.VISIBLE) {
-                ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
-                if (authListView != null) {
-                    authListView.setData(mMenuID);
-                }
+//                ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
+//                if (authListView != null) {
+//                    authListView.setData(mMenuID);
+//                }
+                authListRefresh();
             }
-        }
-
+        //}
     }
 
-    //상세 처리 후 리스트 갱신
+    //처리 후 서비스데스크 권한 리스트 갱신
+    public void authListRefresh() {
+        ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
+        if (authListView != null) {
+            authListView.setData(mMenuID);
+        }
+    }
+
+    //상세 처리 후 동적 리스트 갱신
     public void listRefresh() {
         ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
         shimmerStart();
@@ -916,8 +924,11 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             }
         }
 
+
         //탭 update
         if (!menuItems.isEmpty()) {
+            menuItems.get(0).setCountNum("99");
+
             for (int i = 0; i < menuItems.size(); i++) {
                 if ("Y".equals(menuItems.get(i).getBadgeYn())) {
                     TabLayout.Tab tab = menuTabLayout.getTabAt(i);
@@ -928,6 +939,8 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
         //필터 탭 update
         if (!listMenuItems.isEmpty()){
+            listMenuItems.get(0).setCountNum("99");
+
             mChildOptionListView.setMenuItems(listMenuItems);
             mChildOptionListView.updateCount(mMenuID);
         }

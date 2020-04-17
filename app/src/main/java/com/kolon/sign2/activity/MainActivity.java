@@ -788,6 +788,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void authListRefresh() {
+        ((DynamicListFragment) frgmnt).authListRefresh();
+    }
+
     //디테일 화면으로 이동
     public void gotoDetail(String sysId, Res_AP_IF_002_VO.result.APPROVAL_LIST data) {
         if ("sign".equals(sysId)) {

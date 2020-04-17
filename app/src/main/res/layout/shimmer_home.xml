@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="4dp"
             android:gravity="center_vertical"
@@ -48,7 +48,7 @@
                 android:background="@color/shimmer_background"
                 android:text="                              "
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="19dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,13 +81,13 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="11dp" />
+                android:layout_height="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal">
 
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -164,7 +164,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@color/shimmer_background" />
     </LinearLayout>
     <LinearLayout
@@ -186,7 +186,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal">
 
@@ -228,7 +228,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -263,7 +263,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@color/shimmer_background" />
     </LinearLayout>
     <LinearLayout
@@ -285,7 +285,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="9dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal">
 
@@ -327,7 +327,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -362,7 +362,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@color/shimmer_background" />
     </LinearLayout>
 
@@ -376,8 +376,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/shimmer_background"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:fontFamily="@font/noto_sans_cjk_kr_regular"
             android:includeFontPadding="false"
             android:text="                     "

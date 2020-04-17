@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="4dp"
         android:gravity="center_vertical"
@@ -28,7 +28,7 @@
             android:includeFontPadding="false"
             android:text="서비스데스크"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="19dp" />
 
         <TextView
             android:id="@+id/tv_home_category_num"
@@ -40,7 +40,7 @@
             android:includeFontPadding="false"
             android:text="5"
             android:textColor="@color/lightish_blue"
-            android:textSize="20dp" />
+            android:textSize="19dp" />
 
         <ImageView
             android:layout_width="10dp"
