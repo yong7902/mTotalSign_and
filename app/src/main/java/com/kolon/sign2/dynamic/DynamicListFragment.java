@@ -831,7 +831,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult requestCode:" + requestCode + "  resultCode:" + resultCode);
 
-        //if (resultCode == Activity.RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
+        if (resultCode == Activity.RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
             //shimmerStart();
             //viewModel.call_IF_103(mContext, mUserId, mSysId, mMenuID, "");
             //권한 목록 리프레시
@@ -842,7 +842,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 //                }
                 authListRefresh();
             }
-        //}
+        }
     }
 
     //처리 후 서비스데스크 권한 리스트 갱신
@@ -927,7 +927,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
         //탭 update
         if (!menuItems.isEmpty()) {
-            menuItems.get(0).setCountNum("99");
+           //menuItems.get(0).setCountNum("99");
 
             for (int i = 0; i < menuItems.size(); i++) {
                 if ("Y".equals(menuItems.get(i).getBadgeYn())) {
@@ -939,7 +939,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
         //필터 탭 update
         if (!listMenuItems.isEmpty()){
-            listMenuItems.get(0).setCountNum("99");
+            //listMenuItems.get(0).setCountNum("99");
 
             mChildOptionListView.setMenuItems(listMenuItems);
             mChildOptionListView.updateCount(mMenuID);
