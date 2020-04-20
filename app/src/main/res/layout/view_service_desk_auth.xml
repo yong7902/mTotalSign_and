@@ -150,63 +150,74 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/plus_ble" />
-
-            <TextView
-                android:id="@+id/tv_title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:fontFamily="@font/noto_sans_cjk_kr_medium"
-                android:includeFontPadding="false"
-                android:text="@string/txt_service_desk_auth5"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
+            android:orientation="vertical"
+            android:id="@+id/layout_approval"
+            android:visibility="gone"
+            >
 
             <LinearLayout
-                android:id="@+id/btn_service_desk_name"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/drw_round_grey_cccccc2"
-                android:gravity="center_vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                android:gravity="center_vertical"
+                >
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/plus_ble" />
 
                 <TextView
-                    android:id="@+id/tv_service_desk_name"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_title1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="14dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="@font/noto_sans_cjk_kr_medium"
                     android:includeFontPadding="false"
-                    android:text=""
+                    android:text="@string/txt_service_desk_auth5"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_black" />
+                <LinearLayout
+                    android:id="@+id/btn_service_desk_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/drw_round_grey_cccccc2"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_service_desk_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/noto_sans_cjk_kr_regular"
+                        android:includeFontPadding="false"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="14dp"
+                        android:background="@drawable/open_black" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white_six" />
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="14dp"
-            android:background="@color/white_six" />
 
         <LinearLayout
             android:id="@+id/layout_all_select"

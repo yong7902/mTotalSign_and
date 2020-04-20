@@ -439,7 +439,7 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             if (authListView == null) {
                 authListView = new ServiceDeskAuthListView(mContext);
                 authListView.setInterface(this);
-                authListView.setData(mMenuID);
+                authListView.setData(mMenuID, mSysId);
                 mCustomLayout.removeAllViews();
                 mCustomLayout.addView(authListView);
             }else{
@@ -506,15 +506,16 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             badge.setBackgroundColor(ContextCompat.getColor(mContext, R.color.tomato));
             badge.setNumber(Integer.parseInt(cnt));
             badge.setVerticalOffset(30);
-            badge.setHorizontalOffset(-20);
+            badge.setHorizontalOffset(-10);
+
+            tab.setText(tab.getText().toString().trim() + " ");
+
         } else  {
             BadgeDrawable badge = tab.getOrCreateBadge();
             badge.setVisible(false);
+
+            tab.setText(tab.getText().toString().trim());
         }
-    }
-
-    public void updateTabBadge() {
-
     }
 
     private void isDrawChildMenu(int position) {
@@ -840,22 +841,23 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 //                if (authListView != null) {
 //                    authListView.setData(mMenuID);
 //                }
-                authListRefresh();
+                authListRefresh(authListView.getUserId());
             }
         }
     }
 
     //처리 후 서비스데스크 권한 리스트 갱신
-    public void authListRefresh() {
-        ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
+    public void authListRefresh(String pUserId) {
+        ((MainActivity) mContext).updateBadgeCnt(mSysId, "S06", pUserId);
         if (authListView != null) {
-            authListView.setData(mMenuID);
+            //authListView.setData(mMenuID);
+            authListView.setTab(mMenuID);
         }
     }
 
     //상세 처리 후 동적 리스트 갱신
     public void listRefresh() {
-        ((MainActivity) mContext).updateBadgeCnt(mSysId, "");
+        ((MainActivity) mContext).updateBadgeCnt(mSysId, "", "");
         shimmerStart();
         viewModel.call_IF_103(mContext, mUserId, mSysId, mMenuID, "");
     }

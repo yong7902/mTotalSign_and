@@ -788,8 +788,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void authListRefresh() {
-        ((DynamicListFragment) frgmnt).authListRefresh();
+    public void authListRefresh(String pUserId) {
+        ((DynamicListFragment) frgmnt).authListRefresh(pUserId);
     }
 
     //디테일 화면으로 이동
@@ -1138,13 +1138,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return menuArray;
     }
 
-    public void updateBadgeCnt(String sysId, String menuId) {
+    public void updateBadgeCnt(String sysId, String menuId, String pUserId) {
 
         userId = mPref.getStringPreference(Constants.PREF_USER_IF_ID);
         deptId = mPref.getStringPreference(Constants.PREF_DEPT_ID);
 
         HashMap hm = new HashMap();
-        hm.put("userId", userId);
+        if (TextUtils.isEmpty(pUserId))
+            hm.put("userId", userId);
+        else
+            hm.put("userId", pUserId);
+
         hm.put("sysId", sysId);//시스템 ID
         hm.put("menuId", menuId);//menu ID
         hm.put("deptId", deptId);
@@ -1160,16 +1164,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             //menuArray 업데이트
                             for (Res_AP_IF_102_VO.result.menuArray menu : result.getResult().getMenuArray()) {
-                                if ("Y".equals(menu.getBadgeYn())) {
+                                boolean isBadgeUpTarget = true;
+                                //badgeYn 체크
+                                if (!"Y".equals(menu.getBadgeYn()))
+                                    isBadgeUpTarget = false;
+                                //sysId 검사
+                                if (!TextUtils.isEmpty(sysId) && !sysId.equals(menu.getSysId()))
+                                    isBadgeUpTarget = false;
+                                //menuId 검사
+                                if (!TextUtils.isEmpty(menuId) && !menuId.equals(menu.getMenuId()))
+                                    isBadgeUpTarget = false;
+
+                                if (isBadgeUpTarget) {
                                     String menuId= menu.getMenuId();
                                     for (int i=0; i < menuArray.size(); i++) {
                                         if (menuId.equals(menuArray.get(i).getMenuId())) {
-                                            menuArray.get(i).setCountNum(menuArray.get(i).getCountNum());
+                                            menuArray.get(i).setCountNum(menu.getCountNum());
                                             break;
                                         }
                                     }
                                 }
                             }
+
                             //뱃지 업데이트
                             if (fragmentType == FRAGMENT_APPROVAL) {
                                 //전자결재

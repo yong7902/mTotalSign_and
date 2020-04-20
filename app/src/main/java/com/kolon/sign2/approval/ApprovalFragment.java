@@ -773,7 +773,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
         Log.d(TAG, "onActivityResult requestCode:" + requestCode + "  resultCode:" + resultCode);
 
         if (resultCode == Activity.RESULT_OK) {//결재 처리가 된경우만 리프레시 한다.
-            ((MainActivity) mContext).updateBadgeCnt("sign", "");
+            ((MainActivity) mContext).updateBadgeCnt("sign", "", "");
             getDataList("shimmer");
         }
 

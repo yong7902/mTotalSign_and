@@ -54,7 +54,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     private ImageView iv_service_desk_all_check;
     private TextView tv_service_desk_name;
     private TextView tv_title1;
-    private String userId, menuId;
+    private String userId, menuId, sysId;
     private String selectCode;//D1 : 승인대기, D2 : 승인완료, D3 : 승인반려, D4 : 승인진행
 
     private ProgressBar progressBar;
@@ -65,7 +65,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     private RecyclerView rv;
     private ServiceDeskAuthListAdapter adapter;
 
-    private LinearLayout layout_all_select, layout_no_data, layout_bottom_button;
+    private LinearLayout layout_all_select, layout_no_data, layout_bottom_button, layout_approval;
     private SharedPreferenceManager mPref;
 
     //페이징 처리 -----------------------------------
@@ -116,6 +116,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         layout_bottom_button = (LinearLayout) v.findViewById(R.id.layout_bottom_button);
         layout_all_select = (LinearLayout) v.findViewById(R.id.layout_all_select);
         layout_no_data = (LinearLayout) v.findViewById(R.id.layout_no_data);
+        layout_approval = (LinearLayout) v.findViewById(R.id.layout_approval);
         //layout_no_data.setVisibility(View.VISIBLE);
 
         /*
@@ -184,9 +185,10 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
     }
 
     //맨처음 시작시 - 위임자 로딩후 하단리스트 로딩
-    public void setData(String menuId) {
+    public void setData(String menuId, String sysId) {
         pageNum = 0;
         this.menuId = menuId;
+        this.sysId = sysId;
         //서버 또는 전단계에서 넘어온 데이터 - 위임자 목록
         /*
         String loginInfo = mPref.getStringPreference(Constants.PREF_LOGIN_IF_INFO);
@@ -220,8 +222,10 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
             layout_all_select.setVisibility(View.GONE);
             layout_bottom_button.setVisibility(View.GONE);
         }
-
         CommonUtils.changeTextSize(mContext, tv_title1);
+
+        //현 아이디로 뱃지 카운트 갱신
+        ((MainActivity)mContext).updateBadgeCnt(sysId, "S06", userId);
 
         getAuthorizerList(userId, userNm);
 
@@ -295,6 +299,10 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                                 data.setUserNm(userNm);
                                 dgtnList = new ArrayList<>();
                                 dgtnList.add(data);
+
+                            } else {
+                                //위임자 선택 레이아웃 보이기
+                                layout_approval.setVisibility(View.VISIBLE);
                             }
 
                             setAuthName();
@@ -553,7 +561,11 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                             pageNum = 0;
                             aprList = new ArrayList<>();
 
+                            //현 아이디로 뱃지 카운트 갱신
+                            ((MainActivity)mContext).updateBadgeCnt(sysId, "S06", userId);
+
                             setAuthName();
+                            //setTab(menuId);
                             getAuthList(userId, selectCode, "");
                         }
                     }
@@ -613,7 +625,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         dialog.show(getFragmentManager(mContext));
     }
     private void test() {
-        ((MainActivity) mContext).authListRefresh();
+        ((MainActivity) mContext).authListRefresh(userId);
     }
 
     private void sendConfirmServer(String apprGb, String comment) {
@@ -651,7 +663,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 
                             //getAuthList(userId, selectCode, "");
                             progressBar.setVisibility(View.GONE);
-                            ((MainActivity) mContext).authListRefresh();
+                            ((MainActivity) mContext).authListRefresh(userId);
                             return;
                         } else {
                             errMsg = result.getResult().getErrorMsg();
@@ -729,5 +741,9 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         //Toast.makeText(mContext, "shimerStop", Toast.LENGTH_LONG).show();
         mShimmerLayout.setVisibility(View.GONE);
         mShimmerLayout.stopShimmer();
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }
