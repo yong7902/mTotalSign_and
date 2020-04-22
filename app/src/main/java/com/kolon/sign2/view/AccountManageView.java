@@ -161,7 +161,7 @@ public class AccountManageView extends LinearLayout {
                                     mPref.setStringPreference(Constants.PREF_COMPANY_CD, companyCd);
                                     mPref.setStringPreference(Constants.PREF_USER_NAME, data.get(position).getUserName());
 
-                                    String loginIfStr = new Gson().toJson(data);
+                                    String loginIfStr = new Gson().toJson(data.get(position));
                                     mPref.setStringPreference(Constants.PREF_LOGIN_IF_INFO, loginIfStr);
 
                                     if (mInterface != null)

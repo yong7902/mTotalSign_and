@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // 첫 번째 뒤로가기 버튼을 누를때 표시
     private Toast toast;
 
+    private boolean activityMoveOkCheck;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -463,6 +465,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
+        activityMoveOkCheck = false;
 
         if (view_text_size_adj != null) {
             view_text_size_adj.changeTextSize();
@@ -600,6 +603,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (resId) {
             case R.id.btn_left_menu_setting:
                 Intent i = new Intent(this, SettingActivity.class);
+
+                if (activityMoveOkCheck) {
+                    return;
+                }
+                activityMoveOkCheck = true;
                 startActivityForResult(i, 1);
 
                 closeEtcPopup();
@@ -649,6 +657,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void gotoAddAccount() {
         //계정추가
         Intent add = new Intent(this, SettingAccountManagement.class);
+
+        if (activityMoveOkCheck) {
+            return;
+        }
+        activityMoveOkCheck = true;
         startActivityForResult(add, 1);
 
         closeEtcPopup();
@@ -794,6 +807,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //디테일 화면으로 이동
     public void gotoDetail(String sysId, Res_AP_IF_002_VO.result.APPROVAL_LIST data) {
+
         if ("sign".equals(sysId)) {
             //전자결재
             Intent it = new Intent(this, ApprovalDetailActivity.class);
@@ -829,6 +843,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             it.putExtra("subQuery", subQuery);
             it.putExtra("category", category);
             it.putExtra("object", obj);
+
+            if (activityMoveOkCheck) {
+                return;
+            }
+            activityMoveOkCheck = true;
             startActivityForResult(it, 0);
 
         } else {
@@ -861,7 +880,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             info.setTitle(data.getTitle());
             dynamicListList.add(info);
 
-
+            if (activityMoveOkCheck) {
+                return;
+            }
+            activityMoveOkCheck = true;
             //서비스데스크 중 보안(), 권한 S03,04,05
             if (menuId.startsWith("S03") || menuId.startsWith("S04") || menuId.startsWith("S05")) {
                 Intent intent = new Intent(this, ServiceDeskDetailActivity.class);
@@ -962,6 +984,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             it.putExtra("subQuery", subQuery);
             it.putExtra("category", category);
             it.putExtra("object", obj);
+
+            if (activityMoveOkCheck) {
+                return;
+            }
+            activityMoveOkCheck = true;
             startActivityForResult(it, 0);
         } else {
             String mSysNm = "";
@@ -992,7 +1019,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             info.setTitle(getParamMap.get("title"));
             dynamicListList.add(info);
 
-
+            if (activityMoveOkCheck) {
+                return;
+            }
+            activityMoveOkCheck = true;
             //서비스데스크 중 보안(), 권한 S03,04,05
             if (menuId.startsWith("S03") || menuId.startsWith("S04") || menuId.startsWith("S05")) {
                 Intent intent = new Intent(this, ServiceDeskDetailActivity.class);
@@ -1201,6 +1231,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-
+    public void setActivityMoveOkCheck(boolean activityMoveOkCheck){
+        this.activityMoveOkCheck = activityMoveOkCheck;
+    }
+    public boolean getActivityMoveOkCheck(){
+        return this.activityMoveOkCheck;
+    }
 
 }

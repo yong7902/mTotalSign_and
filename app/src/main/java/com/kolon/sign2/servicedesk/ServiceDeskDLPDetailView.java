@@ -28,6 +28,7 @@ import com.kolon.sign2.utils.CommonUtils;
 import com.kolon.sign2.vo.AttachFileListVO;
 import com.kolon.sign2.vo.Res_AP_IF_032_VO;
 import com.kolon.sign2.vo.Res_AP_IF_033_VO;
+import com.kolon.sign2.vo.Res_AP_IF_107_VO;
 import com.kolon.sign2.vo.Res_Doc_Viewer;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
 
     private ArrayList<Res_AP_IF_032_VO.result.dlpDetailFile> detectList;
 
-    private String appIdx, chkIdx, talkId, userId;
+    private String appIdx, chkIdx, talkId, talkCompany, userId;
 
     private ShimmerFrameLayout mShimmerLayout;
 
@@ -195,6 +196,11 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
                                 tv_job.setText(job);
                                 tv_team.setText(detailOrder.get(0).getOrderDept());
                                 talkId = detailOrder.get(0).getOrderId();
+                                //사용자 아이디가 있는 경우 회사 코드 가져오기
+                                if (!TextUtils.isEmpty(talkId)) {
+                                    getTalkCompany(talkId);
+                                }
+
                             }
 
                             //hideProgressBar();
@@ -248,8 +254,8 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sub_call:
-                //Todo KolonTalk 인터페이스 추가하여 CompanyCode값 적용 필요
-                CommonUtils.callKolonTalk(mContext, talkId, "companyCode");
+                //Todo KolonTalk 인터페이스 추가하여 CompanyCode값 적용 필요ㅛㅐㅜㅎ
+                CommonUtils.callKolonTalk(mContext, talkId, talkCompany);
                 break;
             case R.id.btn_service_desk_cancel:
                 clickCancel();
@@ -458,5 +464,26 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
         //Toast.makeText(mContext, "shimerStop", Toast.LENGTH_LONG).show();
         mShimmerLayout.setVisibility(View.GONE);
         mShimmerLayout.stopShimmer();
+    }
+
+    //iken talk에 필요한 회사코드 가져오기
+    public void getTalkCompany(String userId){
+        HashMap hm = new HashMap();
+        hm.put("userId",userId);
+
+        talkCompany = "";
+        NetworkPresenter presenter = new NetworkPresenter();
+        presenter.getUserCompSearch(hm, new NetworkPresenter.getUserCompSearchResult() {
+            @Override
+            public void onResponse(Res_AP_IF_107_VO result) {
+                if (result != null) {
+                    if ("200".equals(result.getStatus().getStatusCd())) {
+                        if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
+                            talkCompany = result.getResult().getCompanyCd();
+                        }
+                    }
+                }
+            }
+        });
     }
 }

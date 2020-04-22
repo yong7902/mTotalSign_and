@@ -35,6 +35,7 @@ import com.kolon.sign2.utils.DpiUtil;
 import com.kolon.sign2.vo.AttachFileListVO;
 import com.kolon.sign2.vo.Res_AP_Empty_VO;
 import com.kolon.sign2.vo.Res_AP_IF_028_VO;
+import com.kolon.sign2.vo.Res_AP_IF_107_VO;
 import com.kolon.sign2.vo.Res_Doc_Viewer;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
 
     private ArrayList<Res_AP_IF_028_VO.result.approvalAttachList> attachList;
     private ArrayList<Res_AP_IF_028_VO.result.listappHistory> histories;
-    private String key01, key02, talkId;
+    private String key01, key02, talkId, talkCompany;
 
     private String menuId; //yong79, 승인버튼 제어를 위해 추가
 
@@ -192,6 +193,10 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
                             }
 
                             talkId = data.getCustomerId();
+                            //사용자 아이디가 있는 경우 회사 코드 가져오기
+                            if (!TextUtils.isEmpty(talkId)) {
+                                getTalkCompany(talkId);
+                            }
 
                             tv_name.setText(name);
                             tv_team.setText(team);
@@ -266,7 +271,7 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
         switch (v.getId()) {
             case R.id.btn_call:
                 //Todo KolonTalk 인터페이스 추가하여 CompanyCode값 적용 필요
-                CommonUtils.callKolonTalk(mContext, talkId, "companyCode");
+                CommonUtils.callKolonTalk(mContext, talkId, talkCompany);
                 break;
 
             case R.id.btn_service_desk_cancel:
@@ -524,5 +529,26 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
         //Toast.makeText(mContext, "shimerStop", Toast.LENGTH_LONG).show();
         mShimmerLayout.setVisibility(View.GONE);
         mShimmerLayout.stopShimmer();
+    }
+
+    //iken talk에 필요한 회사코드 가져오기
+    public void getTalkCompany(String userId){
+        HashMap hm = new HashMap();
+        hm.put("userId",userId);
+
+        talkCompany = "";
+        NetworkPresenter presenter = new NetworkPresenter();
+        presenter.getUserCompSearch(hm, new NetworkPresenter.getUserCompSearchResult() {
+            @Override
+            public void onResponse(Res_AP_IF_107_VO result) {
+                if (result != null) {
+                    if ("200".equals(result.getStatus().getStatusCd())) {
+                        if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
+                            talkCompany = result.getResult().getCompanyCd();
+                        }
+                    }
+                }
+            }
+        });
     }
 }

@@ -39,6 +39,8 @@ android {
             buildConfigField "String", "r_key", "\"rkey_ad495ef4fb9f40e\""
             buildConfigField "String", "DocViewerURL", "\"http://172.30.151.55:8080/\""
             buildConfigField "String", "pushURL", "\"https://ikenapptest.kolon.com/\""
+            buildConfigField "String", "kolontalk", "\"ikentalk://\""
+            buildConfigField "String", "kolonapps", "\"kolonapps://\""
             resValue "string", "app_name", '"KOLON 결재"'
         }
 
@@ -54,6 +56,8 @@ android {
             buildConfigField "String", "r_key", "\"rkey_dda198b87165477\""
             buildConfigField "String", "DocViewerURL", "\"https://bfdev.kolon.com:8000/\""
             buildConfigField "String", "pushURL", "\"http://203.225.255.241/\""
+            buildConfigField "String", "kolontalk", "\"ikentalk://\""
+            buildConfigField "String", "kolonapps", "\"kolonapps://\""
             resValue "string", "app_name", '"KOLON 결재(dev)"'
         }
     }
@@ -149,5 +153,6 @@ dependencies {
 
     // Gradle dependency on Shimmer for Android
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
 
 }

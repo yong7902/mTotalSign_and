@@ -656,10 +656,6 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
             });
             dialog.show(getFragmentManager());
         } else {
-            if (activityMoveOkCheck) {
-                return;
-            }
-            activityMoveOkCheck = true;
             //열람권있음 - 이동
             //상세에서 이전,다음 결제 건을 바로 넘어가기 위해 guid컬럼 array를 만들어서 전달
             //guid id를 넘기고 해당 액티비티에서 리스트로 받아서 동일 아이디를 찾아서 이동.
@@ -708,6 +704,11 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
             it.putExtra("subQuery", subQuery);
             it.putExtra("category", category);
             it.putExtra("object", readData);
+
+            if (activityMoveOkCheck) {
+                return;
+            }
+            activityMoveOkCheck = true;
             startActivityForResult(it, REQ_DETAIL);
         }
     }

@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_ico"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="allowBackup">
+        tools:replace="allowBackup"
+        >
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.AppCompat.Light.NoActionBar">

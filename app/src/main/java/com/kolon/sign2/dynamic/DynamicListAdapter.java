@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kolon.sign2.R;
+import com.kolon.sign2.activity.MainActivity;
 import com.kolon.sign2.dynamic.dynamicDetail.DynamicDetailActivity;
 import com.kolon.sign2.servicedesk.ServiceDeskDetailActivity;
 import com.kolon.sign2.utils.CommonUtils;
@@ -143,6 +144,11 @@ public class DynamicListAdapter extends RecyclerView.Adapter<DynamicListAdapter.
                     intent.putExtra("object", list);
        //             itemView.getContext().startActivity(intent);
                     if (mContext instanceof Activity) {
+
+                        if (((MainActivity) mContext).getActivityMoveOkCheck()) {
+                            return;
+                        }
+                        ((MainActivity) mContext).setActivityMoveOkCheck(true);
                         ((Activity) mContext).startActivityForResult(intent, 100);
                     }
                 });
@@ -156,7 +162,12 @@ public class DynamicListAdapter extends RecyclerView.Adapter<DynamicListAdapter.
                     intent.putExtra("position", position);
                     intent.putExtra("userId", mUserId);
                //     itemView.getContext().startActivity(intent);
+
                     if (mContext instanceof Activity) {
+                        if (((MainActivity) mContext).getActivityMoveOkCheck()) {
+                            return;
+                        }
+                        ((MainActivity) mContext).setActivityMoveOkCheck(true);
                         ((Activity) mContext).startActivityForResult(intent, 100);
                     }
                 });

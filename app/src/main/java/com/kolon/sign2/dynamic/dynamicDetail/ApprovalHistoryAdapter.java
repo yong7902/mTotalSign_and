@@ -1,6 +1,8 @@
 package com.kolon.sign2.dynamic.dynamicDetail;
 
+import android.content.Context;
 import android.text.Layout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 public class ApprovalHistoryAdapter extends RecyclerView.Adapter<ApprovalHistoryAdapter.ViewHolder> {
 
     ArrayList<Res_AP_IF_104_VO.dynamicDetailList> list;
-
 
     public ApprovalHistoryAdapter(ArrayList<Res_AP_IF_104_VO.dynamicDetailList> list) {
         this.list = list;
@@ -69,7 +70,14 @@ public class ApprovalHistoryAdapter extends RecyclerView.Adapter<ApprovalHistory
 
         public void bind(Res_AP_IF_104_VO.dynamicDetailList item) {
             orderTv.setText(item.getAttr01());
-            orderManagerTv.setText(item.getAttr02());
+
+            //승인자 정보가 없을 경우 처리
+            if (TextUtils.isEmpty(item.getAttr02().trim())) {
+                orderManagerTv.setText(itemView.getContext().getResources().getString(R.string.txt_no_approvalHistory));
+                orderManagerTv.setTextColor(itemView.getContext().getResources().getColor(R.color.greyish));
+            } else
+                orderManagerTv.setText(item.getAttr02());
+
             statusInfoTv.setText(item.getAttr03());
             contentsTv.setText(item.getAttr04());
             dateTv.setText(item.getAttr05());

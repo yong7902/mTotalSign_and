@@ -221,7 +221,6 @@
     <string name="txt_service_desk_err_info">작업내역 입력(투입공수,내용)을 확인해주세요.</string>
     <string name="txt_service_desk_err_no_select">결재 대상을 선택해주세요.</string>
 
-
     <!-- 출입관리 -->
     <string name="txt_enter_management_title">출입관리</string>
 
@@ -266,10 +265,14 @@
     <string name="txt_size_adj_6">가장 크게</string>
 
     <!-- KolonTalk 연동 -->
-
-    <string name="txt_kolontalk_not_installed">"[KOLON TALK]앱이 설치되어 있지 않습니다. Kolon Apps에서 설치를 진행하시겠습니까?"</string>
+    <string name="txt_kolontalk_not_installed">"[KOLON TALK] 앱이 설치되어 있지 않습니다. Kolon Apps에서 설치를 진행하시겠습니까?"</string>
     <string name="txt_kolonapps_web_url">"https://ikenapp.kolon.com/portal/kolon/legacyLoginKolonView.miaps?"</string>
+    <string name="txt_kolonIken_not_installed">"[KOLON IKEN] 앱이 설치되어 있지 않습니다. Kolon Apps에서 설치를 진행하시겠습니까?"</string>
+    <string name="txt_kolontalk_no_user">"[KOLON TALK] 유효하지 않은 계정이므로(퇴사 등) 연결할 수 없습니다."</string>
 
-    <string name="txt_kolonIken_not_installed">"[KOLON IKEN]앱이 설치되어 있지 않습니다. Kolon Apps에서 설치를 진행하시겠습니까?"</string>
+
+    <!-- dynamic -->
+    <string name="txt_no_approvalHistory">결재자 정보가 없습니다.</string>
+
 
 </resources>

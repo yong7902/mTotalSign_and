@@ -154,7 +154,10 @@ public class ApprovalDetailActivity extends AppCompatActivity implements View.On
                     if (position == pager.getCurrentItem()) {
                         readRowData = result.getResult();
                         if (readRowData != null && readRowData.getApprDetailItem() != null) {
-                            if ("Y".equalsIgnoreCase(readRowData.getApprDetailItem().getApporvalPlag()) && "A02011".equals(readRowData.getApprDetailItem().getState())) {
+                            //우상단 결재선 버튼 처리 (승인버튼이 있고, 부서/미처리함 이고, 미접수 상태일때)
+                            if ("Y".equalsIgnoreCase(readRowData.getApprDetailItem().getApporvalPlag())
+                                    && "004".equals(category)
+                                    && "A02011".equals(readRowData.getApprDetailItem().getState())) {
                                 addLineViewHm.put(position, true);
                                 if(isFirst){
                                     isFirst = false;
@@ -290,9 +293,9 @@ public class ApprovalDetailActivity extends AppCompatActivity implements View.On
     public void onBackPressed() {
         finish();
     }
-    public void onBackPressedParentRefresh() {
+    public void setRefresh() {
         setResult(RESULT_OK);
-        finish();
+        //finish();
     }
 
     @Override
@@ -312,10 +315,6 @@ public class ApprovalDetailActivity extends AppCompatActivity implements View.On
     }
 
     public void gotoApprovalLine() {
-        if (activityMoveOkCheck) {
-            return;
-        }
-        activityMoveOkCheck = true;
 
         String wfDocId = data.get(pager.getCurrentItem()).wfDocId;
         Intent i = new Intent(this, ApprovalLineActivity.class);
@@ -325,6 +324,10 @@ public class ApprovalDetailActivity extends AppCompatActivity implements View.On
         i.putExtra("wfDocId", wfDocId);
         i.putExtra("companyCd", companyCd);
 
+        if (activityMoveOkCheck) {
+            return;
+        }
+        activityMoveOkCheck = true;
         startActivityForResult(i, 0);
 
         data.get(pager.getCurrentItem()).approvalLineCheck = true;

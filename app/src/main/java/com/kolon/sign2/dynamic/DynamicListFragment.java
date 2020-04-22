@@ -98,8 +98,10 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
 
     private ShimmerFrameLayout mShimmerLayout;
     private RelativeLayout progressBar;
-//
-    private int pageSize = 10;//한번에 보여주는 사이즈
+
+    private boolean activityMoveOkCheck;
+    //
+    private int pageSize = 20;//한번에 보여주는 사이즈
 //    private int pageNum = 0; //0, 1 ,2 ,3 이 아니라 0 20 40 등 시작페이지이고 pageSize만큼 더해저야함.
 //    private boolean loadingMore=true; //리스트 끝에서 추가 로딩여부
 
@@ -823,6 +825,10 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
         intent.putExtra("object", dynamicListLists);
 
         //startActivity(intent);
+        if (activityMoveOkCheck) {
+            return;
+        }
+        activityMoveOkCheck = true;
 
         startActivityForResult(intent, 100);
     }
@@ -946,6 +952,12 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             mChildOptionListView.setMenuItems(listMenuItems);
             mChildOptionListView.updateCount(mMenuID);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activityMoveOkCheck = false;
     }
 
 }

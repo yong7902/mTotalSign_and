@@ -227,7 +227,7 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
         switch (v.getId()) {
             case R.id.btn_service_desk_cancel:
                 clickCancel();
-                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_service_desk_confirm:
                 clickOk();

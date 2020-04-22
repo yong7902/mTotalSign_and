@@ -1,6 +1,7 @@
 package com.kolon.sign2.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ public class DynamicDetailTxtBtnItemView extends LinearLayout {
     private KolonTalkClickListener dynamicKolonTalkListener;
     public interface KolonTalkClickListener {
         void onTalkClickListener(String userId);
+        void getTalkCompany(String userId);
     }
     public DynamicDetailTxtBtnItemView(Context context) {
         super(context);
@@ -52,12 +54,6 @@ public class DynamicDetailTxtBtnItemView extends LinearLayout {
         mDynamicKolonTalk = view.findViewById(R.id.iv_detail_txtbtn_item_image);
         mDynamicKolonTalk.setOnClickListener(v -> {
 
-            //Todo 현재 UserID를 넘기지 않기 떄문에 무조건 톡 호출 하도록 함. USerID가 파라미터로 넘어가야 한다면 아래 주석 코드를 사용하고 userID가 없을 경우 다른 액션 필요
-            /*
-            * if (!TextUtils.isEmpty(mUserId)) {
-                callKolonTalk();
-            }
-            * */
             dynamicKolonTalkListener.onTalkClickListener(mUserId);
 
         });

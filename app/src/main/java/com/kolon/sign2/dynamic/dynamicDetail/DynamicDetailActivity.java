@@ -123,9 +123,9 @@ public class DynamicDetailActivity extends AppCompatActivity {
         finish();
     }
 
-    public void finishDetailActivityParentRefresh() {
+    public void setRefresh() {
         setResult(RESULT_OK);
-        finish();
+        //finish();
     }
 
 }

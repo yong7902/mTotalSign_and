@@ -32,6 +32,7 @@ import com.kolon.sign2.view.DynamicDetailSingleTextItemView;
 import com.kolon.sign2.view.DynamicDetailTxtBtnItemView;
 import com.kolon.sign2.vo.AttachFileListVO;
 import com.kolon.sign2.vo.Res_AP_IF_104_VO;
+import com.kolon.sign2.vo.Res_AP_IF_107_VO;
 import com.kolon.sign2.vo.Res_Doc_Viewer;
 
 import java.text.SimpleDateFormat;
@@ -66,7 +67,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     private ArrayList<Res_AP_IF_104_VO.dynamicDetailList> mDetailList;
     private ArrayList<AttachFileListVO> fileList = new ArrayList<>();
 
-    private String mCompanyCode = "";
+    private String talkCompany = "";
     private String mUserId;
     private String mSysId;
     private String mMenuId = "";
@@ -345,6 +346,11 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     }
 
     private void drawTxtBtnDetailView(String userInfo, String usedId) {
+        //사용자 아이디가 있는 경우 회사 코드 가져오기
+        if (!TextUtils.isEmpty(usedId)) {
+            getTalkCompany(usedId);
+        }
+
         mDynamicDetailTxtBtnView = new DynamicDetailTxtBtnItemView(mContext);
         mDynamicDetailTxtBtnView.setViewData(userInfo, usedId, this);
         parentContainer.addView(mDynamicDetailTxtBtnView);
@@ -490,13 +496,15 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
 
     //남은 결재건수를 체크_yong79
     private void checkRemainApproval(String title) {
-
         //boolean isFinal = true;
+        //결재 1건이상 처리로 목록 복귀 리프레시 set
+        ((DynamicDetailActivity) mContext).setRefresh();
+
         if (mIsFinal) { //목록으로
             String msg = String.format(getResources().getString(R.string.txt_approval_success), title);
             Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
 
-            ((DynamicDetailActivity) mContext).finishDetailActivityParentRefresh();
+            ((DynamicDetailActivity) mContext).finishDetailActivity();
         } else { //다음 결재
             String msg = String.format(getResources().getString(R.string.txt_approval_success), title) + "\n" + mContext.getResources().getString(R.string.txt_approval_next_process);
             TextDialog dialog = TextDialog.newInstance("", msg, mContext.getResources().getString(R.string.txt_approval_next_process_2),
@@ -508,7 +516,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
                         case R.id.btn_left:
                             //목록으로
                             dialog.dismiss();
-                            ((DynamicDetailActivity) mContext).finishDetailActivityParentRefresh();
+                            ((DynamicDetailActivity) mContext).finishDetailActivity();
                             break;
                         case R.id.btn_right:
                             //다음 결재건
@@ -663,7 +671,7 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
     @Override
     public void onTalkClickListener(String userId) {
         //Todo KolonTalk 인터페이스 추가하여 CompanyCode값 적용 필요
-        CommonUtils.callKolonTalk(getContext(), userId, mCompanyCode);
+        CommonUtils.callKolonTalk(getContext(), userId, talkCompany);
     }
 
     public void shimmerStart() {
@@ -678,5 +686,26 @@ public class DynamiclDetailView extends LinearLayout implements View.OnClickList
         //Toast.makeText(mContext, "shimerStop", Toast.LENGTH_LONG).show();
         mShimmerLayout.setVisibility(View.GONE);
         mShimmerLayout.stopShimmer();
+    }
+
+    //iken talk에 필요한 회사코드 가져오기
+    public void getTalkCompany(String userId){
+        HashMap hm = new HashMap();
+        hm.put("userId",userId);
+
+        talkCompany = "";
+        presenter = new NetworkPresenter();
+        presenter.getUserCompSearch(hm, new NetworkPresenter.getUserCompSearchResult() {
+            @Override
+            public void onResponse(Res_AP_IF_107_VO result) {
+                if (result != null) {
+                    if ("200".equals(result.getStatus().getStatusCd())) {
+                        if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
+                            talkCompany = result.getResult().getCompanyCd();
+                        }
+                    }
+                }
+            }
+        });
     }
 }

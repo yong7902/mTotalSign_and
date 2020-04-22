@@ -86,7 +86,7 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
     private String wfDocId = "";
     private String companyCd;
     private int position;
-    private String talkComapny;
+    private String talkCompany;
     private ApprovalDetailActivity.inputData input;
     private RequestManager mGlideRequestManager;
     private ArrayList<AttachFileListVO> fileList = new ArrayList<>();
@@ -546,7 +546,7 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
             case R.id.btn_call:
             case R.id.tv_approval_detail_name:
                 //Todo KolonTalk 인터페이스 추가하여 CompanyCode값 적용 필요
-                CommonUtils.callKolonTalk(mContext, readData.getApprDetailItem().getWriterId(),talkComapny);
+                CommonUtils.callKolonTalk(mContext, readData.getApprDetailItem().getWriterId(),talkCompany);
                 break;
             case R.id.btn_ok:
                 ((ApprovalDetailActivity) mContext).onBackPressed();
@@ -625,14 +625,15 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
 
     //남은 결재건수를 체크_yong79
     private void checkRemainApproval(String title) {
-
         //boolean isFinal = true;
+        //결재 1건이상 처리로 목록 복귀 리프레시 set
+        ((ApprovalDetailActivity) mContext).setRefresh();
 
         if (isFinal) { //목록으로
             String msg = String.format(getResources().getString(R.string.txt_approval_success), title);
             Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
 
-            ((ApprovalDetailActivity) mContext).onBackPressedParentRefresh();
+            ((ApprovalDetailActivity) mContext).onBackPressed();
         } else { //다음 결재
             String msg = String.format(getResources().getString(R.string.txt_approval_success), title) + "\n" + mContext.getResources().getString(R.string.txt_approval_next_process);
             TextDialog dialog = TextDialog.newInstance("", msg, mContext.getResources().getString(R.string.txt_approval_next_process_2),
@@ -644,7 +645,7 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
                         case R.id.btn_left:
                             //목록으로
                             dialog.dismiss();
-                            ((ApprovalDetailActivity) mContext).onBackPressedParentRefresh();
+                            ((ApprovalDetailActivity) mContext).onBackPressed();
                             break;
                         case R.id.btn_right:
                             //다음 결재건
@@ -738,14 +739,14 @@ public class ApprovalDetailRowView extends LinearLayout implements View.OnClickL
     private void getTalkCompany(){
         HashMap hm = new HashMap();
         hm.put("userId",readData.getApprDetailItem().getWriterId());
-        talkComapny = "";
+        talkCompany = "";
         presenter.getUserCompSearch(hm, new NetworkPresenter.getUserCompSearchResult() {
             @Override
             public void onResponse(Res_AP_IF_107_VO result) {
                 if (result != null) {
                     if ("200".equals(result.getStatus().getStatusCd())) {
                         if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
-                            talkComapny = result.getResult().getCompanyCd();
+                            talkCompany = result.getResult().getCompanyCd();
                         }
                     }
                 }

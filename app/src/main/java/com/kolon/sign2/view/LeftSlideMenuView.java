@@ -217,14 +217,16 @@ public class LeftSlideMenuView extends LinearLayout implements View.OnClickListe
 
                 for(int k =0;k<menuArray.size();k++){
                     if(menuArray.get(k).getMenuId().equals(num.getTag())){
-                        if (TextUtils.isEmpty(menuArray.get(k).getCountNum())) {
+                        if (!"Y".equals(menuArray.get(k).getCountYn())) {
+                        //if (TextUtils.isEmpty(menuArray.get(k).getCountNum())) {
                             num.setVisibility(View.GONE);
                         } else {
                             num.setVisibility(View.VISIBLE);
                             num.setText(menuArray.get(k).getCountNum());
                         }
                     }else if(menuArray.get(k).getMenuId().equals(subNum.getTag())){
-                        if (TextUtils.isEmpty(menuArray.get(k).getCountNum())) {
+                        if (!"Y".equals(menuArray.get(k).getCountYn())) {
+                        //if (TextUtils.isEmpty(menuArray.get(k).getCountNum())) {
                             subNum.setVisibility(View.GONE);
                         } else {
                             subNum.setVisibility(View.VISIBLE);

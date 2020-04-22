@@ -20,12 +20,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.kolon.sign2.BuildConfig;
 import com.kolon.sign2.R;
+import com.kolon.sign2.network.NetworkPresenter;
 import com.kolon.sign2.view.TextSizeAdjView;
+import com.kolon.sign2.vo.Res_AP_IF_107_VO;
+
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.URLEncoder;
@@ -34,6 +40,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -308,6 +315,11 @@ public class CommonUtils {
     }
 
     public static void callKolonTalk(Context context, String userId, String companyCode) {
+        if (TextUtils.isEmpty(userId) || TextUtils.isEmpty(companyCode)){
+            Toast.makeText(context, context.getResources().getString(R.string.txt_kolontalk_no_user), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // 앱 열기
         try {
             SharedPreferenceManager pref = SharedPreferenceManager.getInstance(context);
@@ -319,8 +331,8 @@ public class CommonUtils {
             SSOUtils.putKolonProviderValue(context, "APPLINK", "Y");
             String param = pref.getStringPreference(Constants.PREF_USER_ID) + "^" + pref.getStringPreference(Constants.PREF_USER_PW);
             SSOUtils.putKolonProviderValue(context, "PARAM", param);
-            String url = "ikentalk://?id=" + userId + "&companyCode=" + companyCode; // 스키마 정보 "// + ?파라미터
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            String url = BuildConfig.kolontalk + "?id=" + userId + "&companyCode=" + companyCode; // 스키마 정보 "// + ?파라미터
+            Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse(url));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 
@@ -347,8 +359,8 @@ public class CommonUtils {
 
     public static void callKolonApps(Context context) {
         try {
-            String url = "kolonapps://";
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            String url = BuildConfig.kolonapps;  //"kolonapps://";
+            Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse(url));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 

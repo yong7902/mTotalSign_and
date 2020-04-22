@@ -150,7 +150,7 @@ public class LeftSlideMenuItemView extends LinearLayout implements View.OnClickL
 
                         tv_menu_item.setText(read.getMenuName());
 
-                        if (TextUtils.isEmpty(read.getCountNum())){// || "0".equals(read.getCountNum())) {
+                        if (!"Y".equals(read.getCountYn())) { //(TextUtils.isEmpty(read.getCountNum())){// || "0".equals(read.getCountNum())) {
                             tv_menu_item_num.setVisibility(View.GONE);
                         } else {
                             tv_menu_item_num.setVisibility(View.VISIBLE);
@@ -166,7 +166,8 @@ public class LeftSlideMenuItemView extends LinearLayout implements View.OnClickL
                         lay_menu_item_depth3.setVisibility(View.VISIBLE);
 
                         tv_sub_menu_item.setText(read.getMenuName());
-                        if (TextUtils.isEmpty(read.getCountNum())){// || "0".equals(read.getCountNum())) {
+
+                        if (!"Y".equals(read.getCountYn())) { //(TextUtils.isEmpty(read.getCountNum())){// || "0".equals(read.getCountNum())) {
                             tv_sub_menu_item_num.setVisibility(View.GONE);
                         } else {
                             tv_sub_menu_item_num.setVisibility(View.VISIBLE);
