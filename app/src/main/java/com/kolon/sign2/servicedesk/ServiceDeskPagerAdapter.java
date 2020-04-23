@@ -33,6 +33,11 @@ public class ServiceDeskPagerAdapter extends PagerAdapter {
 
         View view = null;
 
+        //마지막 페이지 여부
+        boolean isFinal = false;
+        if (data.size() == position+1) //마지막 페이지인지 여부
+            isFinal = true;
+
         if (menuId.startsWith("S03")) {
             //보안 it
             view = new ServiceDeskSecurityITDetailView(mContext);
@@ -40,7 +45,7 @@ public class ServiceDeskPagerAdapter extends PagerAdapter {
             if (textSizeAdj) {
                 ((ServiceDeskSecurityITDetailView) view).textSizeAdj();
             } else {
-                ((ServiceDeskSecurityITDetailView) view).setData(userId, data.get(position).getDocId(), menuId);
+                ((ServiceDeskSecurityITDetailView) view).setData(userId, data.get(position).getDocId(), menuId, position, isFinal);
             }
             //((ServiceDeskSecurityITDetailView) view).shimmerStop();
         } else if (menuId.startsWith("S04")) {
@@ -51,7 +56,7 @@ public class ServiceDeskPagerAdapter extends PagerAdapter {
             if (textSizeAdj) {
                 ((ServiceDeskDLPDetailView) view).textSizeAdj();
             } else {
-                ((ServiceDeskDLPDetailView) view).setData(userId, data.get(position).getDocId(), data.get(position).getParam01());
+                ((ServiceDeskDLPDetailView) view).setData(userId, data.get(position).getDocId(), data.get(position).getParam01(), position, isFinal);
             }
             //((ServiceDeskDLPDetailView) view).shimmerStop();
         } else if (menuId.startsWith("S05")) {
@@ -62,7 +67,7 @@ public class ServiceDeskPagerAdapter extends PagerAdapter {
             if (textSizeAdj) {
                 ((ServiceDeskMailFilterView) view).textSizeAdj();
             } else {
-                ((ServiceDeskMailFilterView) view).setData(userId, data.get(position).getDocId());
+                ((ServiceDeskMailFilterView) view).setData(userId, data.get(position).getDocId(), position, isFinal);
             }
             //((ServiceDeskMailFilterView) view).shimmerStop();
         }
@@ -97,6 +102,10 @@ public class ServiceDeskPagerAdapter extends PagerAdapter {
     public void textSizeChange(){
         textSizeAdj = true;
         notifyDataSetChanged();
+    }
+
+    public ArrayList<Res_AP_IF_103_VO.dynamicListList> getData() {
+        return data;
     }
 
 }

@@ -1,17 +1,20 @@
 package com.kolon.sign2.servicedesk;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.kolon.sign2.R;
+import com.kolon.sign2.dialog.TextDialog;
 import com.kolon.sign2.view.TextSizeAdjView;
 import com.kolon.sign2.view.ViewPagerFixed;
 import com.kolon.sign2.vo.Res_AP_IF_103_VO;
@@ -103,5 +106,52 @@ public class ServiceDeskDetailActivity extends AppCompatActivity implements View
         //Toast.makeText(mContext, "shimerStop", Toast.LENGTH_LONG).show();
         mShimmerLayout.setVisibility(View.GONE);
         mShimmerLayout.stopShimmer();
+    }
+
+    //남은 결재건수를 체크_yong79
+    public void checkRemainApproval(String title, boolean isFinal, int position) {
+        //boolean isFinal = true;
+        //결재 1건이상 처리로 목록 복귀 리프레시 set
+        setResult(RESULT_OK);
+
+        if (isFinal) { //목록으로
+            String msg = String.format(getResources().getString(R.string.txt_approval_success), title);
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+
+            onBackPressed();
+        } else { //다음 결재
+            String msg = String.format(getResources().getString(R.string.txt_approval_success), title) + "\n" + this.getResources().getString(R.string.txt_approval_next_process);
+            TextDialog dialog = TextDialog.newInstance("", msg, this.getResources().getString(R.string.txt_approval_next_process_2),
+                    this.getResources().getString(R.string.txt_approval_next_process_3));
+
+            dialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (view.getId()) {
+                        case R.id.btn_left:
+                            //목록으로
+                            dialog.dismiss();
+                            onBackPressed();
+                            break;
+                        case R.id.btn_right:
+                            //다음 결재건
+                            dialog.dismiss();
+                            showProgressBar();
+                            nextApprovalLoading(position);
+                            break;
+                    }
+                }
+            });
+            dialog.show(getSupportFragmentManager());
+        }
+    }
+
+    private void nextApprovalLoading(int nowPosition) {
+        //승인한 아이템 삭제
+        adapter.getData().remove(nowPosition);
+        adapter.notifyDataSetChanged();
+
+        //페이지 이동 처리
+        pager.setCurrentItem(nowPosition);
     }
 }

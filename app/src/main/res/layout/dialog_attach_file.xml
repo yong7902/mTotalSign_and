@@ -27,7 +27,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_attach_dialog"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="200dp"
             android:layout_marginTop="20dp"
             android:scrollbarSize="4dp"
             android:scrollbarThumbVertical="@drawable/drw_popup_scrollbar"

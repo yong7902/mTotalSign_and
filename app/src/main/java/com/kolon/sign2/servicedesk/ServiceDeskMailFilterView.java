@@ -57,6 +57,9 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
 
     private ShimmerFrameLayout mShimmerLayout;
 
+    private int position;
+    private boolean isFinal = false;
+
     public ServiceDeskMailFilterView(Context context) {
         super(context);
         initView(context);
@@ -143,10 +146,13 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
         addView(v);
     }
 
-    public void setData(String rv, String seq) {
+    public void setData(String rv, String seq, int position, boolean isFinal) {
 
         this.rv = rv+"@kolon.com";
         this.seq = seq;
+
+        this.position = position;
+        this.isFinal = isFinal;
 
         //showProgressBar();
 
@@ -293,6 +299,8 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
 
                     @Override
                     public void onConfirm() {
+                        clickOk();
+                        /*
                         //모두 체크되어야만 진행
                         boolean confirmOk = true;
                         for (int i = 0; i < filelist.size(); i++) {
@@ -304,10 +312,25 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
                         if (confirmOk) {
                             //send server....
                             dialog.dismissAllowingStateLoss();
-                            sendServerConfirm();
+
+                            String title = mContext.getResources().getString(R.string.txt_service_confirm);
+                            String okStr = mContext.getResources().getString(R.string.txt_service_confirm);
+                            CommentDialog dialog = CommentDialog.newInstance();
+                            dialog.setData(title, okStr, true);
+                            dialog.setInterface(new CommentDialog.CommentDialogListener() {
+
+                                @Override
+                                public void getMessage(String comment) {
+                                    //send message..
+                                    sendServerConfirm(comment);
+                                }
+                            });
+
+                            //sendServerConfirm();
                         } else {
                             viewMessage(mContext.getResources().getString(R.string.txt_service_desk_file_check));
                         }
+                        */
                     }
                 });
                 dialog.show(getFragmentManager(mContext), "");
@@ -340,10 +363,12 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
 
     private void showProgressBar() {
         progress_bar.setVisibility(View.VISIBLE);
+        //((ServiceDeskDetailActivity)mContext).showProgressBar();
     }
 
     private void hideProgressBar() {
         progress_bar.setVisibility(View.GONE);
+        //((ServiceDeskDetailActivity)mContext).hideProgressBar();
     }
 
     private void clickCancel() {
@@ -372,9 +397,23 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
             }
         }
         if (confirmOk) {
-            sendServerConfirm();
+            String title = mContext.getResources().getString(R.string.txt_service_confirm);
+            String okStr = mContext.getResources().getString(R.string.txt_service_confirm);
+            CommentDialog dialog = CommentDialog.newInstance();
+            dialog.setData(title, okStr, false);
+            dialog.setInterface(new CommentDialog.CommentDialogListener() {
+
+                @Override
+                public void getMessage(String comment) {
+                    //send message..
+                    sendServerConfirm(comment);
+                }
+            });
+            dialog.show(CommonUtils.getFragmentManager(mContext));
+            //sendServerConfirm();
         } else {
-            viewMessage(mContext.getResources().getString(R.string.txt_service_desk_file_check));
+            Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_desk_file_check), Toast.LENGTH_SHORT).show();
+            //viewMessage(mContext.getResources().getString(R.string.txt_service_desk_file_check));
         }
     }
 
@@ -387,13 +426,13 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
      * format			app 접근 여부			O	value : app
      **/
     //승인 전송
-    private void sendServerConfirm() {
+    private void sendServerConfirm(String comment) {
         //test
         String rv = this.rv;
         String cmd = "approval_do";
         String seq = this.seq;
         String format = "app";
-        String comment = "";
+        //String comment = "";
 
         HashMap hm = new HashMap();
         hm.put("rv", rv);
@@ -431,9 +470,13 @@ public class ServiceDeskMailFilterView extends LinearLayout implements View.OnCl
                     if ("200".equals(result.getStatus().getStatusCd())) {
                         if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
                             if (hm.get("cmd").equals("approval_do")) {
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_confirm), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_confirm), Toast.LENGTH_SHORT).show();
+                                ((ServiceDeskDetailActivity) mContext).checkRemainApproval(mContext.getResources().getString(R.string.txt_service_confirm), isFinal, position);
+
                             } else {
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
+                                ((ServiceDeskDetailActivity) mContext).checkRemainApproval(mContext.getResources().getString(R.string.txt_service_cancel), isFinal, position);
+
                             }
                             hideProgressBar();
                             return;

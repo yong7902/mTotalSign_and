@@ -73,6 +73,9 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
     private String usedate1Flag = "N";
     private String usedate2Flag = "N";
 
+    private int position;
+    private boolean isFinal = false;
+
     private ShimmerFrameLayout mShimmerLayout;
 
     public ServiceDeskSecurityITDetailView(Context context) {
@@ -151,10 +154,13 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
         addView(v);
     }
 
-    public void setData(String key01, String key02, String menuId) {
+    public void setData(String key01, String key02, String menuId, int position, boolean isFinal) {
         this.key01 = key01;//userid
         this.key02 = key02;//docNo
         this.menuId = menuId;//docNo
+
+        this.position = position;
+        this.isFinal = isFinal;
 
         String type = "detailApp";
         String key03 = "BOAN";//SR : 요청, CO : 변경, BOAN : 보안 , WANTED : 납기승인, CANCEL_KGC : 취소승인,
@@ -370,7 +376,7 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
         dialog.show(getFragmentManager(mContext));
     }
 
-    private void sendServerData(String result, String comment){
+    private void sendServerData(String resultCd, String comment){
 //        type		I/F 구분자				actionApp
 //        key01		로그인 IKEN ID				ilovebbogle
 //        key02		승인건 고유번호				SR00002735(요청/납기승인/취소승인), CO000002444(변경), TA00005230(테스트)
@@ -424,7 +430,7 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
         hm.put("userId", key01);
         hm.put("pw", "");
         hm.put("seqno", key02);
-        hm.put("result", result);
+        hm.put("result", resultCd);
         hm.put("appgubun", readData.getAppGubun());
         hm.put("appstatus", readData.getAppStatus());
         hm.put("comment", comment);
@@ -445,13 +451,19 @@ public class ServiceDeskSecurityITDetailView extends LinearLayout implements Vie
                 if (result != null) {
                     if ("200".equals(result.getStatus().getStatusCd())) {
                         if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
-                            if(result.equals("Y")){
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_confirm), Toast.LENGTH_SHORT).show();
+
+
+                            if(resultCd.equals("Y")){
+                                ((ServiceDeskDetailActivity) mContext).checkRemainApproval(mContext.getResources().getString(R.string.txt_service_confirm), isFinal, position);
+                                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_confirm), Toast.LENGTH_SHORT).show();
                             }else{
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
+                                ((ServiceDeskDetailActivity) mContext).checkRemainApproval(mContext.getResources().getString(R.string.txt_service_cancel), isFinal, position);
+                                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
                             }
-                            ((ServiceDeskDetailActivity)mContext).onBackPressed();
+                            //((ServiceDeskDetailActivity)mContext).onBackPressed();
+                            //((ServiceDeskDetailActivity) mContext).checkRemainApproval(title, isFinal, position);
                             return;
+
                         } else {
                             errMsg = result.getResult().getErrorMsg();
                         }

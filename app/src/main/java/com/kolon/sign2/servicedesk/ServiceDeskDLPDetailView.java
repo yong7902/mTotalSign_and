@@ -53,6 +53,9 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
 
     private ShimmerFrameLayout mShimmerLayout;
 
+    private int position;
+    private boolean isFinal = false;
+
     public ServiceDeskDLPDetailView(Context context) {
         super(context);
         initView(context);
@@ -142,9 +145,13 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
     }
 
 
-    public void setData(String userId, String appIdx, String chkIdx) {
+    public void setData(String userId, String appIdx, String chkIdx, int position, boolean isFinal) {
         this.appIdx = appIdx;
         this.chkIdx = chkIdx;
+        this.userId = userId;
+
+        this.position = position;
+        this.isFinal = isFinal;
 
         //showProgressBar();
         HashMap hm = new HashMap();
@@ -259,7 +266,7 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
                 break;
             case R.id.btn_service_desk_cancel:
                 clickCancel();
-                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_service_desk_confirm:
                 clickOk();
@@ -317,7 +324,8 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
             });
             dialog.show(CommonUtils.getFragmentManager(mContext));
         } else {
-            viewMessage(mContext.getResources().getString(R.string.txt_service_desk_file_check));
+            Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_desk_file_check), Toast.LENGTH_SHORT).show();
+            //viewMessage(mContext.getResources().getString(R.string.txt_service_desk_file_check));
         }
     }
 
@@ -348,9 +356,13 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
                     if ("200".equals(result.getStatus().getStatusCd())) {
                         if ("S".equalsIgnoreCase(result.getResult().getErrorCd())) {
                             if (appJob.equals("200")) {
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_confirm), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_confirm), Toast.LENGTH_SHORT).show();
+                                ((ServiceDeskDetailActivity) mContext).checkRemainApproval(mContext.getResources().getString(R.string.txt_service_confirm), isFinal, position);
+
                             } else {
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(mContext, mContext.getResources().getString(R.string.txt_service_cancel), Toast.LENGTH_SHORT).show();
+                                ((ServiceDeskDetailActivity) mContext).checkRemainApproval(mContext.getResources().getString(R.string.txt_service_cancel), isFinal, position);
+
                             }
                             hideProgressBar();
                             return;
@@ -387,10 +399,12 @@ public class ServiceDeskDLPDetailView extends LinearLayout implements View.OnCli
 
     private void showProgressBar() {
         progress_bar.setVisibility(View.VISIBLE);
+        //((ServiceDeskDetailActivity)mContext).showProgressBar();
     }
 
     private void hideProgressBar() {
         progress_bar.setVisibility(View.GONE);
+        //((ServiceDeskDetailActivity)mContext).hideProgressBar();
     }
 
     private void viewDoc(AttachFileListVO data, String docId) {
