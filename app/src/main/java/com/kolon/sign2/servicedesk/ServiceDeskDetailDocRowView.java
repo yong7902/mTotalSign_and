@@ -126,7 +126,7 @@ public class ServiceDeskDetailDocRowView extends LinearLayout implements View.On
         tv_foreign_no.setText(setDetect(data.getDetectCnt6()));
         tv_bank_no.setText(setDetect(data.getDetectCnt7()));
         tv_card_no.setText(setDetect(data.getDetectCnt8()));
-        tv_ban.setText(setDetect(data.getDetectCnt1()));
+        tv_ban.setText(setDetect(data.getDetectKeyword()));
 
         CommonUtils.changeTextSize(mContext, tv_title1);
         CommonUtils.changeTextSize(mContext, tv_title2);

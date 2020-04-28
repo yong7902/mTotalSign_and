@@ -86,7 +86,7 @@
     <string name="txt_approval_personal">개인결재함</string>
     <string name="txt_approval_depart">부서결재함</string>
     <string name="txt_approval_tab_total">전체</string>
-    <string name="txt_approval_tab_select_menu">메뉴선택</string>
+    <string name="txt_approval_tab_select_menu">하위 폴더</string>
     <string name="txt_approval_expand">펼치기</string>
     <string name="txt_approval_close">접기</string>
     <string name="txt_approval_opinion">의견</string>
@@ -99,7 +99,7 @@
     <string name="txt_approval_opinion_view">의견 보기</string>
     <string name="txt_approval_txt">결재</string>
     <string name="txt_approval_draft">기안</string>
-    <string name="txt_approval_select_menu">메뉴 선택</string>
+    <string name="txt_approval_select_menu">하위 폴더</string>
     <string name="txt_approval_no_auth">열람 권한이 없습니다.</string>
     <string name="txt_approval_db_approval">DB연동 양식 결재는 PC에서만 결재가 가능합니다.</string>
     <string name="txt_approval_status_progress">진행</string>

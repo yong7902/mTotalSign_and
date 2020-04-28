@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.kolon.sign2.R;
 import com.kolon.sign2.dynamic.DynamicListFragment;
+import com.kolon.sign2.utils.CommonUtils;
 import com.kolon.sign2.view.TextSizeAdjView;
 import com.kolon.sign2.view.ViewPagerFixed;
 import com.kolon.sign2.vo.Res_AP_IF_103_VO;
@@ -47,6 +48,10 @@ public class DynamicDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic_datail);
+
+        //화면 캡쳐 방지 적용
+        CommonUtils.preventCapture(getBaseContext(), getWindow());
+
         mTitleBack = findViewById(R.id.rl_dynamic_detail_title_back);
         mTitleText = findViewById(R.id.tv_dynamic_detail_title);
         pager = findViewById(R.id.view_pager);

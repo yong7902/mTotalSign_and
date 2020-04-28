@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kolon.sign2.R;
 import com.kolon.sign2.dialog.OpinionListDialogAdapter;
+import com.kolon.sign2.utils.CommonUtils;
 import com.kolon.sign2.view.TextSizeAdjView;
 import com.kolon.sign2.vo.Res_AP_IF_016_VO;
 
@@ -33,6 +34,9 @@ public class ApprovalProgressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approval_progress);
+
+        //화면 캡쳐 방지 적용
+        CommonUtils.preventCapture(getBaseContext(), getWindow());
 
         TextView tvTitle = (TextView)findViewById(R.id.title);
         layout_no_data = (LinearLayout)findViewById(R.id.layout_no_data);

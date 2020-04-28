@@ -46,12 +46,13 @@
 
                 <TextView
                     android:id="@+id/txt_subj"
-                    android:layout_width="wrap_content"
+                    android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/noto_sans_cjk_kr_regular"
                     android:includeFontPadding="false"
-                    android:text="@string/txt_approval_search_txt2"
+                    android:textAlignment="center"
+                    android:text="제목"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 

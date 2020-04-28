@@ -138,7 +138,8 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
                 int last = ((LinearLayoutManager) rv.getLayoutManager()).findLastCompletelyVisibleItemPosition() + 1;
                 int totalCnt = rv.getAdapter().getItemCount();
 
-                if (last == totalCnt) {
+                if (totalCnt >= pageSize && last == totalCnt) {
+                //if (last == totalCnt) {
                     if (pagingProcess && loadingMore) {
                         getAuthList(userId, selectCode, "progress");
                     }
@@ -228,6 +229,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
         ((MainActivity)mContext).updateBadgeCnt(sysId, "S06", userId);
 
         getAuthorizerList(userId, userNm);
+        setTab("");
 
     }
 
@@ -318,7 +320,7 @@ public class ServiceDeskAuthListView extends LinearLayout implements View.OnClic
 //                                drawTab(btnAuthTab4);
 //                            }
 
-                            setTab("");
+                            //setTab("");
 
                             return;
                         } else {

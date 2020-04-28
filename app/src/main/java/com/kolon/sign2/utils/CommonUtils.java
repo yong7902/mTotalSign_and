@@ -16,6 +16,8 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.EditText;
@@ -25,10 +27,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kolon.sign2.BuildConfig;
 import com.kolon.sign2.R;
 import com.kolon.sign2.network.NetworkPresenter;
 import com.kolon.sign2.view.TextSizeAdjView;
+import com.kolon.sign2.vo.Res_AP_IF_101_VO;
 import com.kolon.sign2.vo.Res_AP_IF_107_VO;
 
 import org.w3c.dom.Text;
@@ -379,6 +384,25 @@ public class CommonUtils {
                 browserIntent.setData(Uri.parse(url));
                 context.startActivity(browserIntent);
             }
+        }
+    }
+
+    public static void preventCapture(Context context, Window window) {
+
+        try {
+            SharedPreferenceManager mPref = SharedPreferenceManager.getInstance(context);
+
+            String str = mPref.getStringPreference(Constants.PREF_USER_AUTH_INFO);
+            Res_AP_IF_101_VO.result userAuthInfo = new Gson().fromJson(str, new TypeToken<Res_AP_IF_101_VO.result>() {
+            }.getType());
+
+            //MDM 유저인 경우 화면 캡쳐 방지 적용
+            if ("Y".equals(userAuthInfo.getUserInfo().getMdmYn())) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            }
+
+        } catch (Exception e) { //예외 발생 시 캡쳐 적용
+            window.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
     }
 

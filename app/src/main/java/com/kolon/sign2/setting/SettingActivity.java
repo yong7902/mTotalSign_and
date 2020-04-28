@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.kolon.sign2.R;
 import com.kolon.sign2.activity.LoginActivity;
 import com.kolon.sign2.dialog.TextDialog;
+import com.kolon.sign2.utils.CommonUtils;
 import com.kolon.sign2.utils.Constants;
 import com.kolon.sign2.utils.SharedPreferenceManager;
 
@@ -31,7 +32,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+
+        //화면 캡쳐 방지 적용
+        CommonUtils.preventCapture(getBaseContext(), getWindow());
+
         setContentView(R.layout.activity_setting);
         mPref = SharedPreferenceManager.getInstance(getBaseContext());
         initView();

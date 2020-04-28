@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -138,6 +139,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String str = mPref.getStringPreference(Constants.PREF_USER_AUTH_INFO);
         userAuthInfo = new Gson().fromJson(str, new TypeToken<Res_AP_IF_101_VO.result>() {
         }.getType());
+
+        //화면 캡쳐 방지 적용
+        CommonUtils.preventCapture(getBaseContext(), getWindow());
 
         initView();
 

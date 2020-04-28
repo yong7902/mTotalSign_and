@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.kolon.sign2.R;
 import com.kolon.sign2.dialog.TextDialog;
 import com.kolon.sign2.network.NetworkPresenter;
+import com.kolon.sign2.utils.CommonUtils;
 import com.kolon.sign2.view.TextSizeAdjView;
 import com.kolon.sign2.view.ViewPagerFixed;
 import com.kolon.sign2.vo.Res_AP_IF_013_VO;
@@ -68,6 +69,9 @@ public class ApprovalDetailActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approval_detail);
 
+        //화면 캡쳐 방지 적용
+        CommonUtils.preventCapture(getBaseContext(), getWindow());
+
         Button btnBack = (Button) findViewById(R.id.btn_back);
         btnBack.setOnClickListener(this);
 
@@ -111,6 +115,7 @@ public class ApprovalDetailActivity extends AppCompatActivity implements View.On
         listDataLoading(obj, guidList, position);
         isFirst = true;
         addLineViewHm = new HashMap<>();
+
     }
 
     private void listDataLoading(ArrayList<Res_AP_IF_013_VO.result.apprList> obj, ArrayList<String> guidList, int position) {

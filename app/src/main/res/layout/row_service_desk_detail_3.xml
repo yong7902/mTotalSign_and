@@ -21,6 +21,7 @@
             android:layout_gravity="center"
             android:orientation="vertical"
             app:shimmer_duration="1500"
+            android:visibility="gone"
             >
             <LinearLayout
                 android:layout_width="match_parent"

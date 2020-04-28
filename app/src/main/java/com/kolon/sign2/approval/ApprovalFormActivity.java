@@ -21,6 +21,7 @@ import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.kolon.sign2.R;
 import com.kolon.sign2.dialog.TextDialog;
+import com.kolon.sign2.utils.CommonUtils;
 
 /**
  * 본문 보기 - 가로
@@ -35,6 +36,9 @@ public class ApprovalFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approval_form);
+
+        //화면 캡쳐 방지 적용
+        CommonUtils.preventCapture(getBaseContext(), getWindow());
 
         Intent it = getIntent();
         if (it == null) return;

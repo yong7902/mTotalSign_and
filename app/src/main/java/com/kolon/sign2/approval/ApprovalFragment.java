@@ -231,7 +231,8 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
                 }
                 tabView.setData(personalTabData);// 0 개인
                 tabView.setMove(selectPos);
-                sub_tab_position = 0;
+                //sub_tab_position = i;
+                sub_tab_position = selectPos;
 
                 getDataList("shimmer");//데이터 요청
 
@@ -261,6 +262,7 @@ public class ApprovalFragment extends Fragment implements View.OnClickListener, 
 
                 tabView.setData(departTabData);// 1 부서
                 tabView.setMove(selectPos);
+                sub_tab_position = selectPos;
 
                 if (isSub) {
                     depart_SubTabData = new ArrayList<>();

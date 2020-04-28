@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.kolon.sign2.R;
 import com.kolon.sign2.network.NetworkConstants;
+import com.kolon.sign2.utils.CommonUtils;
 
 /**
  * Created by sunho_kim on 2019-12-02.
@@ -49,6 +50,9 @@ public class NoticeActivity extends Activity implements OnClickListener {
 
 			webView.loadUrl(url);
 		}
+
+		//화면 캡쳐 방지 적용
+		CommonUtils.preventCapture(getBaseContext(), getWindow());
 	}
 
 

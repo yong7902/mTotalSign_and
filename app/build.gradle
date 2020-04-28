@@ -126,6 +126,7 @@ dependencies {
     implementation(name: 'miapsupdateapplib', ext: 'aar')
     //SSO lib
     implementation files('libs/MiAPSExternalLib_kolon_contentprovider_mdm_20151123.jar')
+
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
@@ -153,6 +154,5 @@ dependencies {
 
     // Gradle dependency on Shimmer for Android
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-
 
 }

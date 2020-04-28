@@ -34,7 +34,6 @@ import com.kolon.sign2.vo.LoginParamVO;
 import com.kolon.sign2.vo.LoginResultVO;
 import com.kolon.sign2.vo.Res_AP_IF_004_VO;
 import com.kolon.sign2.vo.Res_AP_IF_101_VO;
-
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -42,6 +41,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+
 
 /**
  * Created by sunho_kim on 2019-12-02.
@@ -56,7 +57,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Retrofit mRetrofit;
     private boolean mIsLogout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
             mIsLogout = false;
         }
+
         initView();
     }
 
@@ -469,6 +470,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            mPd = null;
 //        }
     }
-
 
 }

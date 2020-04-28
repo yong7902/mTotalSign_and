@@ -22,6 +22,7 @@ import com.kolon.sign2.R;
 import com.kolon.sign2.dialog.ListDialog;
 import com.kolon.sign2.dialog.TextDialog;
 import com.kolon.sign2.network.NetworkPresenter;
+import com.kolon.sign2.utils.CommonUtils;
 import com.kolon.sign2.utils.Constants;
 import com.kolon.sign2.utils.SharedPreferenceManager;
 import com.kolon.sign2.view.TextSizeAdjView;
@@ -52,6 +53,9 @@ public class ApprovalLineActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approval_line);
+
+        //화면 캡쳐 방지 적용
+        CommonUtils.preventCapture(getBaseContext(), getWindow());
 
         Intent i = getIntent();
         if (i == null) return;
