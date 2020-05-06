@@ -75,6 +75,16 @@ public class CommonUtils {
         return strDate;
     }
 
+    public static String getIfTimeStamp() {
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Seoul");
+        Calendar days = Calendar.getInstance(timeZone);
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+        df.setTimeZone(timeZone);
+        String strDate = df.format(days.getTime());
+        strDate = strDate + "MTOTALSIGN";
+        return strDate;
+    }
+
     public static String getAppVersion(Context context) {
         PackageInfo pi = null;
         try {

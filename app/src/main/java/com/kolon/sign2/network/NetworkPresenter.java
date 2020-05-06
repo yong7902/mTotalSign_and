@@ -142,11 +142,8 @@ public class NetworkPresenter {
     public void getMainList(HashMap<String, String> hm, getMainListResult listener) {
         Log.d(TAG, "#### getMainList in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_002_VO> c = getServerInterface().AP_IF_002(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_002_VO>() {
@@ -175,11 +172,8 @@ public class NetworkPresenter {
     public void getMultiUserList(HashMap<String, String> hm, getMultiUserResult listener) {
         Log.d(TAG, "#### getMultiUserList in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_004_VO> c = getServerInterface().AP_IF_004(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_004_VO>() {
@@ -203,11 +197,8 @@ public class NetworkPresenter {
     public void getMultiUserInsert(HashMap<String, String> hm, getCommonListener listener) {
         Log.d(TAG, "#### getMultiUserInsert in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_Empty_VO> c = getServerInterface().AP_IF_005(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_Empty_VO>() {
@@ -231,11 +222,8 @@ public class NetworkPresenter {
     public void getMultiUserDelete(HashMap<String, String> hm, getCommonListener listener) {
         Log.d(TAG, "#### getMultiUserDelete in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_Empty_VO> c = getServerInterface().AP_IF_006(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_Empty_VO>() {
@@ -264,12 +252,13 @@ public class NetworkPresenter {
     public void getUserAuthSearch(HashMap<String, String> hm, getUserAuthSearchResult listener) {
         Log.d(TAG, "#### getUserAuthSearch in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
+        /*
         try {
             CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
         } catch (Exception e) {e.printStackTrace();}
-
+        */
         Call<Res_AP_IF_101_VO> c = getServerInterface().AP_IF_101(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_101_VO>() {
             @Override
@@ -297,11 +286,8 @@ public class NetworkPresenter {
     public void getSystemMenu(HashMap<String, String> hm, getSystemMenuResult listener) {
         Log.d(TAG, "#### getSystemMenu in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_102_VO> c = getServerInterface().AP_IF_102(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_102_VO>() {
@@ -328,11 +314,8 @@ public class NetworkPresenter {
     public void getUserCompSearch(HashMap<String, String> hm, getUserCompSearchResult listener) {
         Log.d(TAG, "#### getUserCompSearch in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_107_VO> c = getServerInterface().AP_IF_107(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_107_VO>() {
@@ -357,11 +340,8 @@ public class NetworkPresenter {
     public void getUpdateSysOrderMgt(Req_AP_IF_108_VO req, getCommonListener listener){
         Log.d(TAG, "#### getUpdateSysOrderMgt in:" + new Gson().toJson(req));
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_Empty_VO> c = getServerInterface().AP_IF_108(auth, timeStamp, req);
         c.enqueue(new Callback<Res_AP_Empty_VO>() {
@@ -416,11 +396,8 @@ public class NetworkPresenter {
     public void getApprovalList(HashMap<String, String> hm, getApprovalListResult listener) {
         Log.d(TAG, "#### getApprovalList in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_013_VO> c = getServerInterface().AP_IF_013(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_013_VO>() {
@@ -448,11 +425,8 @@ public class NetworkPresenter {
     public void getApprovalDetail(HashMap<String, String> hm, getApprovalDetailResult listener) {
         Log.d(TAG, "#### getApprovalDetail in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_016_VO> c = getServerInterface().AP_IF_016(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_016_VO>() {
@@ -481,11 +455,8 @@ public class NetworkPresenter {
     public void getApprovalSearch(HashMap<String, String> hm, getApprovalSearchResult listener) {
         Log.d(TAG, "#### getApprovalSearch in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_020_VO> c = getServerInterface().AP_IF_020(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_020_VO>() {
@@ -513,11 +484,8 @@ public class NetworkPresenter {
     public void getApprovalProceesing(HashMap<String, String> hm, getApprovalProcessingResult listener) {
         Log.d(TAG, "#### getApprovalProceesing in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_014_VO> c = getServerInterface().AP_IF_014(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_014_VO>() {
@@ -545,11 +513,8 @@ public class NetworkPresenter {
     public void getApprovalFormUrl(HashMap hm, getApprovalFormUrlListener listener) {
         Log.d(TAG, "#### getApprovalFormUrl in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_018_VO> c = getServerInterface().AP_IF_018(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_018_VO>() {
@@ -577,11 +542,8 @@ public class NetworkPresenter {
     public void getApprovalAttachs(HashMap hm, getApprovalAttachsListener listener) {
         Log.d(TAG, "#### getApprovalAttachs in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_019_VO> c = getServerInterface().AP_IF_019(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_019_VO>() {
@@ -610,11 +572,8 @@ public class NetworkPresenter {
     public void getApprovalCountAll(HashMap<String, String> hm, getApprovalCountAllListener listener) {
         Log.d(TAG, "#### getApprovalCountAll in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_021_VO> c = getServerInterface().AP_IF_021(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_021_VO>() {
@@ -643,11 +602,8 @@ public class NetworkPresenter {
     public void getApprovalLineSave(Req_AP_IF_022_VO req, getApprovalLineSaveListener listener) {
         Log.d(TAG, "#### getApprovalLineSave in:" + new Gson().toJson(req));
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_022_VO> c = getServerInterface().AP_IF_022(auth, timeStamp, req);
         c.enqueue(new Callback<Res_AP_IF_022_VO>() {
@@ -675,11 +631,8 @@ public class NetworkPresenter {
     public void getApprovalSpparents(HashMap<String, String> hm, getApprovalSpparentsListener listener) {
         Log.d(TAG, "#### getApprovalSpparents in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_023_VO> c = getServerInterface().AP_IF_023(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_023_VO>() {
@@ -707,11 +660,8 @@ public class NetworkPresenter {
     public void getApprovalListcomps(HashMap<String, String> hm, getApprovalListcompsListener listener) {
         Log.d(TAG, "#### getApprovalListcomps in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_201_VO> c = getServerInterface().AP_IF_023_1(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_201_VO>() {
@@ -739,11 +689,8 @@ public class NetworkPresenter {
     public void getApprovalSporganizationApproval(HashMap<String, String> hm, getApprovalSporganizationApprovalListener listener) {
         Log.d(TAG, "#### getApprovalSporganizationApproval in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_202_VO> c = getServerInterface().AP_IF_023_2(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_202_VO>() {
@@ -771,11 +718,8 @@ public class NetworkPresenter {
     public void getApprovalSplistApproval(HashMap<String, String> hm, getApprovalSplistApprovalListener listener) {
         Log.d(TAG, "#### getApprovalSplistApproval in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_203_VO> c = getServerInterface().AP_IF_023_3(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_203_VO>() {
@@ -803,11 +747,8 @@ public class NetworkPresenter {
     public void getApprovalSpsearchLineinfo(HashMap<String, String> hm, getApprovalSpsearchLineinfoListener listener) {
         Log.d(TAG, "#### getApprovalSpsearchLineinfo in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_204_VO> c = getServerInterface().AP_IF_023_4(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_204_VO>() {
@@ -835,11 +776,8 @@ public class NetworkPresenter {
     public void getApprovalLatelyLineinfo(Req_AP_IF_205_VO input, getApprovalLatelyLineinfoListener listener) {
         Log.d(TAG, "#### getApprovalLatelyLineinfo in:" + new Gson().toJson(input));
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_205_VO> c = getServerInterface().AP_IF_023_5(auth, timeStamp, input);
         c.enqueue(new Callback<Res_AP_IF_205_VO>() {
@@ -868,11 +806,8 @@ public class NetworkPresenter {
     public void getServiceDeskDetail(HashMap<String, String> hm, getServiceDeskDetailListener listener) {
         Log.d(TAG, "#### getServiceDeskDetail in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_028_VO> c = getServerInterface().AP_IF_028(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_028_VO>() {
@@ -896,11 +831,8 @@ public class NetworkPresenter {
     public void getServiceDeskApprove(HashMap<String, String> hm, getCommonListener listener) {
         Log.d(TAG, "#### getServiceDeskApprove in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_Empty_VO> c = getServerInterface().AP_IF_029(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_Empty_VO>() {
@@ -924,11 +856,8 @@ public class NetworkPresenter {
     public void getServiceDeskBoanApprove(HashMap<String, String> hm, getCommonListener listener) {
         Log.d(TAG, "#### getServiceDeskBoanApprove in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_Empty_VO> c = getServerInterface().AP_IF_030(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_Empty_VO>() {
@@ -956,11 +885,8 @@ public class NetworkPresenter {
     public void getServiceDeskDlpDetail(HashMap<String, String> hm, getServiceDeskDlpDetailListener listener) {
         Log.d(TAG, "#### getServiceDeskDlpDetail in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_032_VO> c = getServerInterface().AP_IF_032(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_032_VO>() {
@@ -989,11 +915,8 @@ public class NetworkPresenter {
     public void getServiceDeskDlpApprove(HashMap<String, String> hm, getServiceDeskDlpApproveListener listener) {
         Log.d(TAG, "#### getServiceDeskDlpApprove in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_033_VO> c = getServerInterface().AP_IF_033(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_033_VO>() {
@@ -1022,11 +945,8 @@ public class NetworkPresenter {
     public void getServiceDeskMailFilterDetail(HashMap<String, String> hm, getServiceDeskMainFilterDetailListener listener) {
         Log.d(TAG, "#### getServiceDeskMailFilterDetail in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_035_VO> c = getServerInterface().AP_IF_035(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_035_VO>() {
@@ -1055,11 +975,8 @@ public class NetworkPresenter {
     public void getServiceDeskMailFilterApprove(HashMap<String, String> hm, getServiceDeskMainFilterApproveListener listener) {
         Log.d(TAG, "#### getServiceDeskMailFilterApprove in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_036_VO> c = getServerInterface().AP_IF_036(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_036_VO>() {
@@ -1088,11 +1005,8 @@ public class NetworkPresenter {
     public void getServiceDeskAprList(HashMap<String, String> hm, getServiceDeskAprListListener listener) {
         Log.d(TAG, "#### getServiceDeskAprList in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_037_VO> c = getServerInterface().AP_IF_037(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_037_VO>() {
@@ -1117,11 +1031,8 @@ public class NetworkPresenter {
     public void getServiceDeskAprApprove(Req_AP_IF_039_VO input, getCommonListener listener) {
         Log.d(TAG, "#### getServiceDeskDgtnApprove in:" + new Gson().toJson(input));
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_Empty_VO> c = getServerInterface().AP_IF_039(auth, timeStamp, input);
         c.enqueue(new Callback<Res_AP_Empty_VO>() {
@@ -1150,11 +1061,8 @@ public class NetworkPresenter {
     public void getServiceDeskDgtnList(HashMap<String, String> hm, getServiceDeskDgtnListener listener) {
         Log.d(TAG, "#### getServiceDeskDgtnList in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_040_VO> c = getServerInterface().AP_IF_040(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_040_VO>() {
@@ -1183,11 +1091,8 @@ public class NetworkPresenter {
     public void getDynamicDetailList(HashMap<String, String> hm, getDynamicDetailListListener listener) {
         Log.d(TAG, "#### getDynamicDetailList in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_104_VO> c = getServerInterface().AP_IF_104(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_104_VO>() {
@@ -1215,11 +1120,8 @@ public class NetworkPresenter {
     public void getDynamicDetailAction(HashMap<String, String> hm, getDynamicDetailActionListener listener) {
         Log.d(TAG, "#### getDynamicDetailList in:" + hm);
 
-        String timeStamp = CommonUtils.getTimeStamp();
-        String auth = "";
-        try {
-            CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
-        } catch (Exception e) {e.printStackTrace();}
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_DynamicAction_VO> c = getServerInterface().AP_IF_DynamicAction(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_DynamicAction_VO>() {

@@ -507,8 +507,9 @@ public class DynamicListFragment extends Fragment implements ServiceDeskAuthList
             badge.setVisible(true);
             badge.setBackgroundColor(ContextCompat.getColor(mContext, R.color.tomato));
             badge.setNumber(Integer.parseInt(cnt));
-            badge.setVerticalOffset(30);
+            badge.setVerticalOffset(37);
             badge.setHorizontalOffset(-10);
+            badge.setBadgeGravity(badge.BOTTOM_END);
 
             tab.setText(tab.getText().toString().trim() + " ");
 

@@ -62,11 +62,15 @@ public class DynamicListViewModel extends BaseViewModel {
 
         //((MainActivity) context).showProgressBar();
 
+        /*
         String timeStamp = CommonUtils.getTimeStamp();
         String auth = "";
         try {
             CipherUtils.encrypt(timeStamp, BuildConfig.r_key);
         } catch (Exception e) {e.printStackTrace();}
+        */
+        String timeStamp = CommonUtils.getIfTimeStamp();
+        String auth = BuildConfig.r_key;
 
         Call<Res_AP_IF_103_VO> c = getServerInterface().AP_IF_103(auth, timeStamp, hm);
         c.enqueue(new Callback<Res_AP_IF_103_VO>() {
